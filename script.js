@@ -780,7 +780,7 @@ $(() => {
                 {
                     "Id": 3,
                     "Show": true,
-                    "Name": "Green",
+                    "Name": "Dark Blue",
                     "Description": "Green"
                 }
             ]

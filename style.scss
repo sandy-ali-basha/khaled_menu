@@ -4,6 +4,8 @@
 #030303
 #e6e6e5
  */
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -36,6 +38,12 @@ body {
   font-size: 27px;
   font-style: italic;
   color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  h2 {
+    margin: 0px 0px 0px 10px;
+  }
 }
 
 .menu-title {
@@ -45,7 +53,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 12px;
+  padding: 0px 12px;
 }
 
 .menu-body {
@@ -180,41 +188,88 @@ ul.submenu.show {
   }
 }
 .Green {
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #393869;
+    background-color: #393869;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #59579e;
+  }
+
+  * {
+    font-family: "Inter", sans-serif;
+  }
+  width: auto;
+  min-width: 20vw;
+  padding: 0rem 0.8rem;
+  top: 5px;
+  right: 5px;
+  width: 23vw;
   border-radius: 10px;
-  background-color: #27183f;
-  border: solid 1px #13819f;
+  background-color: #25244e;
+  border: solid 1px #393869;
+  .menu-body {
+    max-height: initial;
+    height: initial;
+  }
   .menu-header {
     background: transparent;
-    padding: 10px;
+    padding: 1rem 0rem;
     text-align: center;
-    font-size: 1.6rem;
-    color: #f4dcff;
-    font-style: normal;
+    color: #dcdcee;
+    h2 {
+      font-style: normal;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
   }
   .menu-title {
-    color: #f4dcff;
+    color: rgb(110 111 166/1);
     background: none;
+    font-weight: 700;
+    font-size: 1rem;
   }
   .menu-body {
     background: transparent;
     ul {
       li {
-        margin: 0.5rem 0.3rem;
-        border-radius: 10px;
-        outline: 1px solid #00c0ff;
-        background: #27183f;
+        margin: 0.8rem 0rem;
+        border-radius: 0.5rem;
+        border: solid;
+        border-color: rgb(73 72 124 /0.5);
+        border-width: 2.6px;
+        background: rgb(57 56 105/0.3);
+        padding: 0.6rem;
+        font-weight: 600;
+        font-size: 1rem;
         &.active {
           a {
             color: #f4dcff;
           }
-          background: linear-gradient(
-            90deg,
-            #27183f 0%,
-            #503e69 35%,
-            #7c6896 100%
-          );
+          background: rgb(57 56 105/0.8);
         }
       }
     }
   }
+  .menu-footer {
+    border-top: solid;
+    border-color: rgb(73 72 124 /0.5);
+    border-width: 2.6px;
+    padding: 1rem 0.5rem;
+    font-size: 1rem;
+    background: transparent;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+}
+.avatar {
+  width: 20%;
+  border-radius: 0.5rem;
+  border: solid 0.2rem rgba(255, 255, 255, 0.212);
 }
