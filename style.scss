@@ -49,7 +49,7 @@ body {
 }
 
 .menu-body {
-  background: rgba(3, 3, 3, 0.7);
+  background: rgb(3 3 3 / 70%);
 }
 
 .menu-body ul li {
@@ -80,7 +80,7 @@ body {
 .menu-footer {
   margin-top: 5px;
   border-top: 3px solid #030303;
-  background: rgba(3, 3, 3, 0.7);
+  background: rgb(3 3 3 / 70%);
   color: #e6e6e5;
   padding: 7px 12px;
   font-size: 16px;
@@ -137,7 +137,6 @@ ul.submenu.show {
   overflow-y: auto;
   max-height: 350px;
 }
-
 .menu-body::-webkit-scrollbar {
   width: 10px;
 }
@@ -157,58 +156,65 @@ ul.submenu.show {
 .redMenu {
   background-color: rgba(255, 0, 0, 0.466);
   border-radius: 10px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  * {
+    font-size: 16px;
+  }
+  .menu-header {
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(90deg, #c43b37 0%, #ed5154 35%, #c04646 100%);
+  }
+  .menu-body {
+    border-radius: 0px 0px 10px 10px;
+  }
+  .menu-footer {
+    border-radius: 10px;
+  }
+  .menu-title {
+    color: white;
+    background: linear-gradient(90deg, #c43b37 0%, #ed5154 35%, #c04646 100%);
+  }
+  .menu-body ul li.active {
+    background-color: rgba(255, 255, 255, 0.815);
+  }
 }
-.redMenu * {
-  font-size: 16px;
-}
-.redMenu .menu-header {
-  border-radius: 10px 10px 0 0;
-  background: linear-gradient(90deg, #c43b37 0%, #ed5154 35%, #c04646 100%);
-}
-.redMenu .menu-body {
-  border-radius: 0px 0px 10px 10px;
-}
-.redMenu .menu-footer {
-  border-radius: 10px;
-}
-.redMenu .menu-title {
-  color: white;
-  background: linear-gradient(90deg, #c43b37 0%, #ed5154 35%, #c04646 100%);
-}
-.redMenu .menu-body ul li.active {
-  background-color: rgba(255, 255, 255, 0.815);
-}
-
 .Green {
   border-radius: 10px;
   background-color: #27183f;
   border: solid 1px #13819f;
+  .menu-header {
+    background: transparent;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #f4dcff;
+    font-style: normal;
+  }
+  .menu-title {
+    color: #f4dcff;
+    background: none;
+  }
+  .menu-body {
+    background: transparent;
+    ul {
+      li {
+        margin: 0.5rem 0.3rem;
+        border-radius: 10px;
+        outline: 1px solid #00c0ff;
+        background: #27183f;
+        &.active {
+          a {
+            color: #f4dcff;
+          }
+          background: linear-gradient(
+            90deg,
+            #27183f 0%,
+            #503e69 35%,
+            #7c6896 100%
+          );
+        }
+      }
+    }
+  }
 }
-.Green .menu-header {
-  background: transparent;
-  padding: 10px;
-  text-align: center;
-  font-size: 1.6rem;
-  color: #f4dcff;
-  font-style: normal;
-}
-.Green .menu-title {
-  color: #f4dcff;
-  background: none;
-}
-.Green .menu-body {
-  background: transparent;
-}
-.Green .menu-body ul li {
-  margin: 0.5rem 0.3rem;
-  border-radius: 10px;
-  outline: 1px solid #00c0ff;
-  background: #27183f;
-}
-.Green .menu-body ul li.active {
-  background: linear-gradient(90deg, #27183f 0%, #503e69 35%, #7c6896 100%);
-}
-.Green .menu-body ul li.active a {
-  color: #f4dcff;
-}/*# sourceMappingURL=style.css.map */

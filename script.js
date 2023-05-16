@@ -769,19 +769,19 @@ $(() => {
                     "Id": 1,
                     "Show": true,
                     "Name": "Default",
-                    "Description": "Default Menu Color"
+                    "Description": "Default"
                 },
                 {
                     "Id": 2,
                     "Show": true,
                     "Name": "Red",
-                    "Description": "Default Menu Color"
+                    "Description": "Red"
                 },
                 {
                     "Id": 3,
                     "Show": true,
                     "Name": "Green",
-                    "Description": "Change color into green"
+                    "Description": "Green"
                 }
             ]
         }]
@@ -863,6 +863,21 @@ $(() => {
                 } else {
                     console.log('You pressed enter within a submenu.', $subMenu.find('li.active'));
                     console.log("subMenu", $subMenu.find('li.active')[0].attributes[0].value);
+                    const Val = $subMenu.find('li.active')[0].attributes[0].value
+                    if (Val === 'Red') {
+                        console.log('red:', Val)
+                        $('.menu').addClass('redMenu')
+                        $('.menu').removeClass('Green')
+                    } else if (Val === 'Default') {
+                        $('.menu').removeClass('Green')
+                        $('.menu').removeClass('redMenu')
+                        console.log('default:', Val)
+                    } else if (Val === 'Green') {
+                        $('.menu').removeClass('redMenu')
+                        $('.menu').addClass('Green')
+                        console.log('Green:', Val)
+                    }
+
                 }
                 break;
             case 'Escape':
