@@ -1,0 +1,158 @@
+/* 
+#0b3c7b
+#2e69bb
+#030303
+#e6e6e5
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'arial';
+    font-size: 18px;
+}
+
+.menu {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 450px;
+}
+
+.menu-header {
+    background: linear-gradient(to right bottom, #0b3c7b, #2e69bb);
+    padding: 20px;
+    text-align: center;
+    font-size: 27px;
+    font-style: italic;
+    color: #fff;
+}
+
+.menu-title {
+    background: #030303;
+    color: #2e69bb;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+}
+
+.menu-body {
+    background: rgb(3 3 3 / 70%);
+}
+
+
+.menu-body ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+
+}
+
+.menu-body ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    transition: all .3s linear;
+    position: relative;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.menu-body ul li.active {
+    background: #fff;
+}
+
+.menu-body ul li.active a {
+    color: #030303;
+}
+
+
+.menu-footer {
+    margin-top: 5px;
+    border-top: 3px solid #030303;
+    background: rgb(3 3 3 / 70%);
+    color: #e6e6e5;
+    padding: 7px 12px;
+    font-size: 16px;
+}
+
+.menu-wrap {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+}
+
+#menu>li>ul {
+    position: absolute;
+    inset: 0;
+    display: none;
+}
+
+#menu>li>ul.show {
+    display: block;
+}
+
+#menu>li>ul>li {
+    margin: 0;
+}
+
+#menu>li>ul>li>a {
+    display: block;
+    padding: 8px;
+}
+
+ul#menu {
+    min-height: 350px;
+    position: relative;
+}
+
+#menu>li>ul.show {
+    display: block;
+}
+
+ul.submenu {
+    display: none;
+}
+
+ul.submenu.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+
+.menu-body {
+    overflow-y: auto;
+    max-height: 350px;
+}
+.menu-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.menu-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.menu-body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.menu-body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
