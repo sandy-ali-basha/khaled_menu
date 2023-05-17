@@ -1,0 +1,2669 @@
+{
+  "action": "OpenMenu",
+  "NamePlayer": "Khaled",
+  "NameMenu": "اسم المنيو ( ينكتب كتابة اسفل الاسم اللاعب يمين بل زاوية )",
+  "Theme": "Red",
+  "ColorMenu": {
+    "b": 255,
+    "a": 255,
+    "r": 255,
+    "g": 255
+  },
+  "LocationsMenu": {
+    "menu": {
+      "Left": "1400px",
+      "Top": "30px"
+    },
+    "Text": {
+      "Left": "1400px",
+      "Top": "30px"
+    },
+    "NoClipText": {
+      "Left": "1400px",
+      "Top": "30px"
+    },
+    "BoxTest": {
+      "Left": "1400px",
+      "Top": "30px"
+    },
+    "Notification": {
+      "Left": "1400px",
+      "Top": "30px"
+    },
+    "ColorPicker": {
+      "Left": "1400px",
+      "Top": "30px"
+    }
+  },
+  "Data": [
+    {
+      "NeedApi": true,
+      "Id": 1,
+      "Show": true,
+      "Name": "Online Players",
+      "Description": "All currently connected players.",
+      "SubMenu": [
+        {
+          "Show": true,
+          "Name": "Spectate Player",
+          "Id": 1,
+          "Description": "Spectate this player. Click this button again to stop spectating."
+        },
+        {
+          "Show": true,
+          "Id": 2
+        },
+        {
+          "Show": true,
+          "Name": "Teleport Player Me",
+          "Id": 3,
+          "Description": "Teleport player to Me."
+        },
+        {
+          "Show": true,
+          "Name": "Kill Player",
+          "Id": 4,
+          "Description": "Kill this player."
+        },
+        {
+          "BoxText": {
+            "BoxText": "Reason Kick :",
+            "Name": "Kick Player",
+            "Description": "Kick Player",
+            "Placeholder": "hack, Rdm, Vdm"
+          },
+          "Id": 5,
+          "Show": true,
+          "Name": "Kick Player",
+          "Description": "Kick this player."
+        },
+        {
+          "BoxText": {
+            "BoxText": "Reason Temporarily Ban :",
+            "Name": "Temporarily Ban",
+            "Description": "Temporarily Ban Player",
+            "Placeholder": "hack"
+          },
+          "Id": 6,
+          "Show": true,
+          "Name": "Temporarily Ban Player",
+          "Description": "Temporarily ban this player."
+        },
+        {
+          "BoxText": {
+            "BoxText": "Reason Permanently Ban :",
+            "Name": "Permanently Ban",
+            "Description": "Permanently Ban Player",
+            "Placeholder": "hack"
+          },
+          "Id": 7,
+          "Show": true,
+          "Name": "Permanently Ban Player",
+          "Description": "Permanently ban this player."
+        },
+        {
+          "Show": true,
+          "Name": "Get Identifiers",
+          "Id": 8,
+          "Description": "This will show the player's identifiers."
+        },
+        {
+          "Show": true,
+          "Name": "Teleport Into Player Vehicle Me",
+          "Id": 9,
+          "Description": "The player Teleport to my Vehicle."
+        },
+        {
+          "Show": true,
+          "Name": "Teleport Into Player Vehicle",
+          "Id": 10,
+          "Description": "Teleport into the vehicle of the player."
+        },
+        {
+          "Show": true,
+          "Name": "Toggle GPS Player",
+          "Id": 11,
+          "Description": "Enables or disables the GPS route on your radar to this player."
+        },
+        {
+          "Show": true,
+          "Name": "Heal Player",
+          "Id": 12,
+          "Description": "Fill this player blood."
+        },
+        {
+          "Show": true,
+          "Name": "Freeze To Player",
+          "Id": 13,
+          "Description": "Freeze this player."
+        }
+      ]
+    },
+    {
+      "NeedApi": true,
+      "Id": 2,
+      "Show": true,
+      "Name": "Banned Players",
+      "Description": "View and manage all banned players in this menu.",
+      "SubMenu": [
+        {
+          "BoxText": {
+            "BoxText": "Reason :",
+            "Name": "Un ban",
+            "Description": "Unban Player",
+            "Placeholder": "..."
+          },
+          "Id": 1,
+          "Show": true,
+          "Name": "Unban Player",
+          "Description": "Unban this player."
+        }
+      ]
+    },
+    {
+      "NeedApi": false,
+      "Id": 3,
+      "Show": true,
+      "Name": "Player Related Options",
+      "Description": "Open this submenu for player related subcategories.",
+      "SubMenu": [
+        {
+          "Show": true,
+          "Name": "Toggle NoClip",
+          "Id": 4,
+          "Description": "Toggle NoClip on or off."
+        },
+        {
+          "ArrowList": [
+            {
+              "Name": "Normal",
+              "Id": 1,
+              "Resend": 1
+            },
+            {
+              "Name": "Best",
+              "Id": 2,
+              "Resend": 2
+            }
+          ],
+          "Id": 5,
+          "Show": true,
+          "Name": "Toggle NoClip Type",
+          "Description": "Toggle the type of NoClip, there is more than type of NoClip."
+        },
+        {
+          "Show": true,
+          "Name": "Last Teleport Back",
+          "Id": 6,
+          "Description": "Go back to the last location you were at 15 seconds ago."
+        },
+        {
+          "Id": 1,
+          "Show": true,
+          "Name": "Player Options",
+          "Description": "Common player options can be accessed here.",
+          "SubMenu": [
+            {
+              "Id": 1,
+              "Show": true,
+              "Name": "Godmode",
+              "Description": "Makes you invincible.",
+              "Checked": false
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Invisible",
+              "Description": "Makes you invisible to yourself and others.",
+              "Checked": false
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Unlimited Stamina",
+              "Description": "Allows you to run forever without slowing down or taking damage.",
+              "Checked": false
+            },
+            {
+              "Id": 4,
+              "Show": true,
+              "Name": "Fast Run",
+              "Description": "Get Snail powers and run very fast!",
+              "Checked": false
+            },
+            {
+              "Id": 5,
+              "Show": true,
+              "Name": "Fast Swim",
+              "Description": "Get Snail powers and Swim very fast!",
+              "Checked": false
+            },
+            {
+              "Id": 6,
+              "Show": true,
+              "Name": "Super Jump",
+              "Description": "Get powers and do super jump.",
+              "Checked": false
+            },
+            {
+              "Id": 7,
+              "Show": true,
+              "Name": "No Ragdoll",
+              "Description": "Disables player ragdoll, makes you not fall off your bike anymore.",
+              "Checked": false
+            },
+            {
+              "Id": 8,
+              "Show": true,
+              "Name": "Everyone Ignore Player",
+              "Description": "Everyone will leave you alone.",
+              "Checked": false
+            },
+            {
+              "Id": 9,
+              "Show": true,
+              "Name": "Stay In Vehicle",
+              "Description": "When this is enabled, NPCs will not be able to drag you out of your vehicle if they get angry at you.",
+              "Checked": false
+            },
+            {
+              "Id": 10,
+              "Show": true,
+              "Name": "Freeze Player",
+              "Description": "Freezes your current location.",
+              "Checked": false
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "No Armor",
+                  "Id": 1,
+                  "Resend": 0
+                },
+                {
+                  "Name": "Super Light Armor",
+                  "Id": 2,
+                  "Resend": 20
+                },
+                {
+                  "Name": "Light Armor",
+                  "Id": 3,
+                  "Resend": 40
+                },
+                {
+                  "Name": "Standard Armor",
+                  "Id": 4,
+                  "Resend": 60
+                },
+                {
+                  "Name": "Heavy Armor",
+                  "Id": 5,
+                  "Resend": 80
+                },
+                {
+                  "Name": "Super Heavy Armor",
+                  "Id": 6,
+                  "Resend": 100
+                }
+              ],
+              "Id": 11,
+              "Show": true,
+              "Name": "Set Armor",
+              "Description": "Set the armor for your player."
+            },
+            {
+              "Show": true,
+              "Name": "Heal Player",
+              "Id": 12,
+              "Description": "Give the player max health."
+            },
+            {
+              "Show": true,
+              "Name": "Heal All Player",
+              "Id": 13,
+              "Description": "Give the All player max health."
+            },
+            {
+              "Id": 14,
+              "Show": true,
+              "Name": "Toggle Night Vision",
+              "Description": "Enable or disable night vision.",
+              "Checked": false
+            },
+            {
+              "Id": 15,
+              "Show": true,
+              "Name": "Toggle Thermal Vision",
+              "Description": "Enable or disable Thermal vision.",
+              "Checked": false
+            },
+            {
+              "Show": true,
+              "Name": "Clean Player Clothes",
+              "Id": 16,
+              "Description": "Clean your player clothes."
+            },
+            {
+              "Show": true,
+              "Name": "Dry Player Clothes",
+              "Id": 17,
+              "Description": "Make your player clothes dry."
+            },
+            {
+              "Show": true,
+              "Name": "Wet Player Clothes",
+              "Id": 18,
+              "Description": "Make your player clothes Wet."
+            },
+            {
+              "Show": true,
+              "Name": "Commit Suicide",
+              "Id": 19,
+              "Description": "Kill yourself by taking the pill. Or by using a pistol if you have one."
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "PROP_HUMAN_SEAT_ARMCHAIR",
+                  "Id": 1,
+                  "Resend": "PROP_HUMAN_SEAT_ARMCHAIR"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_BAR",
+                  "Id": 2,
+                  "Resend": "PROP_HUMAN_SEAT_BAR"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_BENCH",
+                  "Id": 3,
+                  "Resend": "PROP_HUMAN_SEAT_BENCH"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_BUS_STOP_WAIT",
+                  "Id": 4,
+                  "Resend": "PROP_HUMAN_SEAT_BUS_STOP_WAIT"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_CHAIR",
+                  "Id": 5,
+                  "Resend": "PROP_HUMAN_SEAT_CHAIR"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_CHAIR_UPRIGHT",
+                  "Id": 6,
+                  "Resend": "PROP_HUMAN_SEAT_CHAIR_UPRIGHT"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER",
+                  "Id": 7,
+                  "Resend": "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_COMPUTER",
+                  "Id": 8,
+                  "Resend": "PROP_HUMAN_SEAT_COMPUTER"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_DECKCHAIR",
+                  "Id": 9,
+                  "Resend": "PROP_HUMAN_SEAT_DECKCHAIR"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_STRIP_WATCH",
+                  "Id": 10,
+                  "Resend": "PROP_HUMAN_SEAT_STRIP_WATCH"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_SUNLOUNGER",
+                  "Id": 11,
+                  "Resend": "PROP_HUMAN_SEAT_SUNLOUNGER"
+                },
+                {
+                  "Name": "WORLD_HUMAN_SEAT_LEDGE",
+                  "Id": 12,
+                  "Resend": "WORLD_HUMAN_SEAT_LEDGE"
+                },
+                {
+                  "Name": "WORLD_HUMAN_SEAT_STEPS",
+                  "Id": 13,
+                  "Resend": "WORLD_HUMAN_SEAT_STEPS"
+                },
+                {
+                  "Name": "WORLD_HUMAN_SEAT_WALL",
+                  "Id": 14,
+                  "Resend": "WORLD_HUMAN_SEAT_WALL"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_DECKCHAIR_DRINK",
+                  "Id": 15,
+                  "Resend": "PROP_HUMAN_SEAT_DECKCHAIR_DRINK"
+                },
+                {
+                  "Name": "PROP_HUMAN_SEAT_MUSCLE_BENCH_PRESS",
+                  "Id": 16,
+                  "Resend": "PROP_HUMAN_SEAT_MUSCLE_BENCH_PRESS"
+                },
+                {
+                  "Name": "WORLD_HUMAN_STAND_MOBILE",
+                  "Id": 17,
+                  "Resend": "WORLD_HUMAN_STAND_MOBILE"
+                },
+                {
+                  "Name": "PROP_HUMAN_MUSCLE_CHIN_UPS_PRISON",
+                  "Id": 18,
+                  "Resend": "PROP_HUMAN_MUSCLE_CHIN_UPS_PRISON"
+                },
+                {
+                  "Name": "WORLD_HUMAN_BUM_FREEWAY",
+                  "Id": 19,
+                  "Resend": "WORLD_HUMAN_BUM_FREEWAY"
+                },
+                {
+                  "Name": "WORLD_HUMAN_BUM_SLUMPED",
+                  "Id": 20,
+                  "Resend": "WORLD_HUMAN_BUM_SLUMPED"
+                }
+              ],
+              "Id": 20,
+              "Show": true,
+              "Name": "Player Scenarios",
+              "Description": "Select a scenario and hit enter to start it. Selecting another scenario will override the current scenario. If you're already playing the selected scenario, selecting it again will stop the scenario."
+            },
+            {
+              "Show": true,
+              "Id": 21
+            }
+          ]
+        },
+        {
+          "Id": 3,
+          "Show": true,
+          "Name": "Weapon Options",
+          "Description": "Add/remove weapons, modify weapons and set ammo options.",
+          "SubMenu": [
+            {
+              "Show": true,
+              "Name": "Get All Weapons",
+              "Id": 1,
+              "Description": "Get all weapons."
+            },
+            {
+              "Show": true,
+              "Name": "Remove All Weapons",
+              "Id": 2,
+              "Description": "Removes all weapons in your inventory."
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Unlimited Ammo",
+              "Description": "Unlimited ammonition supply.",
+              "Checked": false
+            },
+            {
+              "Id": 4,
+              "Show": true,
+              "Name": "No Reload",
+              "Description": "Never reload.",
+              "Checked": false
+            },
+            {
+              "BoxText": {
+                "BoxText": "Ammo Count :",
+                "Name": "Set Ammo",
+                "Description": "Set All Ammo Count",
+                "Placeholder": "250, 500, 5000"
+              },
+              "Id": 5,
+              "Show": true,
+              "Name": "Set All Ammo Count",
+              "Description": "Set the amount of ammo in all your weapons."
+            },
+            {
+              "Show": true,
+              "Name": "Refill All Ammo",
+              "Id": 6,
+              "Description": "Give all your weapons max ammo."
+            },
+            {
+              "BoxText": {
+                "BoxText": "Weapon Name :",
+                "BoxText2": "Ammo Weapon :",
+                "Placeholder2": "250, 500, 5000",
+                "Name": "Spawn Weapon",
+                "Description": "Spawn Weapon By Name",
+                "Placeholder": "weapon_pistol, weapon_appistol, weapon_smg"
+              },
+              "Id": 7,
+              "Show": true,
+              "Name": "Spawn Weapon By Name",
+              "Description": "Enter a weapon mode name to spawn."
+            },
+            {
+              "Id": 8,
+              "Show": true,
+              "Name": "Parachute Options",
+              "Description": "Parachute Options.",
+              "SubMenu": [
+                {
+                  "Show": true,
+                  "Name": "Toggle Primary Parachute",
+                  "Id": 1,
+                  "Description": "Equip or remove the primary parachute"
+                },
+                {
+                  "Show": true,
+                  "Name": "Enable Reserve Parachute",
+                  "Id": 2,
+                  "Description": "Enables the reserve parachute. Only works if you enabled the primary parachute first. Reserve parachute can not be removed from the player once it's activated."
+                },
+                {
+                  "Id": 3,
+                  "Show": true,
+                  "Name": "Unlimited Parachutes",
+                  "Description": "Enable unlimited parachutes and reserve parachutes.",
+                  "Checked": false
+                },
+                {
+                  "Id": 4,
+                  "Show": true,
+                  "Name": "Auto Equip Parachutes",
+                  "Description": "Automatically equip a parachute and reserve parachute when entering planes/helicopters.",
+                  "Checked": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": 2,
+          "Show": true,
+          "Name": "Player Appearance",
+          "Description": "Choose a ped model, customize it and save & load your customized characters.",
+          "SubMenu": []
+        }
+      ]
+    },
+    {
+      "NeedApi": false,
+      "Id": 4,
+      "Show": true,
+      "Name": "Vehicle Related Options",
+      "Description": "Open this submenu for vehicle related subcategories.",
+      "SubMenu": [
+        {
+          "Id": 1,
+          "Show": true,
+          "Name": "Vehicle Options",
+          "Description": "Here you can change common vehicle options, as well as tune & style your vehicle.",
+          "SubMenu": [
+            {
+              "Id": 1,
+              "Show": true,
+              "Name": "Vehicle Godmode",
+              "Description": "Enable or disable specific damage types.",
+              "Checked": false
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Keep Vehicle Clean",
+              "Description": "This will constantly clean your car if the vehicle dirt level goes above 0. Note that this only cleans dust or dirt. This does not clean mud, snow or other damage decals. Repair your vehicle to remove them.",
+              "Checked": false
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Bike Seatbelt",
+              "Description": "Prevents you from being knocked off your bike, bicyle, ATV or similar.",
+              "Checked": false
+            },
+            {
+              "Id": 4,
+              "Show": true,
+              "Name": "Engine Always On",
+              "Description": "Keeps your vehicle engine on when you exit your vehicle.",
+              "Checked": false
+            },
+            {
+              "Id": 5,
+              "Show": true,
+              "Name": "Disable Plane Turbulence",
+              "Description": "Disables the turbulence for all planes. Note only works for planes. Helicopters and other flying vehicles are not supported.",
+              "Checked": false
+            },
+            {
+              "Id": 6,
+              "Show": true,
+              "Name": "Disable Siren",
+              "Description": "Disables your vehicle's siren. Only works if your vehicle actually has a siren.",
+              "Checked": false
+            },
+            {
+              "Id": 7,
+              "Show": true,
+              "Name": "No Bike Helmet",
+              "Description": "No longer auto-equip a helmet when getting on a bike or quad.",
+              "Checked": false
+            },
+            {
+              "Id": 8,
+              "Show": true,
+              "Name": "Freeze Vehicle",
+              "Description": "Freeze your vehicle's position.",
+              "Checked": false
+            },
+            {
+              "Id": 9,
+              "Show": true,
+              "Name": "Flash Highbeams On Honk",
+              "Description": "Turn on your highbeams on your vehicle when honking your horn. Does not work during the day when you have your lights turned off.",
+              "Checked": false
+            },
+            {
+              "Id": 10,
+              "Show": true,
+              "Name": "Show Vehicle Health",
+              "Description": "Shows the vehicle health on the screen.",
+              "Checked": false
+            },
+            {
+              "Id": 11,
+              "Show": true,
+              "Name": "Infinite Fuel",
+              "Description": "Enables or disables infinite fuel for this vehicle, only works if FRFuel is installed.",
+              "Checked": false
+            },
+            {
+              "Show": true,
+              "Name": "Repair Vehicle",
+              "Id": 12,
+              "Description": "Repair any visual and physical damage present on your vehicle."
+            },
+            {
+              "Id": 13,
+              "Show": true,
+              "Name": "Auto Repair",
+              "Description": "Automatically repairs your vehicle when it has ANY type of damage. It's recommended to keep this turned off to prevent glitchyness.",
+              "Checked": false
+            },
+            {
+              "Id": 14,
+              "ArrowMix": 15,
+              "Show": true,
+              "Name": "Dirty Vehicle",
+              "Description": "Increased dirtiness of the Vehicle.",
+              "ArrowMinimum": 1
+            },
+            {
+              "Show": true,
+              "Name": "Wash Vehicle",
+              "Id": 15,
+              "Description": "Clean your vehicle."
+            },
+            {
+              "Show": true,
+              "Name": "Toggle Engine On/Off",
+              "Id": 16,
+              "Description": "Turn your engine on/off."
+            },
+            {
+              "BoxText": {
+                "BoxText": "License Text :",
+                "Name": "License Plate Text",
+                "Description": "Set License Plate Text",
+                "Placeholder": "Test, Gta, Ram"
+              },
+              "Id": 17,
+              "Show": true,
+              "Name": "Set License Plate Text",
+              "Description": "Enter a custom license plate for your vehicle."
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "Blue on White 1",
+                  "Id": 1,
+                  "Resend": 0
+                },
+                {
+                  "Name": "Blue on White 2",
+                  "Id": 2,
+                  "Resend": 1
+                },
+                {
+                  "Name": "Blue on White 3",
+                  "Id": 3,
+                  "Resend": 2
+                },
+                {
+                  "Name": "Yellow on Blue",
+                  "Id": 4,
+                  "Resend": 3
+                },
+                {
+                  "Name": "Yellow on Black",
+                  "Id": 5,
+                  "Resend": 4
+                },
+                {
+                  "Name": "North Yankton",
+                  "Id": 6,
+                  "Resend": 5
+                }
+              ],
+              "Id": 18,
+              "Show": true,
+              "Name": "Set License Plate Type",
+              "Description": "Choose a custom license plate color for your vehicle."
+            },
+            {
+              "ArrowList": [
+                {
+                  "1": "Set",
+                  "Id": 1,
+                  "Resend": 1
+                },
+                {
+                  "Name": "Reset",
+                  "Id": 2,
+                  "Resend": 2
+                },
+                {
+                  "BoxText": {
+                    "BoxText": "Speed New :",
+                    "Name": "Speed Custom",
+                    "Description": "Vehicle Speed Custom",
+                    "Placeholder": "80, 120, 150"
+                  },
+                  "Name": "Custom",
+                  "Id": 3,
+                  "Resend": 3
+                }
+              ],
+              "Id": 19,
+              "Show": true,
+              "Name": "Speed Limiter",
+              "Description": "Set your vehicles max speed to your current speed. Resetting your vehicles max speed will set the max speed of your current vehicle back to default. Only your current vehicle is affected by this option."
+            },
+            {
+              "Show": true,
+              "Name": "Toggle Vehicle Visibility",
+              "Id": 19,
+              "Description": "Makes your vehicle visible/invisible. Your vehicle will be made visible again as soon as you leave the vehicle. Otherwise you would not be able to get back in."
+            },
+            {
+              "Show": true,
+              "Name": "Flip Vehicle",
+              "Id": 20,
+              "Description": "Sets your current vehicle on all 4 wheels."
+            },
+            {
+              "Show": true,
+              "Name": "Toggle Vehicle Alarm",
+              "Id": 21,
+              "Description": "Starts/stops your vehicle's alarm."
+            },
+            {
+              "Show": true,
+              "Name": "Cycle Through Vehicle Seats",
+              "Id": 22,
+              "Description": "Cycle through the available vehicle seats."
+            },
+            {
+              "Show": true,
+              "Name": "Delete Vehicle",
+              "Id": 23,
+              "Description": "Delete your vehicle."
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "All Tires",
+                  "Id": 1,
+                  "Resend": 1
+                },
+                {
+                  "Name": "Tire #1",
+                  "Id": 2,
+                  "Resend": 2
+                },
+                {
+                  "Name": "Tire #2",
+                  "Id": 3,
+                  "Resend": 3
+                },
+                {
+                  "Name": "Tire #3",
+                  "Id": 4,
+                  "Resend": 4
+                },
+                {
+                  "Name": "Tire #4",
+                  "Id": 5,
+                  "Resend": 5
+                },
+                {
+                  "Name": "Tire #5",
+                  "Id": 6,
+                  "Resend": 6
+                },
+                {
+                  "Name": "Tire #6",
+                  "Id": 7,
+                  "Resend": 7
+                },
+                {
+                  "Name": "Tire #7",
+                  "Id": 8,
+                  "Resend": 8
+                },
+                {
+                  "Name": "Tire #8",
+                  "Id": 9,
+                  "Resend": 9
+                }
+              ],
+              "Id": 24,
+              "Show": true,
+              "Name": "Fix / Destroy Tires",
+              "Description": "Fix or destroy a specific vehicle tire, or all of them at once. Note, not all indexes are valid for all vehicles, some might not do anything on certain vehicles."
+            },
+            {
+              "Id": 25,
+              "Show": true,
+              "Name": "Vehicle Windows",
+              "Description": "Roll your windows up/down or remove/restore your vehicle windows here.",
+              "SubMenu": [
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Roll Down Windows",
+                      "Id": 1,
+                      "Resend": 11
+                    },
+                    {
+                      "Name": "Roll Up Windows",
+                      "Id": 2,
+                      "Resend": 12
+                    },
+                    {
+                      "Name": "Window #0",
+                      "Id": 3,
+                      "Resend": 0
+                    },
+                    {
+                      "Name": "Window #1",
+                      "Id": 4,
+                      "Resend": 1
+                    },
+                    {
+                      "Name": "Window #2",
+                      "Id": 5,
+                      "Resend": 2
+                    },
+                    {
+                      "Name": "Window #3",
+                      "Id": 6,
+                      "Resend": 3
+                    },
+                    {
+                      "Name": "Window #4",
+                      "Id": 7,
+                      "Resend": 4
+                    },
+                    {
+                      "Name": "Window #5",
+                      "Id": 8,
+                      "Resend": 5
+                    },
+                    {
+                      "Name": "Window #6",
+                      "Id": 9,
+                      "Resend": 6
+                    },
+                    {
+                      "Name": "Window #7",
+                      "Id": 10,
+                      "Resend": 7
+                    }
+                  ],
+                  "Id": 1,
+                  "Show": true
+                },
+                {
+                  "Show": true,
+                  "Name": "Fix Vehicle Window",
+                  "Id": 2,
+                  "Description": "Fix all vehicle windows."
+                },
+                {
+                  "Show": true,
+                  "Name": "Remove Vehicle All Window",
+                  "Id": 3,
+                  "Description": "Remove Vehicle All Window."
+                }
+              ]
+            },
+            {
+              "Id": 26,
+              "Show": true,
+              "Name": "Vehicle Doors",
+              "Description": "Open, close, remove and restore vehicle doors here.",
+              "SubMenu": [
+                {
+                  "Name": "Open/Close All Doors",
+                  "Id": 1,
+                  "Description": "Open/Close all vehicle doors."
+                },
+                {
+                  "Show": true,
+                  "Name": "Bomb Bay Door",
+                  "Id": 3,
+                  "Description": "Open/close the bomb bay. Only available on some planes."
+                },
+                {
+                  "Id": 4,
+                  "Show": true,
+                  "Name": "Delete Removed Doors",
+                  "Description": "When enabled, doors that you remove using the list above will be deleted from the world. If disabled, then the doors will just fall on the ground.",
+                  "Checked": false
+                },
+                {
+                  "Show": true,
+                  "Name": "Remove Door",
+                  "Id": 5,
+                  "Description": "Remove a specific vehicle door completely."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Front Left",
+                      "Id": 1,
+                      "Resend": 0
+                    },
+                    {
+                      "Name": "Front Right",
+                      "Id": 2,
+                      "Resend": 1
+                    },
+                    {
+                      "Name": "Rear Left",
+                      "Id": 3,
+                      "Resend": 2
+                    },
+                    {
+                      "Name": "Rear Right",
+                      "Id": 4,
+                      "Resend": 3
+                    },
+                    {
+                      "Name": "Hood",
+                      "Id": 5,
+                      "Resend": 4
+                    },
+                    {
+                      "Name": "Trunk",
+                      "Id": 6,
+                      "Resend": 5
+                    },
+                    {
+                      "Name": "Extra 1",
+                      "Id": 7,
+                      "Resend": 6
+                    },
+                    {
+                      "Name": "Extra 2",
+                      "Id": 8,
+                      "Resend": 7
+                    }
+                  ],
+                  "Id": 2,
+                  "Show": true,
+                  "Name": "Vehicle Doors",
+                  "Description": "Open, close, remove and restore vehicle doors here."
+                }
+              ]
+            },
+            {
+              "Id": 27,
+              "Show": true,
+              "Name": "Vehicle Neon Kits",
+              "Description": "Make your vehicle shine with some fancy neon underglow!",
+              "SubMenu": [
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Enable Front Light",
+                      "Id": 1,
+                      "Resend": 0
+                    },
+                    {
+                      "Name": "Enable Rear Light",
+                      "Id": 2,
+                      "Resend": 1
+                    },
+                    {
+                      "Name": "Enable Left Light",
+                      "Id": 3,
+                      "Resend": 2
+                    },
+                    {
+                      "Name": "Enable Right Light",
+                      "Id": 4,
+                      "Resend": 3
+                    }
+                  ],
+                  "Id": 1,
+                  "Show": true,
+                  "Name": "Vehicle Neon Kits",
+                  "Description": "Make your vehicle shine with some fancy neon underglow!"
+                },
+                {
+                  "Show": true,
+                  "Name": "Change Vehicle Neon Kits",
+                  "Id": 2,
+                  "Description": "Change Vehicle Neon Kits"
+                }
+              ]
+            },
+            {
+              "Id": 28,
+              "Show": true,
+              "Name": "Enable Power Multiplier",
+              "Description": "Enables the torque multiplier selected from the list below.",
+              "Checked": false
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "x2",
+                  "Id": 1,
+                  "Resend": 2
+                },
+                {
+                  "Name": "x4",
+                  "Id": 2,
+                  "Resend": 4
+                },
+                {
+                  "Name": "x8",
+                  "Id": 3,
+                  "Resend": 8
+                },
+                {
+                  "Name": "x16",
+                  "Id": 4,
+                  "Resend": 16
+                },
+                {
+                  "Name": "x32",
+                  "Id": 5,
+                  "Resend": 32
+                },
+                {
+                  "Name": "x64",
+                  "Id": 6,
+                  "Resend": 64
+                },
+                {
+                  "Name": "x128",
+                  "Id": 7,
+                  "Resend": 128
+                },
+                {
+                  "Name": "x256",
+                  "Id": 8,
+                  "Resend": 256
+                },
+                {
+                  "Name": "x512",
+                  "Id": 9,
+                  "Resend": 512
+                },
+                {
+                  "Name": "1024",
+                  "Id": 10,
+                  "Resend": 1024
+                }
+              ],
+              "Id": 29,
+              "Show": true,
+              "Name": "Set Engine Torque Multiplier",
+              "Description": "Set the engine torque multiplier."
+            },
+            {
+              "Id": 30,
+              "Show": true,
+              "Name": "Enable Power Multiplier",
+              "Description": "Enables the Power multiplier selected from the list below.",
+              "Checked": false
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "x2",
+                  "Id": 1,
+                  "Resend": 2
+                },
+                {
+                  "Name": "x4",
+                  "Id": 2,
+                  "Resend": 4
+                },
+                {
+                  "Name": "x8",
+                  "Id": 3,
+                  "Resend": 8
+                },
+                {
+                  "Name": "x16",
+                  "Id": 4,
+                  "Resend": 16
+                },
+                {
+                  "Name": "x32",
+                  "Id": 5,
+                  "Resend": 32
+                },
+                {
+                  "Name": "x64",
+                  "Id": 6,
+                  "Resend": 64
+                },
+                {
+                  "Name": "x128",
+                  "Id": 7,
+                  "Resend": 128
+                },
+                {
+                  "Name": "x256",
+                  "Id": 8,
+                  "Resend": 256
+                },
+                {
+                  "Name": "x512",
+                  "Id": 9,
+                  "Resend": 512
+                },
+                {
+                  "Name": "1024",
+                  "Id": 10,
+                  "Resend": 1024
+                }
+              ],
+              "Id": 31,
+              "Show": true,
+              "Name": "Set Engine Power Multiplier",
+              "Description": "Set the engine Power multiplier."
+            },
+            {
+              "Id": 32,
+              "Show": true,
+              "Name": "Vehicle Extras",
+              "Description": "Add/remove vehicle components/extras.",
+              "SubMenu": []
+            },
+            {
+              "ArrowList": [],
+              "Id": 33,
+              "Show": true,
+              "Name": "Vehicle Liveries",
+              "Description": "Style your vehicle with fancy liveries!"
+            },
+            {
+              "Id": 34,
+              "Show": true,
+              "Name": "Mod Menu",
+              "Description": "Tune and customize your vehicle here.",
+              "SubMenu": [
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Stock Engine",
+                      "Id": 0,
+                      "Resend": "vehmodify 11 -1"
+                    },
+                    {
+                      "Name": "Level 1",
+                      "Id": 1,
+                      "Resend": "vehmodify 11 0"
+                    },
+                    {
+                      "Name": "Level 2",
+                      "Id": 2,
+                      "Resend": "vehmodify 11 1"
+                    },
+                    {
+                      "Name": "Level 3",
+                      "Id": 3,
+                      "Resend": "vehmodify 11 2"
+                    },
+                    {
+                      "Name": "Level 4",
+                      "Id": 4,
+                      "Resend": "vehmodify 11 3"
+                    }
+                  ],
+                  "Id": 1,
+                  "Show": true,
+                  "Name": "Engine (5)",
+                  "Description": "Choose a Engine upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Stock Brakes",
+                      "Id": 0,
+                      "Resend": "vehmodify 12 -1"
+                    },
+                    {
+                      "Name": "Street Brakes",
+                      "Id": 1,
+                      "Resend": "vehmodify 12 0"
+                    },
+                    {
+                      "Name": "Sport Brakes",
+                      "Id": 2,
+                      "Resend": "vehmodify 12 1"
+                    },
+                    {
+                      "Name": "Race Brakes",
+                      "Id": 3,
+                      "Resend": "vehmodify 12 2"
+                    }
+                  ],
+                  "Id": 2,
+                  "Show": true,
+                  "Name": "Brakes (5)",
+                  "Description": "Choose a Brakes upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Stock Transmission",
+                      "Id": 0,
+                      "Resend": "vehmodify 13 -1"
+                    },
+                    {
+                      "Name": "Street Transmission",
+                      "Id": 1,
+                      "Resend": "vehmodify 13 0"
+                    },
+                    {
+                      "Name": "Sport Transmission",
+                      "Id": 2,
+                      "Resend": "vehmodify 13 1"
+                    },
+                    {
+                      "Name": "Race Transmission",
+                      "Id": 3,
+                      "Resend": "vehmodify 13 2"
+                    }
+                  ],
+                  "Id": 3,
+                  "Show": true,
+                  "Name": "Transmission (4)",
+                  "Description": "Choose a Transmission upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Stock Horn",
+                      "Id": 1,
+                      "Resend": "vehmodify 14 -1"
+                    },
+                    {
+                      "Name": "Truck Horn",
+                      "Id": 2,
+                      "Resend": "vehmodify 14 0"
+                    },
+                    {
+                      "Name": "Police Horn",
+                      "Id": 3,
+                      "Resend": "vehmodify 14 1"
+                    },
+                    {
+                      "Name": "Clown Horn",
+                      "Id": 4,
+                      "Resend": "vehmodify 14 2"
+                    },
+                    {
+                      "Name": "Musical Horn 1",
+                      "Id": 5,
+                      "Resend": "vehmodify 14 3"
+                    },
+                    {
+                      "Name": "Musical Horn 2",
+                      "Id": 6,
+                      "Resend": "vehmodify 14 4"
+                    },
+                    {
+                      "Name": "Musical Horn 3",
+                      "Id": 7,
+                      "Resend": "vehmodify 14 5"
+                    },
+                    {
+                      "Name": "Musical Horn 4",
+                      "Id": 8,
+                      "Resend": "vehmodify 14 6"
+                    },
+                    {
+                      "Name": "Musical Horn 5",
+                      "Id": 9,
+                      "Resend": "vehmodify 14 7"
+                    },
+                    {
+                      "Name": "Sad Trombone",
+                      "Id": 10,
+                      "Resend": "vehmodify 14 8"
+                    },
+                    {
+                      "Name": "Classical Horn 1",
+                      "Id": 11,
+                      "Resend": "vehmodify 14 9"
+                    },
+                    {
+                      "Name": "Classical Horn 2",
+                      "Id": 12,
+                      "Resend": "vehmodify 14 10"
+                    },
+                    {
+                      "Name": "Classical Horn 3",
+                      "Id": 13,
+                      "Resend": "vehmodify 14 11"
+                    },
+                    {
+                      "Name": "Classical Horn 4",
+                      "Id": 14,
+                      "Resend": "vehmodify 14 12"
+                    },
+                    {
+                      "Name": "Classical Horn 5",
+                      "Id": 15,
+                      "Resend": "vehmodify 14 13"
+                    },
+                    {
+                      "Name": "Classical Horn 6",
+                      "Id": 16,
+                      "Resend": "vehmodify 14 14"
+                    },
+                    {
+                      "Name": "Classical Horn 7",
+                      "Id": 17,
+                      "Resend": "vehmodify 14 15"
+                    },
+                    {
+                      "Name": "Scale - Do",
+                      "Id": 18,
+                      "Resend": "vehmodify 14 16"
+                    },
+                    {
+                      "Name": "Scale - Re",
+                      "Id": 19,
+                      "Resend": "vehmodify 14 17"
+                    },
+                    {
+                      "Name": "Scale - Mi",
+                      "Id": 20,
+                      "Resend": "vehmodify 14 18"
+                    },
+                    {
+                      "Name": "Scale - Fa",
+                      "Id": 21,
+                      "Resend": "vehmodify 14 19"
+                    },
+                    {
+                      "Name": "Scale - Sol",
+                      "Id": 22,
+                      "Resend": "vehmodify 14 20"
+                    },
+                    {
+                      "Name": "Scale - La",
+                      "Id": 23,
+                      "Resend": "vehmodify 14 21"
+                    },
+                    {
+                      "Name": "Scale - Ti",
+                      "Id": 24,
+                      "Resend": "vehmodify 14 22"
+                    },
+                    {
+                      "Name": "Scale - Do - High",
+                      "Id": 25,
+                      "Resend": "vehmodify 14 23"
+                    },
+                    {
+                      "Name": "Jazz Horn 1",
+                      "Id": 26,
+                      "Resend": "vehmodify 14 25"
+                    },
+                    {
+                      "Name": "Jazz Horn 2",
+                      "Id": 27,
+                      "Resend": "vehmodify 14 26"
+                    },
+                    {
+                      "Name": "Jazz Horn 3",
+                      "Id": 28,
+                      "Resend": "vehmodify 14 27"
+                    },
+                    {
+                      "Name": "Jazz Horn Looped",
+                      "Id": 29,
+                      "Resend": "vehmodify 14 28"
+                    },
+                    {
+                      "Name": "Star Spangled Banner 1",
+                      "Id": 30,
+                      "Resend": "vehmodify 14 29"
+                    },
+                    {
+                      "Name": "Star Spangled Banner 2",
+                      "Id": 31,
+                      "Resend": "vehmodify 14 30"
+                    },
+                    {
+                      "Name": "Star Spangled Banner 3",
+                      "Id": 32,
+                      "Resend": "vehmodify 14 31"
+                    },
+                    {
+                      "Name": "Star Spangled Banner 4",
+                      "Id": 33,
+                      "Resend": "vehmodify 14 32"
+                    },
+                    {
+                      "Name": "Classical Horn Looped 1",
+                      "Id": 34,
+                      "Resend": "vehmodify 14 33"
+                    },
+                    {
+                      "Name": "Classical Horn 8",
+                      "Id": 35,
+                      "Resend": "vehmodify 14 34"
+                    },
+                    {
+                      "Name": "Classical Horn 2 Looped",
+                      "Id": 36,
+                      "Resend": "vehmodify 14 35"
+                    }
+                  ],
+                  "Id": 4,
+                  "Show": true,
+                  "Name": "Horn (36)",
+                  "Description": "Choose a Horn upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Stock Suspension",
+                      "Id": 1,
+                      "Resend": "vehmodify 15 -1"
+                    },
+                    {
+                      "Name": "Lowered Suspension",
+                      "Id": 2,
+                      "Resend": "vehmodify 15 0"
+                    },
+                    {
+                      "Name": "Street Suspension",
+                      "Id": 3,
+                      "Resend": "vehmodify 15 1"
+                    },
+                    {
+                      "Name": "Sport Suspension",
+                      "Id": 4,
+                      "Resend": "vehmodify 15 2"
+                    },
+                    {
+                      "Name": "Competition Suspension",
+                      "Id": 5,
+                      "Resend": "vehmodify 15 3"
+                    }
+                  ],
+                  "Id": 5,
+                  "Show": true,
+                  "Name": "Suspension (5)",
+                  "Description": "Choose a Suspension upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "None",
+                      "Id": 1,
+                      "Resend": "vehmodify 16 -1"
+                    },
+                    {
+                      "Name": "Armor 20%",
+                      "Id": 2,
+                      "Resend": "vehmodify 16 0"
+                    },
+                    {
+                      "Name": "Armor 40%",
+                      "Id": 3,
+                      "Resend": "vehmodify 16 1"
+                    },
+                    {
+                      "Name": "Armor 60%",
+                      "Id": 4,
+                      "Resend": "vehmodify 16 2"
+                    },
+                    {
+                      "Name": "Armor 80%",
+                      "Id": 5,
+                      "Resend": "vehmodify 16 3"
+                    },
+                    {
+                      "Name": "Armor 100%",
+                      "Id": 6,
+                      "Resend": "vehmodify 16 4"
+                    }
+                  ],
+                  "Id": 6,
+                  "Show": true,
+                  "Name": "Armor (6)",
+                  "Description": "Choose a Armor upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "None",
+                      "Id": 1,
+                      "Resend": "vehmod windowtint 0"
+                    },
+                    {
+                      "Name": "Stock",
+                      "Id": 2,
+                      "Resend": "vehmod windowtint 1"
+                    },
+                    {
+                      "Name": "Dark",
+                      "Id": 3,
+                      "Resend": "vehmod windowtint 2"
+                    },
+                    {
+                      "Name": "Medium",
+                      "Id": 4,
+                      "Resend": "vehmod windowtint 3"
+                    },
+                    {
+                      "Name": "Light",
+                      "Id": 5,
+                      "Resend": "vehmod windowtint 4"
+                    },
+                    {
+                      "Name": "Green",
+                      "Id": 6,
+                      "Resend": "vehmod windowtint 5"
+                    }
+                  ],
+                  "Id": 7,
+                  "Show": true,
+                  "Name": "Window Tint (6)",
+                  "Description": "Choose a Window Tint upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "ArrowList": [
+                    {
+                      "Name": "Sport",
+                      "Id": 1,
+                      "Resend": "vehmod changewheeltype 0"
+                    },
+                    {
+                      "Name": "Muscle",
+                      "Id": 2,
+                      "Resend": "vehmod changewheeltype 1"
+                    },
+                    {
+                      "Name": "Lowrider",
+                      "Id": 3,
+                      "Resend": "vehmod changewheeltype 2"
+                    },
+                    {
+                      "Name": "SUV",
+                      "Id": 4,
+                      "Resend": "vehmod changewheeltype 3"
+                    },
+                    {
+                      "Name": "Offroad",
+                      "Id": 5,
+                      "Resend": "vehmod changewheeltype 4"
+                    },
+                    {
+                      "Name": "Tuner",
+                      "Id": 6,
+                      "Resend": "vehmod changewheeltype 5"
+                    },
+                    {
+                      "Name": "Highend",
+                      "Id": 8,
+                      "Resend": "vehmod changewheeltype 7"
+                    },
+                    {
+                      "Name": "Benny's Original",
+                      "Id": 9,
+                      "Resend": "vehmod changewheeltype 8"
+                    }
+                  ],
+                  "Id": 8,
+                  "Show": true,
+                  "Name": "Wheel Category (6)",
+                  "Description": "Choose a Wheel Category upgrade, it will be automatically applied to your vehicle."
+                },
+                {
+                  "Show": true,
+                  "Name": "Tire Smoke",
+                  "Id": 9,
+                  "Description": "Choose a Tire Smoke upgrade, it will be automatically applied to your vehicle."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": 2,
+          "Show": true,
+          "Name": "Vehicle Spawner",
+          "Description": "Spawn a vehicle by name or choose one from a specific category.",
+          "SubMenu": [
+            {
+              "BoxText": {
+                "BoxText": "Model Name :",
+                "Name": "Spawn Vehicle",
+                "Description": "Spawn Vehicle By Model Name",
+                "Placeholder": "panto, issi2, bmx"
+              },
+              "Id": 1,
+              "Show": true,
+              "Name": "Spawn Vehicle By Model Name",
+              "Description": "Enter the name of a vehicle to spawn."
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Spawn Inside Vehicle",
+              "Description": "This will teleport you into the vehicle when you spawn it.",
+              "Checked": false
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Replace Previous Vehicle",
+              "Description": "This will automatically delete your previously spawned vehicle when you spawn a new vehicle.",
+              "Checked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "NeedApi": false,
+      "Id": 5,
+      "Show": true,
+      "Name": "Recording Options",
+      "Description": "In-game recording options.",
+      "SubMenu": [
+        {
+          "Show": true,
+          "Name": "Rockstar Editor",
+          "Id": 1,
+          "Description": "Open the rockstar editor, note you might want to quit the session first before doing this to prevent some issues."
+        },
+        {
+          "Show": true,
+          "Name": "Start Recording",
+          "Id": 2,
+          "Description": "Start a new game recording using GTA V's built in recording."
+        },
+        {
+          "Show": true,
+          "Name": "Stop Recording",
+          "Id": 3,
+          "Description": "Stop and save your current recording."
+        }
+      ]
+    },
+    {
+      "NeedApi": false,
+      "Id": 6,
+      "Show": true,
+      "Name": "Misc Settings",
+      "Description": "Miscellaneous RAM_vMenu options/settings can be configured here. You can also save your settings in this menu and change the language and theme.",
+      "SubMenu": [
+        {
+          "Id": 1,
+          "Show": true,
+          "Name": "Teleport Options",
+          "Description": "Various teleport options.",
+          "SubMenu": [
+            {
+              "BoxText": {
+                "BoxText": "Coords :",
+                "Name": "Teleport To Coords",
+                "Description": "Enter a Coords",
+                "Placeholder": "-75.122, -818.944, 326.177"
+              },
+              "Id": 1,
+              "Show": true,
+              "Name": "Teleport To Coords",
+              "Description": "Enter x, y, z coordinates and you will be teleported to that location."
+            },
+            {
+              "Show": true,
+              "Name": "Teleport To Waypoint",
+              "Id": 2,
+              "Description": "Teleport to the waypoint on your map."
+            },
+            {
+              "Show": true,
+              "Name": "Copy Current Coords",
+              "Id": 3,
+              "Description": "Copy the current coordinates."
+            }
+          ]
+        },
+        {
+          "NeedApi": true,
+          "Id": 2,
+          "Show": true,
+          "Name": "Development Tools",
+          "Description": "Various development/debug tools.",
+          "SubMenu": [
+            {
+              "Show": true,
+              "Name": "Clear Area",
+              "Id": 1,
+              "Description": "Clears the area around your player (100 meters). Damage, dirt, peds, props, vehicles, etc. Everything gets cleaned up, fixed and reset to the default world state."
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Show Coordinates",
+              "Description": "Show your current coordinates at the top of your screen.",
+              "Checked": false
+            },
+            {
+              "Id": 3,
+              "ArrowMix": 730,
+              "Show": true,
+              "Name": "Timecycle Modifier",
+              "Description": "Select a timecycle modifier.",
+              "ArrowMinimum": 1
+            },
+            {
+              "Show": true,
+              "Name": "Normal Timecycle Modifier",
+              "Id": 4,
+              "Description": "Select a Normal timecycle modifier."
+            }
+          ]
+        },
+        {
+          "Id": 3,
+          "Show": true,
+          "Name": "Show Speed KM/H",
+          "Description": "Show a speedometer on your screen indicating your speed in KM/h.",
+          "Checked": false
+        },
+        {
+          "Id": 4,
+          "Show": true,
+          "Name": "Show Speed MP/H",
+          "Description": "Show a speedometer on your screen indicating your speed in MP/h.",
+          "Checked": false
+        },
+        {
+          "Id": 5,
+          "Show": true,
+          "Name": "Connection Options",
+          "Description": "Server game quit options.",
+          "SubMenu": [
+            {
+              "Show": true,
+              "Name": "Quit Server",
+              "Id": 1,
+              "Description": "Exits the game."
+            },
+            {
+              "Show": true,
+              "Name": "Disconnect Server",
+              "Id": 2,
+              "Description": "Disconnect from the server."
+            }
+          ]
+        },
+        {
+          "Id": 6,
+          "Show": true,
+          "Name": "Location Display",
+          "Description": "Shows your current location and heading.",
+          "Checked": false
+        },
+        {
+          "Id": 7,
+          "Show": true,
+          "Name": "Show Time On Screen",
+          "Description": "Shows you the current time on screen.",
+          "Checked": false
+        },
+        {
+          "Id": 8,
+          "Show": true,
+          "Name": "Join Notifications",
+          "Description": "Receive notifications when someone joins the server.",
+          "Checked": false
+        },
+        {
+          "Id": 9,
+          "Show": true,
+          "Name": "Quit Notifications",
+          "Description": "Receive notifications when someone leaves the server.",
+          "Checked": false
+        },
+        {
+          "Id": 10,
+          "Show": true,
+          "Name": "Show Player Blips",
+          "Description": "Shows blips on the map for all players.",
+          "Checked": false
+        },
+        {
+          "Id": 11,
+          "Show": true,
+          "Name": "Show Player Names",
+          "Description": "Shows Names on overhead player.",
+          "Checked": false
+        },
+        {
+          "Id": 12,
+          "Show": true,
+          "Name": "Hide Radar",
+          "Description": "Hide the minimap.",
+          "Checked": false
+        },
+        {
+          "Id": 13,
+          "Show": true,
+          "Name": "Hide Hud",
+          "Description": "Hide all hud elements.",
+          "Checked": false
+        },
+        {
+          "Id": 14,
+          "Show": true,
+          "Name": "Lock Camera Horizontal Rotation",
+          "Description": "Locks your camera horizontal rotation. Could be useful in helicopters I guess.",
+          "Checked": false
+        },
+        {
+          "Id": 15,
+          "Show": true,
+          "Name": "Lock Camera Vertical Rotation",
+          "Description": "Locks your camera Vertical rotation. Could be useful in helicopters I guess.",
+          "Checked": false
+        },
+        {
+          "ArrowList": [
+            {
+              "Name": "Language Arabic",
+              "Id": 1,
+              "Resend": "ar"
+            },
+            {
+              "Name": "Language English",
+              "Id": 2,
+              "Resend": "en"
+            }
+          ],
+          "Id": 16,
+          "Show": true,
+          "Name": "Change Language",
+          "Description": "You can now change the language to Arabic or English using this option."
+        },
+        {
+          "ArrowList": [
+            {
+              "Name": "Default",
+              "Id": 1,
+              "Resend": "Default"
+            },
+            {
+              "Name": "Red",
+              "Id": 2,
+              "Resend": "Red"
+            },
+            {
+              "Name": "Dark Blue",
+              "Id": 3,
+              "Resend": "Dark Blue"
+            }
+          ],
+          "Id": 17,
+          "Show": true,
+          "Name": "Change Theme",
+          "Description": "You can now change the theme to more than theme using this option."
+        },
+        {
+          "Show": true,
+          "Name": "Change Location",
+          "Id": 18,
+          "Description": "You can now change the locations of the menus on the screen using this option."
+        },
+        {
+          "Name": "Change Menu Color",
+          "Id": 19,
+          "Description": "You can now change the color to different colors using this option."
+        },
+        {
+          "Show": true,
+          "Name": "Save Settings",
+          "Id": 20,
+          "Description": "Save your current settings. All saving is done on the client side, if you re-install windows you will lose your settings. Settings are shared across all servers using RAM_vMenu."
+        },
+        {
+          "Show": true,
+          "Name": "Reset Settings",
+          "Id": 21,
+          "Description": "The settings are Reset to their original and then saved."
+        }
+      ]
+    },
+    {
+      "NeedApi": false,
+      "Id": 7,
+      "Show": true,
+      "Name": "About RAM_vMenu",
+      "Description": "Information about RAM_vMenu.",
+      "SubMenu": [
+        {
+          "Show": true,
+          "Name": "Server Info",
+          "Id": 1,
+          "Description": "Description Server Info"
+        },
+        {
+          "Show": true,
+          "Name": "RAM_vMenu Version | v1",
+          "Id": 2,
+          "Description": "Description RAM_vMenu Version"
+        },
+        {
+          "Show": true,
+          "Name": "About RAM_vMenu / Credits",
+          "Id": 3,
+          "Description": "Description About RAM_vMenu / Credits"
+        }
+      ]
+    },
+    {
+      "NeedApi": false,
+      "Id": 4,
+      "Show": true,
+      "Name": "World Related Options",
+      "Description": "Open this submenu for world related subcategories.",
+      "SubMenu": [
+        {
+          "Id": 1,
+          "Show": true,
+          "Name": "Time Options",
+          "Description": "Change the time, and edit other time related options.",
+          "SubMenu": [
+            {
+              "Id": 1,
+              "Show": true,
+              "Name": "Freeze/Unfreeze Time",
+              "Description": "Enable or disable time freezing.",
+              "Checked": false
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Early Morning",
+              "Description": "Set the time to 06:00.",
+              "Label": "06:00"
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Morning",
+              "Description": "Set the time to 09:00.",
+              "Label": "09:00"
+            },
+            {
+              "Id": 4,
+              "Show": true,
+              "Name": "Noon",
+              "Description": "Set the time to 12:00.",
+              "Label": "12:00"
+            },
+            {
+              "Id": 5,
+              "Show": true,
+              "Name": "Early Afternoon",
+              "Description": "Set the time to 15:00.",
+              "Label": "15:00"
+            },
+            {
+              "Id": 6,
+              "Show": true,
+              "Name": "Afternoon",
+              "Description": "Set the time to 18:00.",
+              "Label": "18:00"
+            },
+            {
+              "Id": 7,
+              "Show": true,
+              "Name": "Evening",
+              "Description": "Set the time to 21:00.",
+              "Label": "21:00"
+            },
+            {
+              "Id": 8,
+              "Show": true,
+              "Name": "Midnight",
+              "Description": "Set the time to 00:00.",
+              "Label": "00:00"
+            },
+            {
+              "Id": 9,
+              "Show": true,
+              "Name": "Night",
+              "Description": "Set the time to 03:00.",
+              "Label": "03:00"
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "00",
+                  "Id": 0,
+                  "Resend": "00"
+                },
+                {
+                  "Name": "01",
+                  "Id": 1,
+                  "Resend": "01"
+                },
+                {
+                  "Name": "02",
+                  "Id": 2,
+                  "Resend": "02"
+                },
+                {
+                  "Name": "03",
+                  "Id": 3,
+                  "Resend": "03"
+                },
+                {
+                  "Name": "04",
+                  "Id": 4,
+                  "Resend": "04"
+                },
+                {
+                  "Name": "05",
+                  "Id": 5,
+                  "Resend": "05"
+                },
+                {
+                  "Name": "06",
+                  "Id": 6,
+                  "Resend": "06"
+                },
+                {
+                  "Name": "07",
+                  "Id": 7,
+                  "Resend": "07"
+                },
+                {
+                  "Name": "08",
+                  "Id": 8,
+                  "Resend": "08"
+                },
+                {
+                  "Name": "09",
+                  "Id": 9,
+                  "Resend": "09"
+                },
+                {
+                  "Name": "10",
+                  "Id": 10,
+                  "Resend": "10"
+                },
+                {
+                  "Name": "11",
+                  "Id": 11,
+                  "Resend": "11"
+                },
+                {
+                  "Name": "12",
+                  "Id": 12,
+                  "Resend": "12"
+                },
+                {
+                  "Name": "13",
+                  "Id": 13,
+                  "Resend": "13"
+                },
+                {
+                  "Name": "14",
+                  "Id": 14,
+                  "Resend": "14"
+                },
+                {
+                  "Name": "15",
+                  "Id": 15,
+                  "Resend": "15"
+                },
+                {
+                  "Name": "16",
+                  "Id": 16,
+                  "Resend": "16"
+                },
+                {
+                  "Name": "17",
+                  "Id": 17,
+                  "Resend": "17"
+                },
+                {
+                  "Name": "18",
+                  "Id": 18,
+                  "Resend": "18"
+                },
+                {
+                  "Name": "19",
+                  "Id": 19,
+                  "Resend": "19"
+                },
+                {
+                  "Name": "20",
+                  "Id": 20,
+                  "Resend": "20"
+                },
+                {
+                  "Name": "21",
+                  "Id": 21,
+                  "Resend": "21"
+                },
+                {
+                  "Name": "22",
+                  "Id": 22,
+                  "Resend": "22"
+                },
+                {
+                  "Name": "23",
+                  "Id": 23,
+                  "Resend": "23"
+                }
+              ],
+              "Id": 10,
+              "Show": true,
+              "Name": "Set Custom Hour",
+              "Description": "Choose a custom Hour."
+            },
+            {
+              "ArrowList": [
+                {
+                  "Name": "00",
+                  "Id": 0,
+                  "Resend": "00"
+                },
+                {
+                  "Name": "01",
+                  "Id": 1,
+                  "Resend": "01"
+                },
+                {
+                  "Name": "02",
+                  "Id": 2,
+                  "Resend": "02"
+                },
+                {
+                  "Name": "03",
+                  "Id": 3,
+                  "Resend": "03"
+                },
+                {
+                  "Name": "04",
+                  "Id": 4,
+                  "Resend": "04"
+                },
+                {
+                  "Name": "05",
+                  "Id": 5,
+                  "Resend": "05"
+                },
+                {
+                  "Name": "06",
+                  "Id": 6,
+                  "Resend": "06"
+                },
+                {
+                  "Name": "07",
+                  "Id": 7,
+                  "Resend": "07"
+                },
+                {
+                  "Name": "08",
+                  "Id": 8,
+                  "Resend": "08"
+                },
+                {
+                  "Name": "09",
+                  "Id": 9,
+                  "Resend": "09"
+                },
+                {
+                  "Name": "10",
+                  "Id": 10,
+                  "Resend": "10"
+                },
+                {
+                  "Name": "11",
+                  "Id": 11,
+                  "Resend": "11"
+                },
+                {
+                  "Name": "12",
+                  "Id": 12,
+                  "Resend": "12"
+                },
+                {
+                  "Name": "13",
+                  "Id": 13,
+                  "Resend": "13"
+                },
+                {
+                  "Name": "14",
+                  "Id": 14,
+                  "Resend": "14"
+                },
+                {
+                  "Name": "15",
+                  "Id": 15,
+                  "Resend": "15"
+                },
+                {
+                  "Name": "16",
+                  "Id": 16,
+                  "Resend": "16"
+                },
+                {
+                  "Name": "17",
+                  "Id": 17,
+                  "Resend": "17"
+                },
+                {
+                  "Name": "18",
+                  "Id": 18,
+                  "Resend": "18"
+                },
+                {
+                  "Name": "19",
+                  "Id": 19,
+                  "Resend": "19"
+                },
+                {
+                  "Name": "20",
+                  "Id": 20,
+                  "Resend": "20"
+                },
+                {
+                  "Name": "21",
+                  "Id": 21,
+                  "Resend": "21"
+                },
+                {
+                  "Name": "22",
+                  "Id": 22,
+                  "Resend": "22"
+                },
+                {
+                  "Name": "23",
+                  "Id": 23,
+                  "Resend": "23"
+                },
+                {
+                  "Name": "24",
+                  "Id": 24,
+                  "Resend": "24"
+                },
+                {
+                  "Name": "25",
+                  "Id": 25,
+                  "Resend": "25"
+                },
+                {
+                  "Name": "26",
+                  "Id": 26,
+                  "Resend": "26"
+                },
+                {
+                  "Name": "27",
+                  "Id": 27,
+                  "Resend": "27"
+                },
+                {
+                  "Name": "28",
+                  "Id": 28,
+                  "Resend": "28"
+                },
+                {
+                  "Name": "29",
+                  "Id": 29,
+                  "Resend": "29"
+                },
+                {
+                  "Name": "30",
+                  "Id": 30,
+                  "Resend": "30"
+                },
+                {
+                  "Name": "31",
+                  "Id": 31,
+                  "Resend": "31"
+                },
+                {
+                  "Name": "32",
+                  "Id": 32,
+                  "Resend": "32"
+                },
+                {
+                  "Name": "33",
+                  "Id": 33,
+                  "Resend": "33"
+                },
+                {
+                  "Name": "34",
+                  "Id": 34,
+                  "Resend": "34"
+                },
+                {
+                  "Name": "35",
+                  "Id": 35,
+                  "Resend": "35"
+                },
+                {
+                  "Name": "36",
+                  "Id": 36,
+                  "Resend": "36"
+                },
+                {
+                  "Name": "37",
+                  "Id": 37,
+                  "Resend": "37"
+                },
+                {
+                  "Name": "38",
+                  "Id": 38,
+                  "Resend": "38"
+                },
+                {
+                  "Name": "39",
+                  "Id": 39,
+                  "Resend": "39"
+                },
+                {
+                  "Name": "40",
+                  "Id": 40,
+                  "Resend": "40"
+                },
+                {
+                  "Name": "41",
+                  "Id": 41,
+                  "Resend": "41"
+                },
+                {
+                  "Name": "42",
+                  "Id": 42,
+                  "Resend": "42"
+                },
+                {
+                  "Name": "43",
+                  "Id": 43,
+                  "Resend": "43"
+                },
+                {
+                  "Name": "44",
+                  "Id": 44,
+                  "Resend": "44"
+                },
+                {
+                  "Name": "45",
+                  "Id": 45,
+                  "Resend": "45"
+                },
+                {
+                  "Name": "46",
+                  "Id": 46,
+                  "Resend": "46"
+                },
+                {
+                  "Name": "47",
+                  "Id": 47,
+                  "Resend": "47"
+                },
+                {
+                  "Name": "48",
+                  "Id": 48,
+                  "Resend": "48"
+                },
+                {
+                  "Name": "49",
+                  "Id": 49,
+                  "Resend": "49"
+                },
+                {
+                  "Name": "50",
+                  "Id": 50,
+                  "Resend": "50"
+                },
+                {
+                  "Name": "51",
+                  "Id": 51,
+                  "Resend": "51"
+                },
+                {
+                  "Name": "52",
+                  "Id": 52,
+                  "Resend": "52"
+                },
+                {
+                  "Name": "53",
+                  "Id": 53,
+                  "Resend": "53"
+                },
+                {
+                  "Name": "54",
+                  "Id": 54,
+                  "Resend": "54"
+                },
+                {
+                  "Name": "55",
+                  "Id": 55,
+                  "Resend": "55"
+                },
+                {
+                  "Name": "56",
+                  "Id": 56,
+                  "Resend": "56"
+                },
+                {
+                  "Name": "57",
+                  "Id": 57,
+                  "Resend": "57"
+                },
+                {
+                  "Name": "58",
+                  "Id": 58,
+                  "Resend": "58"
+                },
+                {
+                  "Name": "59",
+                  "Id": 59,
+                  "Resend": "59"
+                }
+              ],
+              "Id": 11,
+              "Show": true,
+              "Name": "Set Custom Minute",
+              "Description": "Choose a custom Minute."
+            }
+          ]
+        },
+        {
+          "Id": 3,
+          "Show": true,
+          "Name": "Special Weather Time",
+          "Description": "You can set a special weather and time in your world that is not visible to all players, only you.",
+          "Checked": false
+        },
+        {
+          "Id": 2,
+          "Show": true,
+          "Name": "Weather Options",
+          "Description": "Change all weather related options here.",
+          "SubMenu": [
+            {
+              "Id": 1,
+              "Show": true,
+              "Name": "Toggle Dynamic Weather",
+              "Description": "Enable or disable dynamic weather changes.",
+              "Checked": true
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Toggle Blackout",
+              "Description": "This disables or enables all lights across the map.",
+              "Checked": false
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Enable Snow Effects",
+              "Description": "This will enable snow particle effects for peds and vehicles. Combine with X-MAS Blizzard weather for best results.",
+              "Checked": true
+            },
+            {
+              "Show": true,
+              "Name": "Extra Sunny",
+              "Id": 4,
+              "Description": "Set the weather to extra sunny!"
+            },
+            {
+              "Show": true,
+              "Name": "Clear",
+              "Id": 5,
+              "Description": "Set the weather to clear!"
+            },
+            {
+              "Show": true,
+              "Name": "Neutral",
+              "Id": 6,
+              "Description": "Set the weather to Neutral!"
+            },
+            {
+              "Show": true,
+              "Name": "Smog",
+              "Id": 7,
+              "Description": "Set the weather to Smog!"
+            },
+            {
+              "Show": true,
+              "Name": "Foggy",
+              "Id": 8,
+              "Description": "Set the weather to Foggy!"
+            },
+            {
+              "Show": true,
+              "Name": "Cloudy",
+              "Id": 9,
+              "Description": "Set the weather to Cloudy!"
+            },
+            {
+              "Show": true,
+              "Name": "Overcast",
+              "Id": 10,
+              "Description": "Set the weather to Overcast!"
+            },
+            {
+              "Show": true,
+              "Name": "Clearing",
+              "Id": 11,
+              "Description": "Set the weather to Clearing!"
+            },
+            {
+              "Show": true,
+              "Name": "Rainy",
+              "Id": 12,
+              "Description": "Set the weather to Rainy!"
+            },
+            {
+              "Show": true,
+              "Name": "Thunder",
+              "Id": 13,
+              "Description": "Set the weather to Thunder!"
+            },
+            {
+              "Show": true,
+              "Name": "Blizzard",
+              "Id": 14,
+              "Description": "Set the weather to Blizzard!"
+            },
+            {
+              "Show": true,
+              "Name": "Snow",
+              "Id": 15,
+              "Description": "Set the weather to Snow!"
+            },
+            {
+              "Show": true,
+              "Name": "Light Snow",
+              "Id": 16,
+              "Description": "Set the weather to Light Snow!"
+            },
+            {
+              "Show": true,
+              "Name": "XMAS Snow",
+              "Id": 17,
+              "Description": "Set the weather to XMAS Snow!"
+            },
+            {
+              "Show": true,
+              "Name": "Halloween",
+              "Id": 18,
+              "Description": "Set the weather to Halloween!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Colors",
+      "Id": 8,
+      "Description": "Change menu theme",
+      "Show": true,
+      "NeedApi": true,
+      "SubMenu": [
+        {
+          "Id": 1,
+          "Show": true,
+          "Name": "Default",
+          "Description": "Default"
+        },
+        {
+          "Id": 2,
+          "Show": true,
+          "Name": "Red",
+          "Description": "Red"
+        },
+        {
+          "Id": 3,
+          "Show": true,
+          "Name": "Dark Blue",
+          "Description": "Green"
+        }
+      ]
+    }
+  ]
+}
