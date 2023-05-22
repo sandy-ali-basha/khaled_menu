@@ -7,9 +7,15 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tajawal&display=swap");
 :root {
   --text-color: hsl(0, 0%, 100%);
   --primary-hue: 215;
+  --lightness: 20;
+  --secondary-hue: 20;
+  --accent-blue: 20;
+  --opacity: 1;
+  --font: "Tajawal";
 }
 
 * {
@@ -26,7 +32,7 @@ ol {
 }
 
 body {
-  font-family: "arial";
+  font-family: var(--font);
   font-size: 18px;
 }
 
@@ -38,7 +44,7 @@ body {
 }
 
 .menu-header {
-  background: linear-gradient(to right bottom, hsl(var(--primary-hue), 84%, 26%), hsl(var(--primary-hue), 61%, 46%));
+  background: linear-gradient(to right bottom, rgba(var(--primary-hue), var(--secondary-hue), var(--accent-blue), var(--opacity)), rgba(calc(var(--primary-hue) * 2), calc(var(--secondary-hue) * 2), calc(var(--accent-blue) * 3), var(--opacity)));
   padding: 20px;
   text-align: center;
   font-size: 27px;
@@ -53,17 +59,20 @@ body {
 }
 
 .menu-title {
-  background: hsl(0, 0%, 1%);
-  color: hsl(var(--primary-hue), 61%, 45%);
+  background: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
+  color: rgba(calc(var(--primary-hue) * 2), calc(var(--secondary-hue) * 2), calc(var(--accent-blue) * 2), var(--opacity));
   text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 12px;
+  padding: 10px 12px;
+}
+.menu-title span {
+  width: 50%;
 }
 
 .menu-body {
-  background: hsla(var(--primary-hue), 0%, 1%, 0.7);
+  background: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
 }
 
 .menu-body ul li {
@@ -93,11 +102,13 @@ body {
 
 .menu-footer {
   margin-top: 5px;
-  border-top: 3px solid hsl(var(--primary-hue), 0%, 1%);
-  background: hsla(var(--primary-hue), 0%, 1%, 0.7);
+  background: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
+  width: 100%;
+  border-top: 3px solid rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
   color: #e6e6e5;
   padding: 7px 12px;
   font-size: 16px;
+  display: inline-flex;
 }
 
 .menu-wrap {
@@ -105,10 +116,6 @@ body {
   height: 100%;
   width: 100%;
   background-size: cover;
-}
-
-#menu {
-  height: 100%;
 }
 
 #menu > li > ul {
@@ -130,8 +137,10 @@ body {
   padding: 8px;
 }
 
-ul#menu {
+ul {
+  min-height: 350px;
   position: relative;
+  max-height: 60vh;
 }
 
 #menu > li > ul.show {
@@ -178,8 +187,8 @@ ul.submenu.show {
   right: 5px;
   width: 30vw;
   border-radius: 10px;
-  background-color: hsl(var(--primary-hue), 37%, 22%);
-  border: solid 1px hsl(var(--primary-hue), 30%, 32%);
+  background-color: rgba(calc(var(--primary-hue) / 2), calc(var(--secondary-hue) / 2), calc(var(--accent-blue) / 2), var(--opacity));
+  border: solid 1px rgba(calc(var(--primary-hue) / 2), calc(var(--secondary-hue) / 2), calc(var(--accent-blue) / 2), var(--opacity));
 }
 .Green ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px hsl(var(--primary-hue), 30%, 32%);
@@ -192,7 +201,7 @@ ul.submenu.show {
   background-color: hsl(var(--primary-hue), 29%, 48%);
 }
 .Green * {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font), sans-serif;
 }
 .Green .menu-header {
   background: transparent;
@@ -208,7 +217,7 @@ ul.submenu.show {
   line-height: 1.75rem;
 }
 .Green .menu-title {
-  color: hsl(var(--primary-hue), 24%, 54%);
+  color: #fff;
   background: none;
   font-weight: 700;
   font-size: 1rem;
@@ -220,22 +229,22 @@ ul.submenu.show {
   margin: 0.8rem 0rem;
   border-radius: 0.5rem;
   border: solid;
-  border-color: hsla(var(--primary-hue), 27%, 38%, 0.5);
+  border-color: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), 0.5);
   border-width: 2.6px;
-  background: hsla(var(--primary-hue), 30%, 32%, 0.3);
+  background: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), 0.3);
   padding: 0.6rem;
   font-weight: 600;
   font-size: 1rem;
 }
 .Green .menu-body ul li.active {
-  background: hsla(var(--primary-hue), 30%, 32%, 0.8);
+  background: rgba(calc(var(--primary-hue) / 1.5), calc(var(--secondary-hue) / 1.5), calc(var(--accent-blue) / 1.5), 1);
 }
 .Green .menu-body ul li.active a {
   color: #f4dcff;
 }
 .Green .menu-footer {
   border-top: solid;
-  border-color: hsla(var(--primary-hue), 27%, 38%, 0.5);
+  border-color: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), 1);
   border-width: 2.6px;
   padding: 1rem 0.5rem;
   font-size: 1rem;
@@ -244,19 +253,18 @@ ul.submenu.show {
 }
 
 .redMenu {
-  background-color: hsla(var(--primary-hue), 100%, 50%, 0.466);
   border-radius: 10px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-family: var(--font);
   width: auto;
   min-width: 20vw;
   padding: 0rem 1rem;
   width: 30vw;
   border-radius: 30px;
-  background-color: hsl(var(--primary-hue), 90%, 68%);
+  background-color: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
 }
 .redMenu ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px hsl(var(--primary-hue), 30%, 32%);
-  background-color: hsl(var(--primary-hue), 30%, 32%);
+  background-color: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
 }
 .redMenu ::-webkit-scrollbar {
   width: 4px;
@@ -285,7 +293,7 @@ ul.submenu.show {
   background-color: hsla(var(--primary-hue), 0%, 100%, 0.815);
 }
 .redMenu * {
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font), sans-serif;
 }
 .redMenu .menu-header {
   background: transparent;
@@ -329,10 +337,10 @@ ul.submenu.show {
   background: #fff4f4;
 }
 .redMenu .menu-body ul li.active:before {
-  color: hsl(var(--primary-hue), 90%, 68%);
+  color: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
 }
 .redMenu .menu-body ul li.active a {
-  color: hsl(var(--primary-hue), 90%, 68%);
+  color: rgba(calc(var(--primary-hue) / 3), calc(var(--secondary-hue) / 3), calc(var(--accent-blue) / 3), var(--opacity));
 }
 .redMenu .menu-footer {
   border-top: solid;
@@ -374,14 +382,190 @@ ul.submenu.show {
 }
 
 .color_input_container {
-  height: 45px;
-  width: 45px;
-  border: 1px solid white;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.alertContainer {
+  min-width: 20vw;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.alert {
+  opacity: 90%;
   position: relative;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  margin: 10px;
+  line-height: 1.8;
   border-radius: 5px;
-  display: flex;
+  cursor: hand;
+  cursor: pointer;
+  font-family: var(--font);
+  font-weight: 400;
+}
+
+:checked + .alert {
+  display: none;
+}
+
+.alertText {
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+.alertClose {
+  float: right;
+  padding-top: 5px;
+  font-size: 10px;
+}
+
+.clear {
+  clear: both;
+}
+
+.info {
+  background-color: #dddddd;
+  border: 1px solid #d1d1d1;
+  color: #999;
+}
+
+.success {
+  background-color: rgb(206, 255, 206);
+  border: 1px solid rgb(200, 236, 200);
+  color: #9a9;
+}
+
+.notice {
+  background-color: rgb(213, 255, 255);
+  border: 1px solid rgb(190, 236, 236);
+  color: #9aa;
+}
+
+.warning {
+  background-color: #fff4c7;
+  border: 1px solid #feec6f;
+  color: #c9971c;
+}
+
+.error {
+  background-color: rgb(255, 208, 208);
+  border: 1px solid rgb(230, 182, 182);
+  color: #a66;
+}
+
+.show {
+  display: block;
+  transition: all 0.3s;
+}
+
+.hide {
+  display: none;
+  transition: all 2s;
+}
+
+.modal-window {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 1;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-window:target {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-window > div {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  background: white;
+}
+.modal-window header {
+  font-weight: bold;
+}
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+.modal-close:hover {
+  color: black;
+}
+
+/* Demo Styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  display: grid;
   justify-content: center;
-  right: 1vw;
-  bottom: 20px;
   align-items: center;
+  inset: 0;
+  position: absolute;
+  background: rgba(149, 149, 149, 0.368627451);
+}
+
+.modal-window > div {
+  border-radius: 1rem;
+}
+
+.modal-window div:not(:last-of-type) {
+  margin-bottom: 15px;
+}
+
+.logo {
+  max-width: 150px;
+  display: block;
+}
+
+small {
+  color: lightgray;
+}
+
+.btn {
+  background-color: white;
+  padding: 1em 1.5em;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+.btn i {
+  padding-right: 0.3em;
+}
+
+.pcr-app {
+  border-radius: 15px;
+}
+
+.pcr-app[data-theme=nano] .pcr-selection .pcr-color-palette .pcr-palette,
+.pcr-app[data-theme=nano] .pcr-selection .pcr-color-palette .pcr-palette::before {
+  border-radius: 15px 15px 0px 0px;
 }/*# sourceMappingURL=style.css.map */

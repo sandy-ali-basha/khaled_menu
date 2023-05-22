@@ -7,21 +7,8 @@
     <title>Menu</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"
-    />
-    <!-- 'classic' theme -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"
-    />
-    <!-- 'monolith' theme -->
-    <link
-      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"
     />
-    <!-- 'nano' theme -->
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/pickr.min.js"></script>
-
     <link rel="stylesheet" href="./style.css" />
   </head>
 
@@ -29,14 +16,10 @@
     <div class="menu-wrap" style="background-image: url(./bg.jpg)">
       <div class="menu draggable-item">
         <div class="adjustment-line"></div>
-
-        <div class="menu-header">
-          <img class="avatar" src="./defaultAvatar.png" alt="" />
-          <h2>Ram!!</h2>
-        </div>
+        <div class="menu-header"></div>
         <div class="menu-title">
-          <span>Main Menu</span>
-          <p>5/10</p>
+          <p>Main Menu</p>
+          <span class="menuTitle"></span>
         </div>
         <div class="menu-area">
           <div class="menu-body">
@@ -44,16 +27,63 @@
             <ul id="menu"></ul>
             <div class="menu-footer">
               <p>Menu item Description</p>
+              <div class="color_input_container">
+                <div id="color_input"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="color_input_container">
-        <div id="color_input"></div>
+      <div class="alertContainer">
+        <label class="labelAlert hide">
+          <div class="alert info">
+            <span class="alertText">Bla Bla Bla info</span>
+          </div>
+        </label>
+        <label class="labelAlert hide">
+          <div class="alert success">
+            <span class="alertText">Bla Bla Bla success</span>
+          </div>
+        </label>
+        <label class="labelAlert hide">
+          <div class="alert warning">
+            <span class="alertText">Bla Bla Bla warning</span>
+          </div>
+        </label>
+        <label class="labelAlert hide">
+          <div class="alert error">
+            <span class="alertText">Bla Bla Bla error </span>
+          </div>
+        </label>
+      </div>
+      <button class="showALert">showALert</button>
+      <button class="showModal">show modal window</button>
+    </div>
+
+    <div class="modal-window hide">
+      <div>
+        <a href="#" title="Close" class="modal-close">Close</a>
+        <h1>Voilà!</h1>
+        <div>
+          A CSS-only modal based on the :target pseudo-class. Hope you find it
+          helpful.
+        </div>
+        <br />
+        <div><small>Check out 👇</small></div>
+        <a
+          href="https://chrome.google.com/webstore/detail/chroma/pkgejkfioihnchalojepdkefnpejomgn?utm_campaign=chromapromo&utm_source=codepen.io"
+          target="_blank"
+        >
+          Your new favorite eyedropper tool!
+        </a>
       </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- 'nano' theme -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/pickr.min.js"></script>
+
     <script src="./script.js"></script>
   </body>
 </html>

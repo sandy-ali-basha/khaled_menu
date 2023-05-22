@@ -1,11 +1,11 @@
 
 $(() => {
+    $('.menu').addClass('show')
     const $menu = $('body #menu');
     async function fetchData() {
         try {
             const response = await fetch('./DataNew.json');
             const data = await response.json();
-
             console.log(data);
             // Return the data if you need to use it outside the async function
             return data;
@@ -14,7 +14,6 @@ $(() => {
             console.error(error);
         }
     }
-
     const renderSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
             return `<li data-description="${item.Description}"><a href="#">${item.Name}</a></li>`
@@ -27,10 +26,26 @@ $(() => {
         }, 500)
         return innermenu
     }
-
+    const renderSubSubMenu = (submenu) => {
+        const innermenu = submenu.map(item => {
+            console.log(item.Description)
+            return `<li data-description="${item.Description}"><a href="#">${item.Name}</a></li>`
+        })
+        setTimeout(() => {
+            const ulSubmenu = document.querySelectorAll("ul.submenu");
+            ulSubmenu.forEach((ul) => {
+                ul.innerHTML = ul.innerHTML.replace(/,/g, "");
+            });
+        }, 500)
+        return innermenu
+    }
     fetchData().then(data => {
         // You can use the retrievedData outside the async function
-        console.log(data)
+        console.log('data', data)
+        $('.menu-header').append(
+            ` <img class="avatar" src="${data.logo}" alt="" /><h2>${data.NamePlayer}</h2>`
+        )
+        $('.menuTitle').append(data.NameMenu)
         data.Data.forEach((item, index) => {
             $menu.append(`
             <li class="${index === 0 ? 'active' : ''}" data-name="${item.Name.replace(/\s+/g, "")}" data-description="${item.Description}">
@@ -42,7 +57,19 @@ $(() => {
                 ${renderSubMenu(item.SubMenu)}
             </ul>
         `)
+
+            //             if (item.SubMenu.SubMenu) {
+            //                 item.SubMenu.SubMenu.map(subItem => {
+            //                     console.log('subItem.Name', subItem.Name)
+            //                     $('.menu-body').append(`
+            //     <ul class="SUBsubmenu submenu">
+            //         ${renderSubSubMenu(subItem.Name)}
+            //     </ul>
+            // `)
+            //                 })
+            //             }
         })
+
         const $globalLinks = $menu.find('> li > a');
         let focusIndex = 0;
         let submenuOpen = false;
@@ -80,7 +107,13 @@ $(() => {
                     if (!submenuOpen) {
                         if ($menu.find('li.active').length) {
                             let sectionName = $menu.find('li.active').data('name');
+                            //*  show selected item data 
+                            console.log('sectionName: ', $menu.find('li.active').data('name'))
+                            console.log('description: ', $menu.find('li.active').data('description'))
+                            //* subMenu
                             $subMenu = $(`.submenu.${sectionName}`);
+                            console.log('subMenu', $subMenu)
+
                             $subLinks = $subMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
                             $subLinks.parent().removeClass('active');
@@ -111,7 +144,7 @@ $(() => {
 
                     }
                     break;
-                case 'Escape':
+                case 'Backspace':
                     event.preventDefault();
                     if (submenuOpened) {
                         $subMenu.removeClass('show');
@@ -128,7 +161,16 @@ $(() => {
                         submenuOpen = false;
                     }
                     break;
+                case 'Escape':
+                    $('.menu').removeClass('show')
+                    $('.menu').addClass('hide')
+                    break;
+                case 'KeyM':
+                    $('.menu').removeClass('hide')
+                    $('.menu').addClass('show')
+                    break;
             }
+
             const menuList = document.querySelector(".menu-body ul.show");
             if (menuList) {
                 menuItems = menuList.getElementsByTagName("li");
@@ -139,17 +181,17 @@ $(() => {
                         activeItem = menuItems[index]
                     }
                 }
+                //* moving
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
                     if (activeItem.nextElementSibling.offsetTop > menuList.scrollTop + menuList
                         .clientHeight) {
-                        console.log('this worked ?');
                         menuList.scrollTop = activeItem.nextElementSibling.offsetTop - menuList
                             .clientHeight;
-                        console.log(activeItem.nextElementSibling.offsetTop, menuList
-                            .clientHeight);
+                        // console.log(activeItem.nextElementSibling.offsetTop, menuList
+                        //     .clientHeight);
                     }
-                    console.log(activeItem.nextElementSibling);
+                    // console.log(activeItem.nextElementSibling);
                     activeItem.nextElementSibling.focus();
                 } else if (event.key === "ArrowUp" && activeItem !== firstItem) {
                     event.preventDefault();
@@ -161,6 +203,7 @@ $(() => {
             }
 
             $globalLinks.parent().removeClass('active');
+
             if (!submenuOpen) {
                 $globalLinks.eq(focusIndex).parent().addClass('active');
                 const activeDescription = $('body li.active').data('description');
@@ -173,7 +216,7 @@ $(() => {
             }
         });
     }).catch(error => console.error(error));
-
+    //* draggable
     $(function () {
         $('.draggable-item').draggable({
             stop: function (event, ui) {
@@ -197,38 +240,57 @@ $(() => {
         });
     });
 })
-
-
+//*     pickr *** //
 $(document).ready(function () {
     const pickr = Pickr.create({
         el: "#color_input",
-        theme: "monolith",
+        theme: "nano",
         components: {
             preview: true,
             opacity: true,
             hue: true,
-            // Input / output Options
             interaction: {
                 hex: false,
                 rgba: false,
-                hsla: true,
+                hsla: false,
                 hsva: false,
                 cmyk: false,
-                input: false,
-                clear: false,
+                input: true,
+                clear: true,
                 save: true,
             },
         },
     });
     //change the color of the main div when color changes
     pickr.on("change", function (e) {
-        document.documentElement.style.setProperty('--primary-hue', e.toHSLA()[0]);
-    });
+        document.documentElement.style.setProperty('--primary-hue', e.toRGBA()[0]);
+        document.documentElement.style.setProperty('--secondary-hue', e.toRGBA()[1]);
+        document.documentElement.style.setProperty('--accent-blue', e.toRGBA()[2]);
+        document.documentElement.style.setProperty('--opacity', e.toRGBA()[3]);
+    }).on('save', (color, instance) => {
+        console.log('Event: "save"', color, instance);
+        pickr.hide()
+    })
 });
-// var hue = 200;
-// var saturation = 50;
-// var lightness = 75;
-// var alpha = 0.8;
 
-// var hslaColor = 'hsla(' + hue + ', ' + saturation + '%, ' + lightness + '%, ' + alpha + ')';
-// $('.menu-title').css('background-color', hslaColor);
+//* Alert
+$('.showALert').click(() => {
+    $('.labelAlert').addClass('show')
+    $('.labelAlert').removeClass('hide')
+    setTimeout(() => {
+        $('.labelAlert').addClass('hide')
+    }, 3000)
+})
+
+$('.showModal').click(() => {
+    $('.modal-window').addClass('show')
+    $('.modal-window').removeClass('hide')
+})
+$('.modal-close').click(() => {
+    $('.modal-window').addClass('hide')
+    $('.modal-window').removeClass('show')
+})
+choseFont = () => {
+    document.documentElement.style.setProperty('--font', 'Tajawal')
+    //* Font available Rubik  / Inter
+}
