@@ -37,8 +37,8 @@ body {
 
 .menu {
   position: absolute;
-  top: 1px;
-  right: 10px;
+  top: 5px;
+  right: 20px;
   width: 450px;
   height: 95vh;
 }
@@ -140,6 +140,7 @@ body {
     var(--opacity)
   );
   width: 100%;
+  height: 12vh;
   border-top: 3px solid
     rgba(
       calc(var(--primary-hue) / 3),
@@ -180,11 +181,10 @@ body {
 }
 
 ul {
-  min-height: 350px;
   display: flex;
   flex-direction: column;
   position: relative;
-  max-height: 60vh;
+  height: 55vh;
   overflow: auto;
 }
 
@@ -207,44 +207,14 @@ ul.submenu.show {
 .menu-body {
   overflow-y: auto;
 }
-.menu-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-.menu-body::-webkit-scrollbar-track {
-  background: hsl(var(--primary-hue), 0%, 95%);
-}
-
-.menu-body::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary-hue), 0%, 53%);
-}
-
-.menu-body::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary-hue), 0%, 33%);
-}
 
 .Green {
-  ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px hsl(var(--primary-hue), 30%, 32%);
-    background-color: hsl(var(--primary-hue), 30%, 32%);
-  }
-
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--primary-hue), 29%, 48%);
-  }
-
   * {
     font-family: var(--font), sans-serif;
   }
   width: auto;
   min-width: 20vw;
   padding: 0rem 0.8rem;
-  top: 5px;
-  right: 5px;
   width: 30vw;
   border-radius: 10px;
   background-color: rgba(
@@ -260,9 +230,6 @@ ul.submenu.show {
       calc(var(--accent-blue) / 2),
       var(--opacity)
     );
-  // .menu-body {
-  //   max-height: 60vh;
-  // }
   .menu-header {
     background: transparent;
     padding: 0rem;
@@ -302,7 +269,7 @@ ul.submenu.show {
           calc(var(--accent-blue) / 3),
           0.3
         );
-        padding: 0.6rem;
+        padding: 0.4rem;
         font-weight: 600;
         font-size: 1rem;
         &.active {
@@ -334,25 +301,30 @@ ul.submenu.show {
     border-radius: 0 0 0.5rem 0.5rem;
   }
 }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px hsl(var(--primary-hue), 30%, 32%);
+  background-color: rgba(
+    calc(var(--primary-hue) / 3),
+    calc(var(--secondary-hue) / 3),
+    calc(var(--accent-blue) / 3),
+    var(--opacity)
+  );
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(
+    calc(var(--primary-hue)),
+    calc(var(--secondary-hue)),
+    calc(var(--accent-blue))
+  );
+}
+//* theme 2
 .redMenu {
-  ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px hsl(var(--primary-hue), 30%, 32%);
-    background-color: rgba(
-      calc(var(--primary-hue) / 3),
-      calc(var(--secondary-hue) / 3),
-      calc(var(--accent-blue) / 3),
-      var(--opacity)
-    );
-  }
-
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--primary-hue), 29%, 48%);
-  }
-
   border-radius: 10px;
   font-family: var(--font);
 

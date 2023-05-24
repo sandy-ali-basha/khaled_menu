@@ -136,6 +136,7 @@ $(() => {
                             submenuOpen = true;
                             $subMenu.addClass('show');
                             $menu.addClass('hide');
+                            $menu.removeClass('show');
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
                     } else {
@@ -155,7 +156,6 @@ $(() => {
                             $('.menu').addClass('Green')
                             console.log('Green:', Val)
                         }
-
                     }
                     break;
                 case 'Backspace':
@@ -163,6 +163,7 @@ $(() => {
                     if (submenuOpened) {
                         $subMenu.removeClass('show');
                         $menu.removeClass('hide');
+                        $menu.addClass('show');
                         $subLinks.parent().removeClass('active');
                         focusIndexSubmenu = 0;
                         submenuOpened = false;
