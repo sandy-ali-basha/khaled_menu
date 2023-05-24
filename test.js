@@ -81,6 +81,7 @@ $(() => {
         // let SubfocusIndexSubmenu = 0;
         // let SubsubmenuOpened = false;
 
+
         let menuItems = null
         let firstItem = null
         let lastItem = null
@@ -158,17 +159,18 @@ $(() => {
                         $menu.find('li.active').removeClass('active');
                         $globalLinks.eq(focusIndex).parent().addClass('active');
                         //* ***  ** */
-                        // Sub$subMenu = $(`.subSubMenu.${sectionName} `);
-                        // Sub$subLinks = $subMenu.find('> li > a');
-                        // $globalLinks.eq(focusIndex).parent().removeClass('active');
-                        // Sub$subLinks.parent().removeClass('active');
-                        // SubfocusIndexSubmenu = 0;
-                        // SubsubmenuOpened = true;
-                        // SubsubmenuOpen = true;
-                        // Sub$subMenu.addClass('show');
-                        // $menu.addClass('hide');
-                        // SubsubLinks.eq(focusIndexSubmenu).parent().addClass('active');
-                    } else if (!submenuOpened) {
+                        Sub$subMenu = $(`.subSubMenu.${sectionName} `);
+                        Sub$subLinks = $subMenu.find('> li > a');
+                        $globalLinks.eq(focusIndex).parent().removeClass('active');
+                        Sub$subLinks.parent().removeClass('active');
+                        SubfocusIndexSubmenu = 0;
+                        SubsubmenuOpened = true;
+                        SubsubmenuOpen = true;
+                        Sub$subMenu.addClass('show');
+                        $menu.addClass('hide');
+                        SubsubLinks.eq(focusIndexSubmenu).parent().addClass('active');
+
+                    } else {
                         $globalLinks.parent().removeClass('active');
                         focusIndex = 0;
                         submenuOpen = false;
@@ -216,6 +218,7 @@ $(() => {
             }
 
             $globalLinks.parent().removeClass('active');
+
             if (!submenuOpen) {
                 $globalLinks.eq(focusIndex).parent().addClass('active');
                 const activeDescription = $('body li.active').data('description');
@@ -228,32 +231,31 @@ $(() => {
             }
         });
     }).catch(error => console.error(error));
+    //* draggable
+    $(function () {
+        $('.draggable-item').draggable({
+            stop: function (event, ui) {
+                var newPosition = ui.position;
+                console.log('New position:', newPosition);
+                // Perform any further actions with the new position here
+            },
+            containment: "window",
+            handle: ".adjustment-line"
+        });
+        $('.pcr-app').append('<div class="color-adjustment-line"></div>')
+        $('.pcr-app').draggable({
+
+            stop: function (event, ui) {
+                var newPosition = ui.position;
+                console.log('New position:', newPosition);
+                // Perform any further actions with the new position here
+            },
+            containment: "window",
+            handle: ".color-adjustment-line"
+        });
+    });
 })
-//* draggable
-$(function () {
-    $('.draggable-item').draggable({
-        stop: function (event, ui) {
-            var newPosition = ui.position;
-            console.log('New position:', newPosition);
-            // Perform any further actions with the new position here
-        },
-        containment: "window",
-        handle: ".adjustment-line"
-    });
-    $('.pcr-app').append('<div class="color-adjustment-line"></div>')
-    $('.pcr-app').draggable({
-
-        stop: function (event, ui) {
-            var newPosition = ui.position;
-            console.log('New position:', newPosition);
-            // Perform any further actions with the new position here
-        },
-        containment: "window",
-        handle: ".color-adjustment-line"
-    });
-});
-
-//*  pickr *** //
+//*     pickr *** //
 $(document).ready(function () {
     const pickr = Pickr.create({
         el: "#color_input",
@@ -294,25 +296,15 @@ $('.showALert').click(() => {
         $('.labelAlert').addClass('hide')
     }, 3000)
 })
-// *text modal
+
 $('.showModal').click(() => {
     $('.modal-window').addClass('show')
     $('.modal-window').removeClass('hide')
 })
-$('.normal-modal-close').click(() => {
+$('.modal-close').click(() => {
     $('.modal-window').addClass('hide')
     $('.modal-window').removeClass('show')
 })
-// *save modal
-$('.showSave').click(() => {
-    $('.saveHideModal').addClass('show')
-    $('.saveHideModal').removeClass('hide')
-})
-$('.showSave-modal-close').click(() => {
-    $('.saveHideModal').addClass('hide')
-    $('.saveHideModal').removeClass('show')
-})
-
 choseFont = () => {
     document.documentElement.style.setProperty('--font', 'Tajawal')
     //* Font available Rubik  / Inter

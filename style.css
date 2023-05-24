@@ -462,15 +462,24 @@ ul.submenu.show {
 
 .show {
   display: block;
-  transition: all 0.3s;
 }
 
 .hide {
   display: none;
-  transition: all 2s;
 }
 
-.modal-window {
+.Subsubmenu {
+  -webkit-margin-start: 10px;
+          margin-inline-start: 10px;
+  border: 2px solid wheat;
+}
+
+.has-icon::before {
+  content: "🎍";
+}
+
+.modal-window,
+.saveHideModal {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.25);
   top: 0;
@@ -479,29 +488,57 @@ ul.submenu.show {
   left: 0;
   z-index: 999;
   opacity: 1;
-  pointer-events: none;
   transition: all 0.3s;
 }
-.modal-window:target {
+.modal-window:target,
+.saveHideModal:target {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
-.modal-window > div {
+.modal-window > div,
+.saveHideModal > div {
   width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 2em;
+  border-radius: 10px;
   background: white;
 }
-.modal-window header {
+.modal-window header,
+.saveHideModal header {
   font-weight: bold;
 }
-.modal-window h1 {
+.modal-window h1,
+.saveHideModal h1 {
   font-size: 150%;
   margin: 0 0 15px;
+}
+
+.saveHideModal textarea {
+  padding: 0.5rem;
+  margin: 0 auto;
+  width: 90%;
+  border: 1px solid #bfbfbf;
+  border-radius: 10px;
+  margin: 10px;
+}
+.saveHideModal .btns {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.saveHideModal button {
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 10px 30px;
+  font-size: 1rem;
+  margin: 0.5rem 1rem;
 }
 
 .modal-close {
