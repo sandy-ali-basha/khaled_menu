@@ -7,6 +7,7 @@ $(() => {
             const response = await fetch('./DataNew.json');
             const data = await response.json();
             console.log(data);
+
             return data;
         } catch (error) {
             console.error(error);
@@ -36,7 +37,18 @@ $(() => {
     //     return subMenuLi
     // }
     fetchData().then(data => {
-
+        const CurrentTheme = data.Theme
+        if (CurrentTheme === 'basic') {
+            console.log('red:', CurrentTheme)
+            $('.menu').addClass('redMenu')
+        } else if (CurrentTheme === 'Default') {
+            $('.menu').removeClass('Green')
+            $('.menu').removeClass('redMenu')
+            console.log('default:', Val)
+        } else if (CurrentTheme === 'modern') {
+            $('.menu').addClass('Green')
+            console.log('Green:', Val)
+        }
         $('.menu-header').append(
             ` <img class="avatar" src="${data.logo}" alt="" /><h2>${data.NamePlayer}</h2>`
         ) // * header
@@ -130,15 +142,15 @@ $(() => {
                         console.log('You pressed enter within a submenu.', $subMenu.find('li.active'));
                         console.log("subMenu", $subMenu.find('li.active')[0].attributes[0].value);
                         const Val = $subMenu.find('li.active')[0].attributes[0].value
-                        if (Val === 'Red') {
-                            console.log('red:', Val)
+                        if (Val === 'basic') {
+                            console.log('basic :', Val)
                             $('.menu').addClass('redMenu')
                             $('.menu').removeClass('Green')
                         } else if (Val === 'Default') {
                             $('.menu').removeClass('Green')
                             $('.menu').removeClass('redMenu')
                             console.log('default:', Val)
-                        } else if (Val === 'Green') {
+                        } else if (Val === 'modern') {
                             $('.menu').removeClass('redMenu')
                             $('.menu').addClass('Green')
                             console.log('Green:', Val)
@@ -200,11 +212,10 @@ $(() => {
                     if (activeItem.nextElementSibling.offsetTop > menuList.scrollTop + menuList
                         .clientHeight) {
                         menuList.scrollTop = activeItem.nextElementSibling.offsetTop - menuList
-                            .clientHeight;
-                        // console.log(activeItem.nextElementSibling.offsetTop, menuList
-                        //     .clientHeight);
+                            .clientHeight + activeItem.nextElementSibling.clientHeight;
+                        activeItem.nextElementSibling.focus();
+                        console.log(activeItem.nextElementSibling.clientHeight)
                     }
-                    // console.log(activeItem.nextElementSibling);
                     activeItem.nextElementSibling.focus();
                 } else if (event.key === "ArrowUp" && activeItem !== firstItem) {
                     event.preventDefault();

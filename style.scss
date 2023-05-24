@@ -36,10 +36,11 @@ body {
 }
 
 .menu {
-  position: fixed;
-  top: 10px;
+  position: absolute;
+  top: 1px;
   right: 10px;
   width: 450px;
+  height: 95vh;
 }
 
 .menu-header {
@@ -129,6 +130,8 @@ body {
 }
 
 .menu-footer {
+  position: absolute;
+  bottom: 0px;
   margin-top: 5px;
   background: rgba(
     calc(var(--primary-hue) / 3),
@@ -178,8 +181,11 @@ body {
 
 ul {
   min-height: 350px;
+  display: flex;
+  flex-direction: column;
   position: relative;
   max-height: 60vh;
+  overflow: auto;
 }
 
 #menu > li > ul.show {
@@ -259,7 +265,7 @@ ul.submenu.show {
   // }
   .menu-header {
     background: transparent;
-    padding: 1rem 0rem;
+    padding: 0rem;
     text-align: center;
     color: hsl(var(--primary-hue), 35%, 90%);
     h2 {
@@ -280,7 +286,7 @@ ul.submenu.show {
     background: transparent;
     ul {
       li {
-        margin: 0.8rem 0rem;
+        margin: 0.2rem 0rem;
         border-radius: 0.5rem;
         border: solid;
         border-color: rgba(
@@ -322,7 +328,7 @@ ul.submenu.show {
       1
     );
     border-width: 2.6px;
-    padding: 1rem 0.5rem;
+    padding: 0.3rem 0.5rem;
     font-size: 1rem;
     background: transparent;
     border-radius: 0 0 0.5rem 0.5rem;
@@ -398,7 +404,7 @@ ul.submenu.show {
   );
   .menu-header {
     background: transparent;
-    padding: 1rem 0rem;
+    padding: 0rem;
     text-align: center;
     color: hsl(0, 100%, 98%);
     border-bottom: 1px solid #fff4f4;
@@ -426,7 +432,7 @@ ul.submenu.show {
           color: #fff4f4;
           width: 20px;
         }
-        margin: 0.5rem 0rem;
+        margin: 0.1rem 0rem;
         border-radius: 50px;
         background: transparent;
         padding: 0.5rem 1rem;
@@ -459,7 +465,7 @@ ul.submenu.show {
     border-top: solid;
     border-color: hsl(var(--primary-hue), 100%, 98%);
     border-width: 1px;
-    padding: 1rem 0.5rem;
+    padding: 0.3rem 0.5rem;
     font-size: 1rem;
     background: transparent;
     border-radius: 0 0 0.5rem 0.5rem;

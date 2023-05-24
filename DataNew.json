@@ -1,8 +1,8 @@
 {
   "action": "OpenMenu",
   "NamePlayer": "Khaled",
-  "NameMenu": "اسم المنيو ( ينكتب كتابة اسفل الاسم اللاعب يمين بل زاوية )",
-  "Theme": "Red",
+  "NameMenu": "اسم المنيو ",
+  "Theme": "basic",
   "ColorMenu": {
     "b": 255,
     "a": 255,
@@ -2656,13 +2656,13 @@
           "Id": 2,
           "Show": true,
           "Name": "Theme 1",
-          "Description": "Red"
+          "Description": "basic"
         },
         {
           "Id": 3,
           "Show": true,
           "Name": "Theme 3",
-          "Description": "Green"
+          "Description": "modern"
         }
       ]
     }
