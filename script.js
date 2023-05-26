@@ -1,13 +1,11 @@
 
 $(() => {
-    $('.menu').addClass('show')
+
     const $menu = $('body #menu');
     async function fetchData() {
         try {
             const response = await fetch('./DataNew.json');
-            const data = await response.json();
-            console.log(data);
-
+            const data = await response.json();;
             return data;
         } catch (error) {
             console.error(error);
@@ -27,16 +25,9 @@ $(() => {
         }, 500)
         return innermenu
     }
-    // * git sub sub menu items <li></li> * //
-    // const renderSubSubMenu = (subMenuItems) => {
-    //     const subMenuLi = subMenuItems.map(subsubItem => {
-    //         return `<li class="${subsubItem.Name?.indexOf(' ') >= 0 ? subsubItem.Name.replace(/\s+/g, "") : subsubItem.Name}">
-    //         <a href="#"> ${subsubItem.Name}</a>
-    //         </li>`
-    //     })
-    //     return subMenuLi
-    // }
+
     fetchData().then(data => {
+        $('.menu').addClass('show')
         const CurrentTheme = data.Theme
         if (CurrentTheme === 'basic') {
             console.log('red:', CurrentTheme)
