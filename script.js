@@ -157,11 +157,12 @@ $(() => {
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
-                        // show sub sub menu press enter in sub menu
-                        console.log('subSubmenuOpen')
+                        //! show sub sub menu press enter in sub menu
+
                         let sectionName = $subMenu.find('li.active').data('name');
                         $subSubMenu = $(`.subSubMenu.${sectionName}`);
-                        console.log('$subSubMenu', $subSubMenu.length)
+
+                        // *check if there is a subsub ul menu in the dom 
                         if ($subSubMenu.length > 0) {
                             $subSubLinks = $subSubMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
@@ -177,13 +178,13 @@ $(() => {
                             $subMenu.removeClass('show');
                             $subSubLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
-                        // * --------------------
+                        // * -------- actions on enter a sub menu item ------------
                         let subMenuItem = $subMenu.find('li.active')[0].attributes[1].value
                         console.log("subMenu", subMenuItem);
                         switch (subMenuItem) {
                             case "ChangeMenuColor":
-                                console.log('change menu color')
                                 pickr.show()
+                                //! add your mouse enable function here 
                                 break;
                         }
                     } else if (!submenuOpen && subSubmenuOpen) {
