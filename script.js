@@ -161,20 +161,31 @@ $(() => {
                         console.log('subSubmenuOpen')
                         let sectionName = $subMenu.find('li.active').data('name');
                         $subSubMenu = $(`.subSubMenu.${sectionName}`);
-                        $subSubLinks = $subSubMenu.find('> li > a');
-                        $globalLinks.eq(focusIndex).parent().removeClass('active');
-                        $subSubLinks.parent().removeClass('active');
-
-                        focusIndexSubSubmenu = 0;
-                        submenuOpened = false;
-                        submenuOpen = false;
-                        subSubmenuOpen = true;
-                        subSubmenuOpened = true;
-                        $subSubMenu.addClass('show');
-                        $subSubMenu.removeClass('hide');
-                        $subMenu.removeClass('show');
-
-                        $subSubLinks.eq(focusIndexSubmenu).parent().addClass('active');
+                        console.log('$subSubMenu', $subSubMenu.length)
+                        if ($subSubMenu.length > 0) {
+                            $subSubLinks = $subSubMenu.find('> li > a');
+                            $globalLinks.eq(focusIndex).parent().removeClass('active');
+                            $subSubLinks.parent().removeClass('active');
+                            focusIndexSubSubmenu = 0;
+                            submenuOpened = false;
+                            submenuOpen = false;
+                            subSubmenuOpen = true;
+                            subSubmenuOpened = true;
+                            console.log('$subSubMenu', $subSubMenu)
+                            $subSubMenu.addClass('show');
+                            $subSubMenu.removeClass('hide');
+                            $subMenu.removeClass('show');
+                            $subSubLinks.eq(focusIndexSubmenu).parent().addClass('active');
+                        }
+                        // * --------------------
+                        let subMenuItem = $subMenu.find('li.active')[0].attributes[1].value
+                        console.log("subMenu", subMenuItem);
+                        switch (subMenuItem) {
+                            case "ChangeMenuColor":
+                                console.log('change menu color')
+                                pickr.show()
+                                break;
+                        }
                     } else if (!submenuOpen && subSubmenuOpen) {
                         //  item Name 
                         const subSubMenuItem = $subSubMenu.find('li.active')[0].attributes[0].value
@@ -192,9 +203,7 @@ $(() => {
                                 $('.menu').removeClass('redMenu')
                                 $('.menu').addClass('Green')
                                 break;
-
                         }
-
                     } else if (submenuOpen && !subSubmenuOpen) {
                         console.log('You pressed enter within a submenu.', $subMenu.find('li.active'));
                         let subMenuItem = $subMenu.find('li.active')[0].attributes[1].value
@@ -322,37 +331,35 @@ $(function () {
 });
 
 //*  pickr *** //
-$(document).ready(function () {
-    const pickr = Pickr.create({
-        el: "#color_input",
-        theme: "nano",
-        components: {
-            preview: true,
-            opacity: true,
-            hue: true,
-            interaction: {
-                hex: false,
-                rgba: false,
-                hsla: false,
-                hsva: false,
-                cmyk: false,
-                input: true,
-                clear: true,
-                save: true,
-            },
+const pickr = Pickr.create({
+    el: "#color_input",
+    theme: "nano",
+    components: {
+        preview: true,
+        opacity: true,
+        hue: true,
+        interaction: {
+            hex: false,
+            rgba: false,
+            hsla: false,
+            hsva: false,
+            cmyk: false,
+            input: true,
+            clear: true,
+            save: true,
         },
-    });
-    //change the color of the main div when color changes
-    pickr.on("change", function (e) {
-        document.documentElement.style.setProperty('--primary-hue', e.toRGBA()[0]);
-        document.documentElement.style.setProperty('--secondary-hue', e.toRGBA()[1]);
-        document.documentElement.style.setProperty('--accent-blue', e.toRGBA()[2]);
-        document.documentElement.style.setProperty('--opacity', e.toRGBA()[3]);
-    }).on('save', (color, instance) => {
-        console.log('Event: "save"', color, instance);
-        pickr.hide()
-    })
+    },
 });
+//change the color of the main div when color changes
+pickr.on("change", function (e) {
+    document.documentElement.style.setProperty('--primary-hue', e.toRGBA()[0]);
+    document.documentElement.style.setProperty('--secondary-hue', e.toRGBA()[1]);
+    document.documentElement.style.setProperty('--accent-blue', e.toRGBA()[2]);
+    document.documentElement.style.setProperty('--opacity', e.toRGBA()[3]);
+}).on('save', (color, instance) => {
+    console.log('Event: "save"', color, instance);
+    pickr.hide()
+})
 
 //* Alert
 $('.showALert').click(() => {

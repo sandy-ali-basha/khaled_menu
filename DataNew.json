@@ -2641,33 +2641,6 @@
           ]
         }
       ]
-    },
-    {
-      "Name": "Colors",
-      "Id": 8,
-      "Description": "Change menu theme",
-      "Show": true,
-      "NeedApi": true,
-      "SubMenu": [
-        {
-          "Id": 1,
-          "Show": true,
-          "Name": "Default",
-          "Description": "Default"
-        },
-        {
-          "Id": 2,
-          "Show": true,
-          "Name": "Theme 1",
-          "Description": "basic"
-        },
-        {
-          "Id": 3,
-          "Show": true,
-          "Name": "Theme 3",
-          "Description": "modern"
-        }
-      ]
     }
   ]
 }
