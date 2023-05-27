@@ -136,7 +136,8 @@ $(() => {
                 case 'Enter':
                     event.preventDefault();
                     if (!submenuOpen && !subSubmenuOpen) {
-                        //show sub menu press enter in menu
+                        //! show sub menu when press enter in menu
+
                         if ($menu.find('li.active').length) {
                             //* sectionName / subMenu */
                             let sectionName = $menu.find('li.active').data('name');
@@ -157,12 +158,12 @@ $(() => {
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
-                        //! show sub sub menu press enter in sub menu
+                        //! show sub sub menu when press enter in sub menu
 
                         let sectionName = $subMenu.find('li.active').data('name');
                         $subSubMenu = $(`.subSubMenu.${sectionName}`);
 
-                        // *check if there is a subsub ul menu in the dom 
+                        // *check if there is a sub sub ul menu in the dom 
                         if ($subSubMenu.length > 0) {
                             $subSubLinks = $subSubMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
@@ -191,6 +192,8 @@ $(() => {
                         //  item Name 
                         const subSubMenuItem = $subSubMenu.find('li.active')[0].attributes[0].value
                         console.log('You pressed enter within a sub submenu, item name :', subSubMenuItem)
+
+                        // * -------- actions on enter a sub sub menu item ------------
                         switch (subSubMenuItem) {
                             case "basic":
                                 $('.menu').addClass('redMenu')
@@ -206,14 +209,7 @@ $(() => {
                                 break;
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
-                        console.log('You pressed enter within a submenu.', $subMenu.find('li.active'));
-                        let subMenuItem = $subMenu.find('li.active')[0].attributes[1].value
-                        console.log("subMenu", subMenuItem);
-                        switch (subMenuItem) {
-                            case "ChangeMenuColor":
-                                console.log('change menu color')
-                                break;
-                        }
+                        console.log('You pressed enter, submenuOpen && !subSubmenuOpen', $menu.find('li.active'));
                     }
                     break;
                 case 'Backspace':
@@ -305,7 +301,7 @@ $(() => {
                 $subSubLinks.eq(focusIndexSubSubmenu).parent().addClass('active');
             }
         });
-    }).catch(error => console.error(error));
+    }).catch(error => console.error('error', error));
 })
 //* draggable
 $(function () {
@@ -313,18 +309,19 @@ $(function () {
         stop: function (event, ui) {
             var newPosition = ui.position;
             console.log('New position:', newPosition);
-            // Perform any further actions with the new position here
+            //! Perform any further actions with the new position here
         },
         containment: "window",
         handle: ".adjustment-line"
     });
+
     $('.pcr-app').append('<div class="color-adjustment-line"></div>')
     $('.pcr-app').draggable({
 
         stop: function (event, ui) {
             var newPosition = ui.position;
             console.log('New position:', newPosition);
-            // Perform any further actions with the new position here
+            //! Perform any further actions with the new position here
         },
         containment: "window",
         handle: ".color-adjustment-line"
@@ -351,7 +348,7 @@ const pickr = Pickr.create({
         },
     },
 });
-//change the color of the main div when color changes
+// * change the color of the main div when color changes
 pickr.on("change", function (e) {
     document.documentElement.style.setProperty('--primary-hue', e.toRGBA()[0]);
     document.documentElement.style.setProperty('--secondary-hue', e.toRGBA()[1]);
