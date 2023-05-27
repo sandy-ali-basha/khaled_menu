@@ -1923,27 +1923,30 @@
           "Description": "You can now change the language to Arabic or English using this option."
         },
         {
-          "ArrowList": [
-            {
-              "Name": "Default",
-              "Id": 1,
-              "Resend": "Default"
-            },
-            {
-              "Name": "Red",
-              "Id": 2,
-              "Resend": "Red"
-            },
-            {
-              "Name": "Dark Blue",
-              "Id": 3,
-              "Resend": "Dark Blue"
-            }
-          ],
           "Id": 17,
           "Show": true,
           "Name": "Change Theme",
-          "Description": "You can now change the theme to more than theme using this option."
+          "Description": "You can now change the theme to more than theme using this option.",
+          "SubMenu": [
+            {
+              "Id": 1,
+              "Show": true,
+              "Name": "Default",
+              "Description": "Default"
+            },
+            {
+              "Id": 2,
+              "Show": true,
+              "Name": "Theme 1",
+              "Description": "basic"
+            },
+            {
+              "Id": 3,
+              "Show": true,
+              "Name": "Theme 3",
+              "Description": "modern"
+            }
+          ]
         },
         {
           "Show": true,
