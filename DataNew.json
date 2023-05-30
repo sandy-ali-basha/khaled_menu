@@ -209,7 +209,7 @@
               "Show": true,
               "Name": "Godmode",
               "Description": "Makes you invincible.",
-              "Checked": false
+              "Checked": true
             },
             {
               "Id": 2,

@@ -112,24 +112,29 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 2px 12px;
+  * {
+    color: var(--text-color);
+  }
 }
 
 .menu-body ul li a {
-  color: var(--text-color);
   text-decoration: none;
   display: block;
   transition: all 0.2s ease-in-out;
   position: relative;
   cursor: pointer;
   font-weight: 300;
+  margin: auto auto auto 0px;
 }
 
 .menu-body ul li.active {
   background: var(--text-color);
 }
 
-.menu-body ul li.active a {
-  color: hsl(var(--primary-hue), 0%, 1%);
+.menu-body ul li.active {
+  * {
+    color: hsl(var(--primary-hue), 0%, 1%);
+  }
 }
 
 .menu-footer {
@@ -203,7 +208,7 @@ ul.submenu.show {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .menu-body {

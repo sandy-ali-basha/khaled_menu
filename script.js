@@ -13,9 +13,17 @@ $(() => {
     }
     const renderSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
-            return `<li data-description="${item.Description}" data-name=${item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name}>
-            <a href="#">${item.Name}</a>
-            </li>`
+            const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name;
+            return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName}>
+
+            <a href="#">
+            ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
+            </a>
+
+            ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
+
+            ${item.SubMenu ? '<span>⇒</span>' : ' '}
+            </li> `
         })
         setTimeout(() => {
             const ulSubmenu = document.querySelectorAll("ul.submenu");
@@ -27,9 +35,17 @@ $(() => {
     }
     const renderSubSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
-            return `<li data-description="${item.Description}" data-name=${item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name}>
-            <a href="#">${item.Name}</a>
-            </li>`
+            const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name;
+
+            return `<li class="${item.Show ? '' : 'hide'}" 
+            data-description="${item.Description}" 
+            data-name=${Name}>
+            <a href="#">
+            ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
+            </a>
+            ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
+            ${item.SubMenu ? '<span>⇒</span>' : ' '}
+            </li >`
         })
         setTimeout(() => {
             const ulSubmenu = document.querySelectorAll("ul.subSubMenu");
@@ -57,29 +73,33 @@ $(() => {
         }
         // * append Menu * //
         $('.menu-header').append(
-            ` <img class="avatar" src="${data.logo}" alt="" /><h2>${data.NamePlayer}</h2>`
+            ` <img class="avatar" src = "${data.logo}" alt = "" /> <h2>${data.NamePlayer}</h2>`
         ) // * header
         $('.menuTitle').append(data.NameMenu)//** render menu title 
         //* append main menu items 
         data.Data.forEach((item, index) => {
+            const ItemName = item.Name.replace(/\s+/g, "");
             $menu.append(`
-            <li class="${index === 0 ? 'active' : ''}" data-name="${item.Name.replace(/\s+/g, "")}" data-description="${item.Description}">
-                <a href="#">${item.Name}</a>
-            </li>
+        <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" >
+                <a href="#">
+                ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
+                </a>
+                ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ''}>`}
+                ${item.SubMenu ? '<span>⇒</span>' : ' '}
+            </li >
         `);
             //* append SubMenu *//
             $('.menu-body').append(`
-                    <ul class="submenu ${item.Name.replace(/\s+/g, "")}">
-                        ${renderSubMenu(item.SubMenu)}
+        <ul class="submenu ${item.Name.replace(/\s+/g, "")}" >
+            ${renderSubMenu(item.SubMenu)}
                     </ul>
-            `)
+        `)
             //* append sub sub menu if it there *//
             if (item.SubMenu) {
                 item.SubMenu.map(subMenuItem => {
                     if (subMenuItem.SubMenu) {
                         const ulContent = `<ul class="submenu subSubMenu ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/\s+/g, "") : subMenuItem.Name}"
-                        >${renderSubSubMenu(subMenuItem.SubMenu)}</ul>`
-
+        > ${renderSubSubMenu(subMenuItem.SubMenu)}</ul> `
                         $('.menu-body').append(ulContent)
                     }
                 })
@@ -145,7 +165,7 @@ $(() => {
                             console.log('sectionName: ', $menu.find('li.active').data('name'))
                             console.log('description: ', $menu.find('li.active').data('description'))
                             //* subMenu
-                            $subMenu = $(`.submenu.${sectionName}`);
+                            $subMenu = $(`.submenu.${sectionName} `);
                             $subLinks = $subMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
                             $subLinks.parent().removeClass('active');
@@ -161,7 +181,7 @@ $(() => {
                         //! show sub sub menu when press enter in sub menu
 
                         let sectionName = $subMenu.find('li.active').data('name');
-                        $subSubMenu = $(`.subSubMenu.${sectionName}`);
+                        $subSubMenu = $(`.subSubMenu.${sectionName} `);
 
                         // *check if there is a sub sub ul menu in the dom 
                         if ($subSubMenu.length > 0) {
@@ -180,8 +200,10 @@ $(() => {
                             $subSubLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
                         // * -------- actions on enter a sub menu item ------------
-                        let subMenuItem = $subMenu.find('li.active')[0].attributes[1].value
+                        let subMenuItem = $subMenu.find('li.active')[0].getAttribute('data-name')
                         console.log("subMenu", subMenuItem);
+                        const checkedItem = document.getElementById(subMenuItem).checked;
+                        checkedItem ? document.getElementById(subMenuItem).checked = false : document.getElementById(subMenuItem).checked = true
                         switch (subMenuItem) {
                             case "ChangeMenuColor":
                                 pickr.show()
@@ -189,11 +211,14 @@ $(() => {
                                 break;
                         }
                     } else if (!submenuOpen && subSubmenuOpen) {
-                        //  item Name 
-                        const subSubMenuItem = $subSubMenu.find('li.active')[0].attributes[0].value
-                        console.log('You pressed enter within a sub submenu, item name :', subSubMenuItem)
-
                         // * -------- actions on enter a sub sub menu item ------------
+                        //  item Name 
+                        const subSubMenuItem = $subSubMenu.find('li.active')[0].getAttribute('data-name');
+                        const checkedItem = document.getElementById(subSubMenuItem).checked;
+                        console.log('checkedItem:', checkedItem)
+
+                        checkedItem ? document.getElementById(subSubMenuItem).checked = false : document.getElementById(subSubMenuItem).checked = true
+
                         switch (subSubMenuItem) {
                             case "basic":
                                 $('.menu').addClass('redMenu')
@@ -209,8 +234,10 @@ $(() => {
                                 break;
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
-                        console.log('You pressed enter, submenuOpen && !subSubmenuOpen', $menu.find('li.active'));
+                        console.log('You pressed enter, submenuOpen && !subSubmenuOpen', $menu.find('li.active')[0].attributes[0].value);
+                        //!
                     }
+
                     break;
                 case 'Backspace':
                     event.preventDefault();
