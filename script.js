@@ -19,9 +19,18 @@ $(() => {
         })
         return innerMenu
     }
+
+    const renderArrowMix = (ArrowMix, ArrowMinimum) => {
+        const spans = [];
+        for (let i = ArrowMinimum; i <= ArrowMix; i++) {
+            spans.push(`<span class="mySlides" style="display: ${i < 1 ? 'block' : 'none'};" id="${i}">${i} </span>`);
+        }
+        console.log('spans', spans)
+        return spans;
+    }
     const renderSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
-            const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name;
+            const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
             return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName} name="${item.Name}">
 
             <a href="#">
@@ -47,7 +56,7 @@ $(() => {
 
     const renderSubSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
-            const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name;
+            const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
             return `<li class="${item.Show ? '' : 'hide'}" 
             data-description="${item.Description}" 
             data-name=${Name}
@@ -58,6 +67,7 @@ $(() => {
             ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
             ${item.SubMenu ? '<span>⇒</span>' : ' '}
             ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
+            ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum)}</div>` : ' '}
             </li >`
         })
         setTimeout(() => {
@@ -93,7 +103,7 @@ $(() => {
         $('.menuTitle').append(data.NameMenu)//** render menu title 
         //! append main menu items 
         data.Data.forEach((item, index) => {
-            const ItemName = item.Name.replace(/\s+/g, "");
+            const ItemName = item.Name.replace(/[\s\/]+/g, "");
             $menu.append(`
         <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" name="${item.Name}">
                 <a href="#">
@@ -105,7 +115,7 @@ $(() => {
         `);
             //* append SubMenu *//
             $('.menu-body').append(`
-        <ul class="submenu ${item.Name.replace(/\s+/g, "")}" >
+        <ul class="submenu ${item.Name.replace(/[\s\/]+/g, "")}" >
             ${renderSubMenu(item.SubMenu)}
                     </ul>
         `)
@@ -113,7 +123,7 @@ $(() => {
             if (item.SubMenu) {
                 item.SubMenu.map(subMenuItem => {
                     if (subMenuItem.SubMenu) {
-                        const ulContent = `<ul class="submenu subSubMenu ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/\s+/g, "") : subMenuItem.Name}"
+                        const ulContent = `<ul class="submenu subSubMenu ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/[\s\/]+/g, "") : subMenuItem.Name}"
         > ${renderSubSubMenu(subMenuItem.SubMenu)}</ul> `
                         $('.menu-body').append(ulContent)
                     }
