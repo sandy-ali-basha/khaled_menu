@@ -312,7 +312,8 @@ $(() => {
                     $('.menu').removeClass('show')
                     $('.menu').addClass('hide')
 
-                    data = null
+                    $('.menu-body').empty();
+                    $('.menu-body').append('<ul id="menu" class="show"></ul>')
                     break;
                 case 'KeyM':
                     $('.menu').removeClass('hide')
