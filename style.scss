@@ -17,6 +17,23 @@
   --opacity: 0.9;
   --font: "Tajawal";
 }
+.draggable-item {
+  width: 30vw;
+  height: 70vh;
+  left: -10px;
+  position: relative;
+}
+.leftRightItem {
+  display: inline-flex;
+  justify-content: center;
+  align-items: space-between;
+  &::after {
+    content: ">";
+  }
+  &::before {
+    content: "<";
+  }
+}
 * {
   margin: 0;
   padding: 0;

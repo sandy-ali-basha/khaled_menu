@@ -18,6 +18,25 @@
   --font: "Tajawal";
 }
 
+.draggable-item {
+  width: 30vw;
+  height: 70vh;
+  left: -10px;
+  position: relative;
+}
+
+.leftRightItem {
+  display: inline-flex;
+  justify-content: center;
+  align-items: space-between;
+}
+.leftRightItem::after {
+  content: ">";
+}
+.leftRightItem::before {
+  content: "<";
+}
+
 * {
   margin: 0;
   padding: 0;

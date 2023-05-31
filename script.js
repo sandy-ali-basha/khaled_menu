@@ -11,10 +11,18 @@ $(() => {
             console.error(error);
         }
     }
+    const renderArrowList = (ArrowListItem) => {
+        const innerMenu = ArrowListItem.map((item, index) => {
+            return `
+             <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" id="${item.Id}">${item.Name} </span>
+          `
+        })
+        return innerMenu
+    }
     const renderSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
             const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name;
-            return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName}>
+            return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName} name="${item.Name}">
 
             <a href="#">
             ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
@@ -23,6 +31,9 @@ $(() => {
             ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
 
             ${item.SubMenu ? '<span>⇒</span>' : ' '}
+            
+            ${item.ArrowList ? `<div class='leftRightItem' id='${ItemName}'>${renderArrowList(item.ArrowList)}</div>` : ' '}
+            
             </li> `
         })
         setTimeout(() => {
@@ -33,18 +44,20 @@ $(() => {
         }, 500)
         return innermenu
     }
+
     const renderSubSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
             const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/\s+/g, "") : item.Name;
-
             return `<li class="${item.Show ? '' : 'hide'}" 
             data-description="${item.Description}" 
-            data-name=${Name}>
+            data-name=${Name}
+            name="${item.Name}">
             <a href="#">
             ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
             </a>
             ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
             ${item.SubMenu ? '<span>⇒</span>' : ' '}
+            ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
             </li >`
         })
         setTimeout(() => {
@@ -55,20 +68,22 @@ $(() => {
         }, 500)
         return innermenu
     }
-
     fetchData().then(data => {
         $('.menu').addClass('show')
         // * theme * //
         const CurrentTheme = data.Theme
+
         if (CurrentTheme === 'basic') {
             console.log('red:', CurrentTheme)
             $('.menu').addClass('redMenu')
+            $('.menu').removeClass('Green')
         } else if (CurrentTheme === 'Default') {
             $('.menu').removeClass('Green')
             $('.menu').removeClass('redMenu')
             console.log('default:', Val)
         } else if (CurrentTheme === 'modern') {
             $('.menu').addClass('Green')
+            $('.menu').removeClass('redMenu')
             console.log('Green:', Val)
         }
         // * append Menu * //
@@ -76,11 +91,11 @@ $(() => {
             ` <img class="avatar" src = "${data.logo}" alt = "" /> <h2>${data.NamePlayer}</h2>`
         ) // * header
         $('.menuTitle').append(data.NameMenu)//** render menu title 
-        //* append main menu items 
+        //! append main menu items 
         data.Data.forEach((item, index) => {
             const ItemName = item.Name.replace(/\s+/g, "");
             $menu.append(`
-        <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" >
+        <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" name="${item.Name}">
                 <a href="#">
                 ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
                 </a>
@@ -156,6 +171,8 @@ $(() => {
                 case 'Enter':
                     event.preventDefault();
                     if (!submenuOpen && !subSubmenuOpen) {
+                        let ItemName = $menu.find('li.active')[0].getAttribute('name')
+                        console.log('ItemName:', ItemName)
                         //! show sub menu when press enter in menu
 
                         if ($menu.find('li.active').length) {
@@ -178,6 +195,8 @@ $(() => {
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
+                        let ItemName = $subMenu.find('li.active')[0].getAttribute('name')
+                        console.log('ItemName:', ItemName)
                         //! show sub sub menu when press enter in sub menu
 
                         let sectionName = $subMenu.find('li.active').data('name');
@@ -201,9 +220,15 @@ $(() => {
                         }
                         // * -------- actions on enter a sub menu item ------------
                         let subMenuItem = $subMenu.find('li.active')[0].getAttribute('data-name')
-                        console.log("subMenu", subMenuItem);
-                        const checkedItem = document.getElementById(subMenuItem).checked;
-                        checkedItem ? document.getElementById(subMenuItem).checked = false : document.getElementById(subMenuItem).checked = true
+
+                        const Item = $subMenu.find('li.active')[0]
+                        const hasCheckbox = Item.querySelector("input[type='checkbox']") !== null;
+
+                        if (hasCheckbox) {
+                            const checkedItem = document.getElementById(subMenuItem).checked;
+                            checkedItem ? document.getElementById(subMenuItem).checked = false : document.getElementById(subMenuItem).checked = true
+                        }
+
                         switch (subMenuItem) {
                             case "ChangeMenuColor":
                                 pickr.show()
@@ -211,16 +236,21 @@ $(() => {
                                 break;
                         }
                     } else if (!submenuOpen && subSubmenuOpen) {
-                        // * -------- actions on enter a sub sub menu item ------------
+                        let ItemName = $subSubMenu.find('li.active')[0].getAttribute('name')
+                        console.log('ItemName:', ItemName)
+                        // ! -------- actions on enter a sub sub menu item ------------
                         //  item Name 
                         const subSubMenuItem = $subSubMenu.find('li.active')[0].getAttribute('data-name');
-                        const checkedItem = document.getElementById(subSubMenuItem).checked;
-                        console.log('checkedItem:', checkedItem)
-
-                        checkedItem ? document.getElementById(subSubMenuItem).checked = false : document.getElementById(subSubMenuItem).checked = true
+                        const SubItem = $subSubMenu.find('li.active')[0]
+                        const SubHasCheckbox = SubItem.querySelector("input[type='checkbox']") !== null;
+                        if (SubHasCheckbox) {
+                            const checkedItem = document.getElementById(subSubMenuItem).checked;
+                            checkedItem ? document.getElementById(subSubMenuItem).checked = false : document.getElementById(subSubMenuItem).checked = true
+                        }
+                        //! /////////////
 
                         switch (subSubMenuItem) {
-                            case "basic":
+                            case "Theme1":
                                 $('.menu').addClass('redMenu')
                                 $('.menu').removeClass('Green')
                                 break;
@@ -228,7 +258,7 @@ $(() => {
                                 $('.menu').removeClass('Green')
                                 $('.menu').removeClass('redMenu')
                                 break;
-                            case "modern":
+                            case "Theme3":
                                 $('.menu').removeClass('redMenu')
                                 $('.menu').addClass('Green')
                                 break;
@@ -278,6 +308,13 @@ $(() => {
                     $('.menu').removeClass('hide')
                     $('.menu').addClass('show')
                     break;
+                case 'ArrowRight':
+                    plusDivs(1)
+                    break;
+                case 'ArrowLeft':
+                    console.log('ArrowLeft')
+                    plusDivs(-1)
+                    break;
             }
 
             const menuList = document.querySelector(".menu-body ul.show");
@@ -298,7 +335,6 @@ $(() => {
                         menuList.scrollTop = activeItem.nextElementSibling.offsetTop - menuList
                             .clientHeight + activeItem.nextElementSibling.clientHeight;
                         activeItem.nextElementSibling.focus();
-                        console.log(activeItem.nextElementSibling.clientHeight)
                     }
                     activeItem.nextElementSibling.focus();
                 } else if (event.key === "ArrowUp" && activeItem !== firstItem) {
@@ -416,4 +452,32 @@ $('.showSave-modal-close').click(() => {
 choseFont = () => {
     document.documentElement.style.setProperty('--font', 'Tajawal')
     //* Font available Rubik  / Inter
+}
+// ! slider Arrow
+var slideIndex = 1;
+
+showDivs(slideIndex);
+
+function plusDivs(n) {
+    showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+    // var x = item.childElementCount;
+    var ItemName
+    $subSubMenu ? ItemName = $('.active')[1].getAttribute('data-name') : ItemName = $('.active')[0].getAttribute('data-name')
+    console.log('ItemNameeeee', ItemName)
+    var elements = (`#${ItemName} .mySlides`)
+    console.log('elements', elements)
+    var x = document.querySelectorAll(elements);
+    var i;
+
+    if (n > x.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = x.length };
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    if (slideIndex - 1 >= 0 && slideIndex - 1 < x.length) {
+        x[slideIndex - 1].style.display = "block";
+    }
 }
