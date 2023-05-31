@@ -364,6 +364,37 @@ $(() => {
                 $subSubLinks.eq(focusIndexSubSubmenu).parent().addClass('active');
             }
         });
+
+
+        // ! slider Arrow
+        var slideIndex = 1;
+
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+        function showDivs(n) {
+            // var x = item.childElementCount; subSubmenuOpen
+            var ItemName
+            if (!submenuOpen && subSubmenuOpen) {
+                ItemName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
+            } else ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
+            console.log('ItemNameeeee', ItemName)
+            var elements = (`#${ItemName} .mySlides`)
+            console.log('elements', elements)
+            var x = document.querySelectorAll(elements);
+            var i;
+
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length };
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            if (slideIndex - 1 >= 0 && slideIndex - 1 < x.length) {
+                x[slideIndex - 1].style.display = "block";
+            }
+        }
     }).catch(error => console.error('error', error));
 })
 //* draggable
@@ -452,32 +483,4 @@ $('.showSave-modal-close').click(() => {
 choseFont = () => {
     document.documentElement.style.setProperty('--font', 'Tajawal')
     //* Font available Rubik  / Inter
-}
-// ! slider Arrow
-var slideIndex = 1;
-
-showDivs(slideIndex);
-
-function plusDivs(n) {
-    showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-    // var x = item.childElementCount;
-    var ItemName
-    $subSubMenu ? ItemName = $('.active')[1].getAttribute('data-name') : ItemName = $('.active')[0].getAttribute('data-name')
-    console.log('ItemNameeeee', ItemName)
-    var elements = (`#${ItemName} .mySlides`)
-    console.log('elements', elements)
-    var x = document.querySelectorAll(elements);
-    var i;
-
-    if (n > x.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = x.length };
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-    }
-    if (slideIndex - 1 >= 0 && slideIndex - 1 < x.length) {
-        x[slideIndex - 1].style.display = "block";
-    }
 }
