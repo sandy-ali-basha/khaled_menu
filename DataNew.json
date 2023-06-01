@@ -46,6 +46,13 @@
       "SubMenu": [
         {
           "Show": true,
+          "Name": "Search",
+          "Id": 1,
+          "Description": "Search",
+          "textBox": true
+        },
+        {
+          "Show": true,
           "Name": "Spectate Player",
           "Id": 1,
           "Description": "Spectate this player. Click this button again to stop spectating."
@@ -69,6 +76,7 @@
         {
           "BoxText": {
             "BoxText": "Reason Kick :",
+            "BoxText2": "Reason Kick 2 :",
             "Name": "Kick Player",
             "Description": "Kick Player",
             "Placeholder": "hack, Rdm, Vdm"
@@ -147,6 +155,13 @@
       "Name": "Banned Players",
       "Description": "View and manage all banned players in this menu.",
       "SubMenu": [
+        {
+          "Show": true,
+          "Name": "BannedSearch",
+          "Id": 1,
+          "Description": "Banned Players Search",
+          "textBox": true
+        },
         {
           "BoxText": {
             "BoxText": "Reason :",

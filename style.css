@@ -412,7 +412,6 @@ ul.submenu.show {
   line-height: 1.8;
   border-radius: 5px;
   cursor: hand;
-  cursor: pointer;
   font-family: var(--font);
   font-weight: 400;
 }
@@ -498,12 +497,6 @@ ul.submenu.show {
   opacity: 1;
   transition: all 0.3s;
 }
-.modal-window:target,
-.saveHideModal:target {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
 .modal-window > div,
 .saveHideModal > div {
   width: 400px;
@@ -540,13 +533,23 @@ ul.submenu.show {
   width: 100%;
 }
 .saveHideModal button {
-  cursor: pointer;
   border-radius: 10px;
-  border: none;
-  outline: none;
   padding: 10px 30px;
   font-size: 1rem;
   margin: 0.5rem 1rem;
+}
+.saveHideModal button:hover {
+  background-color: rgb(86, 97, 97);
+}
+
+.TechBtn {
+  top: -11px;
+  position: relative;
+  left: 3rem;
+  background: white;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
 }
 
 .modal-close {

@@ -25,12 +25,12 @@ $(() => {
         for (let i = ArrowMinimum; i <= ArrowMix; i++) {
             spans.push(`<span class="mySlides" style="display: ${i < 1 ? 'block' : 'none'};" id="${i}">${i} </span>`);
         }
-        console.log('spans', spans)
         return spans;
     }
     const renderSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
             const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
+
             return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName} name="${item.Name}">
 
             <a href="#">
@@ -40,11 +40,19 @@ $(() => {
             ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
 
             ${item.SubMenu ? '<span>⇒</span>' : ' '}
+            ${item.textBox ? `<span><input type="text" id="${ItemName}" ></input></span>` : ' '}
             
-            ${item.ArrowList ? `<div class='leftRightItem' id='${ItemName}'>${renderArrowList(item.ArrowList)}</div>` : ' '}
-            
+            ${item.ArrowList ? `<div class='leftRightItem' id='${ItemName}' >${renderArrowList(item.ArrowList)}</div>` : ' '}
+            ${item.BoxText ? `<i 
+            BoxText="${item.BoxText.BoxText}"
+           ${item.BoxText.BoxText2 ? `BoxText2="${item.BoxText.BoxText2}"` : ' '}
+            Placeholder="${item.BoxText.Placeholder}"
+            BoxText="${item.BoxText.BoxText}"
+            Description="${item.BoxText.Description}"
+            id="${item.BoxText.Name?.indexOf(' ') >= 0 ? item.BoxText.Name.replace(/[\s\/]+/g, "") : item.BoxText.Name}">${item.BoxText.Name}</i>` : ` `}
             </li> `
         })
+
         setTimeout(() => {
             const ulSubmenu = document.querySelectorAll("ul.submenu");
             ulSubmenu.forEach((ul) => {
@@ -57,6 +65,7 @@ $(() => {
     const renderSubSubMenu = (submenu) => {
         const innermenu = submenu.map(item => {
             const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
+
             return `<li class="${item.Show ? '' : 'hide'}" 
             data-description="${item.Description}" 
             data-name=${Name}
@@ -234,15 +243,75 @@ $(() => {
                         const Item = $subMenu.find('li.active')[0]
                         const hasCheckbox = Item.querySelector("input[type='checkbox']") !== null;
 
+                        let divElement = Item.querySelector("i") !== null;
+                        if (divElement) {
+                            let id = Item.querySelector("i").id;
+                            let BoxText = Item.querySelector("i").getAttribute('BoxText');
+                            let Description = Item.querySelector("i").getAttribute('Description');
+                            let Placeholder = Item.querySelector("i").getAttribute('Placeholder');
+                            let BoxText2 = Item.querySelector("i").getAttribute('BoxText2') !== null;
+                            let BoxText2Val
+                            BoxText2 ? BoxText2Val = Item.querySelector("i").getAttribute('BoxText2') : BoxText2Val = null
+
+                            const ModalData = `<h1>${id}</h1>
+                            <div>${Description} <i>${Placeholder}</i></div>
+                            <br /><div><small>${BoxText}</small></div>
+                            <textarea rows="6" id="${BoxText}"></textarea>
+                            ${BoxText2 ? ` <br /><div><small>${BoxText2Val}</small></div>
+                            <textarea rows="6" id="${BoxText2Val}"></textarea>` : ' '}
+                            <div class="btns">
+                              <button class="Save SaveTextModal">Save</button>
+                              <button class="Cancel closeTextModal" >cancel</button>
+                            </div>`
+                            $('#InputModal').empty()
+                            $('#InputModal').append(ModalData)
+                            $('.saveHideModal').addClass('show')
+                            $('.saveHideModal').removeClass('hide')
+                        }
+
                         if (hasCheckbox) {
                             const checkedItem = document.getElementById(subMenuItem).checked;
                             checkedItem ? document.getElementById(subMenuItem).checked = false : document.getElementById(subMenuItem).checked = true
                         }
 
+                        let activeSearch = false
+                        console.log('let activeSearch', activeSearch)
                         switch (subMenuItem) {
                             case "ChangeMenuColor":
                                 pickr.show()
                                 //! add your mouse enable function here 
+                                break;
+                            case 'ChangeLocation':
+                                $('.adjustment-line').addClass('show')
+                                $('.adjustment-line').removeClass('hide')
+                                break;
+                            case 'Search':
+                                console.log('activeSearch', activeSearch)
+                                if (activeSearch) {
+                                    activeSearch = false
+                                    Item.querySelector("input").blur();
+                                }
+                                else {
+                                    activeSearch = true
+                                    Item.querySelector("input").focus()
+                                }
+                                const inputValue = Item.querySelector("input").value;
+                                console.log('inputValue', inputValue)
+
+                                break;
+                            case 'BannedSearch':
+                                console.log('activeSearch', activeSearch)
+                                if (activeSearch) {
+                                    activeSearch = false
+                                    Item.querySelector("input").blur();
+                                }
+                                else {
+                                    activeSearch = true
+                                    Item.querySelector("input").focus()
+                                }
+                                const BannedSearch = Item.querySelector("input").value;
+                                console.log('Banned Search Value', BannedSearch)
+
                                 break;
                         }
                     } else if (!submenuOpen && subSubmenuOpen) {
@@ -279,7 +348,7 @@ $(() => {
                     }
 
                     break;
-                case 'Backspace':
+                case 'Escape':
                     event.preventDefault();
                     if (submenuOpened && !subSubmenuOpen) {
                         // back from sub menu
@@ -308,7 +377,7 @@ $(() => {
                         $globalLinks.eq(focusIndex).parent().addClass('active');
                     }
                     break;
-                case 'Escape':
+                case 'KeyH':
                     $('.menu').removeClass('show')
                     $('.menu').addClass('hide')
 
@@ -390,8 +459,8 @@ $(() => {
             var ItemName
             if (!submenuOpen && subSubmenuOpen) {
                 ItemName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
-            } else ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
-            console.log('ItemNameeeee', ItemName)
+            } else if (submenuOpen && !subSubmenuOpen) ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
+
             var elements = (`#${ItemName} .mySlides`)
             console.log('elements', elements)
             var x = document.querySelectorAll(elements);
@@ -415,6 +484,8 @@ $(function () {
             var newPosition = ui.position;
             console.log('New position:', newPosition);
             //! Perform any further actions with the new position here
+
+
         },
         containment: "window",
         handle: ".adjustment-line"
@@ -462,35 +533,52 @@ pickr.on("change", function (e) {
 }).on('save', (color, instance) => {
     console.log('Event: "save"', color, instance);
     pickr.hide()
+}).on('clear', instance => {
+    console.log('Event: "clear"', instance);
+}).on('hide', instance => {
+    console.log('Event: "hide"', instance);
 })
 
 //* Alert
-$('.showALert').click(() => {
-    $('.labelAlert').addClass('show')
-    $('.labelAlert').removeClass('hide')
-    setTimeout(() => {
-        $('.labelAlert').addClass('hide')
-    }, 3000)
+$(document).ready(() => {
+    $('.showALert').click(() => {
+        $('.labelAlert').addClass('show')
+        $('.labelAlert').removeClass('hide')
+        setTimeout(() => {
+            $('.labelAlert').addClass('hide')
+        }, 3000)
+    })
+    // *text modal
+
+    $('.showModal').click(() => {
+        $('.modal-window').addClass('show')
+        $('.modal-window').removeClass('hide')
+    })
+    $('.normal-modal-close').click(() => {
+        $('.modal-window').addClass('hide')
+        $('.modal-window').removeClass('show')
+    })
+    // *save modal
+    $('.showSave').click(() => {
+        $('.saveHideModal').addClass('show')
+        $('.saveHideModal').removeClass('hide')
+    })
 })
-// *text modal
-$('.showModal').click(() => {
-    $('.modal-window').addClass('show')
-    $('.modal-window').removeClass('hide')
-})
-$('.normal-modal-close').click(() => {
-    $('.modal-window').addClass('hide')
-    $('.modal-window').removeClass('show')
-})
-// *save modal
-$('.showSave').click(() => {
-    $('.saveHideModal').addClass('show')
-    $('.saveHideModal').removeClass('hide')
-})
-$('.showSave-modal-close').click(() => {
+$(document).on('click', '.closeTextModal', () => {
+    console.log("Button clicked closeTextModal");
     $('.saveHideModal').addClass('hide')
     $('.saveHideModal').removeClass('show')
 })
-
+$(document).on('click', '.SaveTextModal', () => {
+    console.log("Button clicked SaveTextModal");
+    $('.saveHideModal').addClass('hide')
+    $('.saveHideModal').removeClass('show')
+})
+$(document).on('click', '.TechBtn', () => {
+    console.log("Button clicked SaveTextModal");
+    $('.adjustment-line').addClass('hide')
+    $('.adjustment-line').removeClass('show')
+})
 choseFont = () => {
     document.documentElement.style.setProperty('--font', 'Tajawal')
     //* Font available Rubik  / Inter
