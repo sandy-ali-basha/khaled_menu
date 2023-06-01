@@ -1,7 +1,7 @@
 
 $(() => {
     var data = null;
-    const $menu = $('body #menu');
+
     async function fetchData() {
         try {
             const response = await fetch('./DataNew.json');
@@ -113,7 +113,7 @@ $(() => {
         //! append main menu items 
         data.Data.forEach((item, index) => {
             const ItemName = item.Name.replace(/[\s\/]+/g, "");
-            $menu.append(`
+            $('#menu').append(`
         <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" name="${item.Name}">
                 <a href="#">
                 ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
@@ -140,7 +140,7 @@ $(() => {
             }
         })
 
-        const $globalLinks = $menu.find('> li > a');
+        const $globalLinks = $('#menu').find('> li > a');
         let focusIndex = 0;
         let submenuOpen = false;
         let subSubmenuOpen = false;
@@ -158,7 +158,7 @@ $(() => {
         let lastItem = null
         let activeItem = null
 
-        $menu.find('li.active').focus();
+        $('#menu').find('li.active').focus();
         $(document).on('keydown', function (event) {
             switch (event.code) {
                 case 'ArrowUp':
@@ -190,16 +190,16 @@ $(() => {
                 case 'Enter':
                     event.preventDefault();
                     if (!submenuOpen && !subSubmenuOpen) {
-                        let ItemName = $menu.find('li.active')[0].getAttribute('name')
+                        let ItemName = $('#menu').find('li.active')[0].getAttribute('name')
                         console.log('ItemName:', ItemName)
                         //! show sub menu when press enter in menu
 
-                        if ($menu.find('li.active').length) {
+                        if ($('#menu').find('li.active').length) {
                             //* sectionName / subMenu */
-                            let sectionName = $menu.find('li.active').data('name');
+                            let sectionName = $('#menu').find('li.active').data('name');
                             //*  show selected item data 
-                            console.log('sectionName: ', $menu.find('li.active').data('name'))
-                            console.log('description: ', $menu.find('li.active').data('description'))
+                            console.log('sectionName: ', $('#menu').find('li.active').data('name'))
+                            console.log('description: ', $('#menu').find('li.active').data('description'))
                             //* subMenu
                             $subMenu = $(`.submenu.${sectionName} `);
                             $subLinks = $subMenu.find('> li > a');
@@ -209,8 +209,8 @@ $(() => {
                             submenuOpened = true;
                             submenuOpen = true;
                             $subMenu.addClass('show');
-                            $menu.addClass('hide');
-                            $menu.removeClass('show');
+                            $('#menu').addClass('hide');
+                            $('#menu').removeClass('show');
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
@@ -343,7 +343,7 @@ $(() => {
                                 break;
                         }
                     } else if (submenuOpen && !subSubmenuOpen) {
-                        console.log('You pressed enter, submenuOpen && !subSubmenuOpen', $menu.find('li.active')[0].attributes[0].value);
+                        console.log('You pressed enter, submenuOpen && !subSubmenuOpen', $('#menu').find('li.active')[0].attributes[0].value);
                         //!
                     }
 
@@ -353,13 +353,13 @@ $(() => {
                     if (submenuOpened && !subSubmenuOpen) {
                         // back from sub menu
                         $subMenu.removeClass('show');
-                        $menu.removeClass('hide');
-                        $menu.addClass('show');
+                        $('#menu').removeClass('hide');
+                        $('#menu').addClass('show');
                         $subLinks.parent().removeClass('active');
                         focusIndexSubmenu = 0;
                         submenuOpened = false;
                         submenuOpen = false;
-                        $menu.find('li.active').removeClass('active');
+                        $('#menu').find('li.active').removeClass('active');
                         $globalLinks.eq(focusIndex).parent().addClass('active');
                     } else if (!submenuOpened && subSubmenuOpen) {
                         // back from sub sub menu
@@ -373,7 +373,7 @@ $(() => {
                         submenuOpened = true;
                         subSubmenuOpen = false;
                         subSubmenuOpened = false;
-                        $menu.find('li.active').removeClass('active');
+                        $('#menu').find('li.active').removeClass('active');
                         $globalLinks.eq(focusIndex).parent().addClass('active');
                     }
                     break;
@@ -381,10 +381,13 @@ $(() => {
                     $('.menu').removeClass('show')
                     $('.menu').addClass('hide')
 
+                    $('.menu-title').empty();
+                    $('.menu-header').empty();
                     $('.menu-body').empty();
                     $('.menu-body').append('<ul id="menu" class="show"></ul>')
                     break;
                 case 'KeyM':
+                    fetchData()
                     $('.menu').removeClass('hide')
                     $('.menu').addClass('show')
                     break;
