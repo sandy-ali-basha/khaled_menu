@@ -1955,6 +1955,7 @@
           "Description": "You can now change the locations of the menus on the screen using this option."
         },
         {
+          "Show": true,
           "Name": "Change Menu Color",
           "Id": 19,
           "Description": "You can now change the color to different colors using this option."
