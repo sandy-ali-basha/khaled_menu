@@ -1,110 +1,84 @@
+var data = null;
+const renderArrowList = (ArrowListItem) => {
+    const innerMenu = ArrowListItem.map((item, index) => {
+        return `
+         <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" id="${item.Id}">${item.Name} </span>
+      `
+    })
+    return innerMenu
+}
 
-$(() => {
-    var data = null;
-
-    async function fetchData() {
-        try {
-            const response = await fetch('./DataNew.json');
-            data = await response.json();;
-            return data;
-        } catch (error) {
-            console.error(error);
-        }
+const renderArrowMix = (ArrowMix, ArrowMinimum) => {
+    const spans = [];
+    for (let i = ArrowMinimum; i <= ArrowMix; i++) {
+        spans.push(`<span class="mySlides" style="display: ${i < 1 ? 'block' : 'none'};" id="${i}">${i} </span>`);
     }
-    const renderArrowList = (ArrowListItem) => {
-        const innerMenu = ArrowListItem.map((item, index) => {
-            return `
-             <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" id="${item.Id}">${item.Name} </span>
-          `
-        })
-        return innerMenu
-    }
+    return spans;
+}
+const renderSubMenu = (submenu) => {
+    const innermenu = submenu.map(item => {
+        const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
 
-    const renderArrowMix = (ArrowMix, ArrowMinimum) => {
-        const spans = [];
-        for (let i = ArrowMinimum; i <= ArrowMix; i++) {
-            spans.push(`<span class="mySlides" style="display: ${i < 1 ? 'block' : 'none'};" id="${i}">${i} </span>`);
-        }
-        return spans;
-    }
-    const renderSubMenu = (submenu) => {
-        const innermenu = submenu.map(item => {
-            const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
+        return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName} name="${item.Name}">
 
-            return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName} name="${item.Name}">
+        <a href="#">
+        ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
+        </a>
 
-            <a href="#">
-            ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
-            </a>
+        ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
 
-            ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
+        ${item.SubMenu ? '<span>⇒</span>' : ' '}
+        ${item.textBox ? `<span><input type="text" id="${ItemName}" ></input></span>` : ' '}
+        
+        ${item.ArrowList ? `<div class='leftRightItem' id='${ItemName}' >${renderArrowList(item.ArrowList)}</div>` : ' '}
+        ${item.BoxText ? `<i 
+        BoxText="${item.BoxText.BoxText}"
+       ${item.BoxText.BoxText2 ? `BoxText2="${item.BoxText.BoxText2}"` : ' '}
+        Placeholder="${item.BoxText.Placeholder}"
+        BoxText="${item.BoxText.BoxText}"
+        Description="${item.BoxText.Description}"
+        id="${item.BoxText.Name?.indexOf(' ') >= 0 ? item.BoxText.Name.replace(/[\s\/]+/g, "") : item.BoxText.Name}">${item.BoxText.Name}</i>` : ` `}
+        </li> `
+    })
 
-            ${item.SubMenu ? '<span>⇒</span>' : ' '}
-            ${item.textBox ? `<span><input type="text" id="${ItemName}" ></input></span>` : ' '}
-            
-            ${item.ArrowList ? `<div class='leftRightItem' id='${ItemName}' >${renderArrowList(item.ArrowList)}</div>` : ' '}
-            ${item.BoxText ? `<i 
-            BoxText="${item.BoxText.BoxText}"
-           ${item.BoxText.BoxText2 ? `BoxText2="${item.BoxText.BoxText2}"` : ' '}
-            Placeholder="${item.BoxText.Placeholder}"
-            BoxText="${item.BoxText.BoxText}"
-            Description="${item.BoxText.Description}"
-            id="${item.BoxText.Name?.indexOf(' ') >= 0 ? item.BoxText.Name.replace(/[\s\/]+/g, "") : item.BoxText.Name}">${item.BoxText.Name}</i>` : ` `}
-            </li> `
-        })
+    setTimeout(() => {
+        const ulSubmenu = document.querySelectorAll("ul.submenu");
+        ulSubmenu.forEach((ul) => {
+            ul.innerHTML = ul.innerHTML.replace(/,/g, "");
+        });
+    }, 500)
+    return innermenu
+}
 
-        setTimeout(() => {
-            const ulSubmenu = document.querySelectorAll("ul.submenu");
-            ulSubmenu.forEach((ul) => {
-                ul.innerHTML = ul.innerHTML.replace(/,/g, "");
-            });
-        }, 500)
-        return innermenu
-    }
+const renderSubSubMenu = (submenu) => {
+    const innermenu = submenu.map(item => {
+        const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
 
-    const renderSubSubMenu = (submenu) => {
-        const innermenu = submenu.map(item => {
-            const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
-
-            return `<li class="${item.Show ? '' : 'hide'}" 
-            data-description="${item.Description}" 
-            data-name=${Name}
-            name="${item.Name}">
-            <a href="#">
-            ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
-            </a>
-            ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
-            ${item.SubMenu ? '<span>⇒</span>' : ' '}
-            ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
-            ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum)}</div>` : ' '}
-            </li >`
-        })
-        setTimeout(() => {
-            const ulSubmenu = document.querySelectorAll("ul.subSubMenu");
-            ulSubmenu.forEach((ul) => {
-                ul.innerHTML = ul.innerHTML.replace(/,/g, "");
-            });
-        }, 500)
-        return innermenu
-    }
-    fetchData().then(data => {
-        $('.menu').addClass('show')
-        // * theme * //
-        const CurrentTheme = data.Theme
-
-        if (CurrentTheme === 'basic') {
-            console.log('red:', CurrentTheme)
-            $('.menu').addClass('redMenu')
-            $('.menu').removeClass('Green')
-        } else if (CurrentTheme === 'Default') {
-            $('.menu').removeClass('Green')
-            $('.menu').removeClass('redMenu')
-            console.log('default:', Val)
-        } else if (CurrentTheme === 'modern') {
-            $('.menu').addClass('Green')
-            $('.menu').removeClass('redMenu')
-            console.log('Green:', Val)
-        }
+        return `<li class="${item.Show ? '' : 'hide'}" 
+        data-description="${item.Description}" 
+        data-name=${Name}
+        name="${item.Name}">
+        <a href="#">
+        ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
+        </a>
+        ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
+        ${item.SubMenu ? '<span>⇒</span>' : ' '}
+        ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
+        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum)}</div>` : ' '}
+        </li >`
+    })
+    setTimeout(() => {
+        const ulSubmenu = document.querySelectorAll("ul.subSubMenu");
+        ulSubmenu.forEach((ul) => {
+            ul.innerHTML = ul.innerHTML.replace(/,/g, "");
+        });
+    }, 500)
+    return innermenu
+}
+async function fetchData() {
+    try {
+        const response = await fetch('./DataNew.json');
+        data = await response.json();
         // * append Menu * //
         $('.menu-header').append(
             ` <img class="avatar" src = "${data.logo}" alt = "" /> <h2>${data.NamePlayer}</h2>`
@@ -139,6 +113,32 @@ $(() => {
                 })
             }
         })
+        console.log(data)
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+$(() => {
+    fetchData().then(data => {
+        $('.menu').addClass('show')
+        // * theme * //
+        const CurrentTheme = data.Theme
+
+        if (CurrentTheme === 'basic') {
+            console.log('red:', CurrentTheme)
+            $('.menu').addClass('redMenu')
+            $('.menu').removeClass('Green')
+        } else if (CurrentTheme === 'Default') {
+            $('.menu').removeClass('Green')
+            $('.menu').removeClass('redMenu')
+            console.log('default:', Val)
+        } else if (CurrentTheme === 'modern') {
+            $('.menu').addClass('Green')
+            $('.menu').removeClass('redMenu')
+            console.log('Green:', Val)
+        }
+
 
         const $globalLinks = $('#menu').find('> li > a');
         let focusIndex = 0;
