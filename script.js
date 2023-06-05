@@ -106,7 +106,7 @@ async function fetchData() {
         data.Data.forEach((item, index) => {
             const ItemName = item.Name.replace(/[\s\/]+/g, "");
             $('#menu').append(`
-        <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" name="${item.Name}">
+                <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" name="${item.Name}">
                 <a href="#">
                 ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
                 </a>
@@ -144,17 +144,17 @@ $(() => {
         const CurrentTheme = data.Theme
 
         if (CurrentTheme === 'basic') {
-            console.log('red:', CurrentTheme)
+
             $('.menu').addClass('redMenu')
             $('.menu').removeClass('Green')
         } else if (CurrentTheme === 'Default') {
             $('.menu').removeClass('Green')
             $('.menu').removeClass('redMenu')
-            console.log('default:', Val)
+
         } else if (CurrentTheme === 'modern') {
             $('.menu').addClass('Green')
             $('.menu').removeClass('redMenu')
-            console.log('Green:', Val)
+
         }
 
 
