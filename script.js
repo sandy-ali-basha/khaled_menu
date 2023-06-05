@@ -139,7 +139,7 @@ async function fetchData() {
 }
 $(() => {
     fetchData().then(data => {
-        $('.menu').addClass('show')
+
         // * theme * //
         const CurrentTheme = data.Theme
 
@@ -157,7 +157,7 @@ $(() => {
 
         }
 
-
+        $('.menu').addClass('show')
         const $globalLinks = $('#menu').find('> li > a');
         let focusIndex = 0;
         let submenuOpen = false;
@@ -366,7 +366,7 @@ $(() => {
                     }
 
                     break;
-                case 'Escape':
+                case 'Backspace':
                     event.preventDefault();
                     if (submenuOpened && !subSubmenuOpen) {
                         // back from sub menu
@@ -465,7 +465,6 @@ $(() => {
                 $subSubLinks.eq(focusIndexSubSubmenu).parent().addClass('active');
             }
         });
-
 
         // ! slider Arrow
         var slideIndex = 1;
