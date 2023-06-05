@@ -83,7 +83,25 @@ async function fetchData() {
         $('.menu-header').append(
             ` <img class="avatar" src = "${data.logo}" alt = "" /> <h2>${data.NamePlayer}</h2>`
         ) // * header
-        $('.menuTitle').append(data.NameMenu)//** render menu title 
+        $('.menu-title').append()//** render menu title 
+        $('.menu-title').append(`<div class="menu-title">
+        <p>Main Menu</p>
+        <span class="menuTitle">${data.NameMenu}</span>
+     </div>`)//** render menu title 
+        $('.draggable-item').css('left', data.LocationsMenu.menu.Left)
+        $('.draggable-item').css('top', data.LocationsMenu.menu.Top)
+
+        $('.alertContainer').css('left', data.LocationsMenu.Notification.Left)
+        $('.alertContainer').css('top', data.LocationsMenu.Notification.Top)
+
+        $('.pcr-app').css('left', data.LocationsMenu.ColorPicker.Left)
+        $('.pcr-app').css('top', data.LocationsMenu.ColorPicker.Top)
+
+        $('.normalModal').css('left', data.LocationsMenu.NoClipText.Left)
+        $('.normalModal').css('top', data.LocationsMenu.NoClipText.Top)
+
+        $('#InputModal').css('left', data.LocationsMenu.BoxTest.Left)
+        $('#InputModal').css('top', data.LocationsMenu.BoxTest.Top)
         //! append main menu items 
         data.Data.forEach((item, index) => {
             const ItemName = item.Name.replace(/[\s\/]+/g, "");

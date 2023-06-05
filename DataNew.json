@@ -12,7 +12,7 @@
   "logo": "./defaultAvatar.png",
   "LocationsMenu": {
     "menu": {
-      "Left": "1400px",
+      "Left": "400px",
       "Top": "30px"
     },
     "Text": {
@@ -20,19 +20,19 @@
       "Top": "30px"
     },
     "NoClipText": {
-      "Left": "1400px",
+      "Left": "120px",
       "Top": "30px"
     },
     "BoxTest": {
-      "Left": "1400px",
+      "Left": "160px",
       "Top": "30px"
     },
     "Notification": {
-      "Left": "1400px",
+      "Left": "150px",
       "Top": "30px"
     },
     "ColorPicker": {
-      "Left": "1400px",
+      "Left": "180px",
       "Top": "30px"
     }
   },
