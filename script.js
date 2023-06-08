@@ -53,7 +53,6 @@ const renderSubMenu = (submenu) => {
 const renderSubSubMenu = (submenu) => {
     const innermenu = submenu.map(item => {
         const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
-
         return `<li class="${item.Show ? '' : 'hide'}" 
         data-description="${item.Description}" 
         data-name=${Name}
@@ -75,11 +74,36 @@ const renderSubSubMenu = (submenu) => {
     }, 500)
     return innermenu
 }
+
+const renderSubMenuTree = (submenu) => {
+    const innermenu = submenu.map(item => {
+        const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
+        return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" 
+        data-name=${Name}
+        name="${item.Name}">
+        <a href="#">
+        ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
+        </a>
+        ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
+        ${item.SubMenu ? '<span>⇒</span>' : ' '}
+        ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
+        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum)}</div>` : ' '}
+        </li >`
+    })
+    setTimeout(() => {
+        const ulSubmenu = document.querySelectorAll("ul.subSubMenu");
+        ulSubmenu.forEach((ul) => {
+            ul.innerHTML = ul.innerHTML.replace(/,/g, "");
+        });
+    }, 500)
+    return innermenu
+}
 async function fetchData() {
     try {
-        const response = await fetch('./DataNew.json');
+        const response = await fetch('./DataNewNew.json');
         data = await response.json();
         // * append Menu * //
+
         $('.menu-header').append(
             ` <img class="avatar" src = "${data.logo}" alt = "" /> <h2>${data.NamePlayer}</h2>`
         ) // * header
@@ -88,8 +112,8 @@ async function fetchData() {
         <p>Main Menu</p>
         <span class="menuTitle">${data.NameMenu}</span>
      </div>`)//** render menu title 
-        $('.draggable-item').css('left', data.LocationsMenu.menu.Left)
-        $('.draggable-item').css('top', data.LocationsMenu.menu.Top)
+        $('.draggable-item').css('left', data.LocationsMenu.Menu.Left)
+        $('.draggable-item').css('top', data.LocationsMenu.Menu.Top)
 
         $('.alertContainer').css('left', data.LocationsMenu.Notification.Left)
         $('.alertContainer').css('top', data.LocationsMenu.Notification.Top)
@@ -100,11 +124,20 @@ async function fetchData() {
         $('.normalModal').css('left', data.LocationsMenu.NoClipText.Left)
         $('.normalModal').css('top', data.LocationsMenu.NoClipText.Top)
 
-        $('#InputModal').css('left', data.LocationsMenu.BoxTest.Left)
-        $('#InputModal').css('top', data.LocationsMenu.BoxTest.Top)
+        $('#InputModal').css('left', data.LocationsMenu.BoxText.Left)
+        $('#InputModal').css('top', data.LocationsMenu.BoxText.Top)
+
+        // Menu Colors
+        document.documentElement.style.setProperty('--primary-hue', data.ColorMenu.r);
+        document.documentElement.style.setProperty('--secondary-hue', data.ColorMenu.g);
+        document.documentElement.style.setProperty('--accent-blue', data.ColorMenu.b);
+        document.documentElement.style.setProperty('--opacity', data.ColorMenu.a);
+
         //! append main menu items 
+        $('.menu-body').append(`<ul data-MenuName="${data.NameMenu}" id="menu" class="show"></ul>`)
         data.Data.forEach((item, index) => {
             const ItemName = item.Name.replace(/[\s\/]+/g, "");
+
             $('#menu').append(`
                 <li class="${index === 0 ? 'active' : ''} ${item.Show ? '' : 'hide'}" data-name="${ItemName}" data-description="${item.Description}" name="${item.Name}">
                 <a href="#">
@@ -114,9 +147,10 @@ async function fetchData() {
                 ${item.SubMenu ? '<span>⇒</span>' : ' '}
             </li >
         `);
+
             //* append SubMenu *//
             $('.menu-body').append(`
-        <ul class="submenu ${item.Name.replace(/[\s\/]+/g, "")}" >
+        <ul data-MenuName="${item.Name}" class="submenu ${item.Name.replace(/[\s\/]+/g, "")}" >
             ${renderSubMenu(item.SubMenu)}
                     </ul>
         `)
@@ -124,14 +158,28 @@ async function fetchData() {
             if (item.SubMenu) {
                 item.SubMenu.map(subMenuItem => {
                     if (subMenuItem.SubMenu) {
-                        const ulContent = `<ul class="submenu subSubMenu ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/[\s\/]+/g, "") : subMenuItem.Name}"
-        > ${renderSubSubMenu(subMenuItem.SubMenu)}</ul> `
+                        const ulContent = `<ul
+                        data-MenuName="${subMenuItem.Name}"
+                         class="submenu subSubMenu
+                         ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/[\s\/]+/g, "") : subMenuItem.Name}"
+        > ${renderSubSubMenu(subMenuItem.SubMenu)}
+                                            </ul>`
                         $('.menu-body').append(ulContent)
+
+                        subMenuItem.SubMenu.map(item => {
+                            if (item.SubMenu) {
+                                const ulContent = `<ul
+                                data-MenuName="${item.Name}"
+                         class="submenu subSubS ${item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name}"> ${renderSubMenuTree(item.SubMenu)}</ul>`
+                                $('.menu-body').append(ulContent)
+                            }
+                        })
                     }
                 })
             }
         })
-        console.log(data)
+
+        console.log('data: '.data)
         return data;
     } catch (error) {
         console.error(error);
@@ -163,12 +211,16 @@ $(() => {
         let submenuOpen = false;
         let subSubmenuOpen = false;
         let subSubmenuOpened = false;
+        let subSubSubmenuOpened = false;
         let $subMenu = null;
         let $subSubMenu = null;
+        let $subSubSubMenu = null;
         let $subLinks = null;
         let $subSubLinks = null;
+        let $subSubSubLinks = null;
         let focusIndexSubmenu = 0;
         let focusIndexSubSubmenu = 0;
+        let focusIndexSubSubSubmenu = 0;
         let submenuOpened = false;
 
         let menuItems = null
@@ -181,33 +233,38 @@ $(() => {
             switch (event.code) {
                 case 'ArrowUp':
                     event.preventDefault();
-                    if (!submenuOpen && !subSubmenuOpen) {
+                    if (!submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         // menu
                         focusIndex = Math.max(0, focusIndex - 1);
-                    } else if (subSubmenuOpen && !submenuOpen) {
+                    } else if (subSubmenuOpen && !submenuOpen && !subSubSubmenuOpened) {
                         // sub sub menu
                         focusIndexSubSubmenu = Math.max(0, focusIndexSubSubmenu - 1);
-                    } else if (submenuOpen && !subSubmenuOpen) {
+                    } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         // sub menu
                         focusIndexSubmenu = Math.max(0, focusIndexSubmenu - 1);
+                    } else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
+                        focusIndexSubSubSubmenu = Math.max(0, focusIndexSubmenu - 1);
                     }
                     break;
                 case 'ArrowDown':
                     event.preventDefault();
-                    if (!submenuOpen && !subSubmenuOpen) {
+                    if (!submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         // menu
                         focusIndex = Math.min($globalLinks.length - 1, focusIndex + 1);
-                    } else if (subSubmenuOpen && !submenuOpen) {
+                    } else if (subSubmenuOpen && !submenuOpen && !subSubSubmenuOpened) {
                         // sub sub menu
                         focusIndexSubSubmenu = Math.min($subSubLinks.length - 1, focusIndexSubSubmenu + 1);
-                    } else if (submenuOpen && !subSubmenuOpen) {
+                    } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         // sub menu
                         focusIndexSubmenu = Math.min($subLinks.length - 1, focusIndexSubmenu + 1);
+                    } else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
+                        // Sub sub sub menu
+                        focusIndexSubSubSubmenu = Math.min($subSubSubLinks.length - 1, focusIndexSubSubSubmenu + 1);
                     }
                     break;
                 case 'Enter':
                     event.preventDefault();
-                    if (!submenuOpen && !subSubmenuOpen) {
+                    if (!submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         let ItemName = $('#menu').find('li.active')[0].getAttribute('name')
                         console.log('ItemName:', ItemName)
                         //! show sub menu when press enter in menu
@@ -222,7 +279,7 @@ $(() => {
                             $subMenu = $(`.submenu.${sectionName} `);
                             $subLinks = $subMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
-                            $subLinks.parent().removeClass('active');
+                            $.parent().removeClass('active');
                             focusIndexSubmenu = 0;
                             submenuOpened = true;
                             submenuOpen = true;
@@ -231,14 +288,14 @@ $(() => {
                             $('#menu').removeClass('show');
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
-                    } else if (submenuOpen && !subSubmenuOpen) {
+                    } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         let ItemName = $subMenu.find('li.active')[0].getAttribute('name')
                         console.log('ItemName:', ItemName)
                         //! show sub sub menu when press enter in sub menu
 
                         let sectionName = $subMenu.find('li.active').data('name');
                         $subSubMenu = $(`.subSubMenu.${sectionName} `);
-
+                        console.log('$subSubMenu', $subSubMenu)
                         // *check if there is a sub sub ul menu in the dom 
                         if ($subSubMenu.length > 0) {
                             $subSubLinks = $subSubMenu.find('> li > a');
@@ -332,7 +389,7 @@ $(() => {
 
                                 break;
                         }
-                    } else if (!submenuOpen && subSubmenuOpen) {
+                    } else if (!submenuOpen && subSubmenuOpen && !subSubSubmenuOpened) {
                         let ItemName = $subSubMenu.find('li.active')[0].getAttribute('name')
                         console.log('ItemName:', ItemName)
                         // ! -------- actions on enter a sub sub menu item ------------
@@ -360,15 +417,35 @@ $(() => {
                                 $('.menu').addClass('Green')
                                 break;
                         }
-                    } else if (submenuOpen && !subSubmenuOpen) {
-                        console.log('You pressed enter, submenuOpen && !subSubmenuOpen', $('#menu').find('li.active')[0].attributes[0].value);
-                        //!
+                        // ! open sub sub sub menu
+                        let SubDataName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
+                        $subSubSubMenu = $(`.subSubS.${SubDataName} `);
+                        console.log('$subSubSubMenu.length', $subSubSubMenu.length)
+                        if ($subSubSubMenu.length > 0) {
+                            $subSubSubLinks = $subSubSubMenu.find('> li > a');
+                            $globalLinks.eq(focusIndex).parent().removeClass('active');
+                            $subSubSubLinks.parent().removeClass('active');
+                            focusIndexSubSubSubmenu = 0;
+                            submenuOpened = false;
+                            submenuOpen = false;
+                            subSubmenuOpen = false;
+                            subSubmenuOpened = false;
+                            subSubSubmenuOpened = true;
+                            $subSubSubMenu.addClass('show');
+                            $subSubSubMenu.removeClass('hide');
+                            $subSubMenu.removeClass('show');
+                            $subSubSubLinks.eq(focusIndexSubSubSubmenu).parent().addClass('active');
+                        }
+                    } else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
+                        // ! click Enter on Sub sub sub menu item
+                        let ItemName = $subSubSubMenu.find('li.active')[0].getAttribute('name')
+                        console.log('ItemName:', ItemName)
                     }
 
                     break;
                 case 'Backspace':
                     event.preventDefault();
-                    if (submenuOpened && !subSubmenuOpen) {
+                    if (submenuOpened && !subSubmenuOpen && !subSubSubmenuOpened) {
                         // back from sub menu
                         $subMenu.removeClass('show');
                         $('#menu').removeClass('hide');
@@ -379,7 +456,7 @@ $(() => {
                         submenuOpen = false;
                         $('#menu').find('li.active').removeClass('active');
                         $globalLinks.eq(focusIndex).parent().addClass('active');
-                    } else if (!submenuOpened && subSubmenuOpen) {
+                    } else if (!submenuOpened && subSubmenuOpen && !subSubSubmenuOpened) {
                         // back from sub sub menu
                         $globalLinks.parent().removeClass('active');
                         focusIndex = 0;
@@ -393,6 +470,20 @@ $(() => {
                         subSubmenuOpened = false;
                         $('#menu').find('li.active').removeClass('active');
                         $globalLinks.eq(focusIndex).parent().addClass('active');
+                    } else if (!submenuOpened && !subSubmenuOpen && subSubSubmenuOpened) {
+                        // ! Back From Sub sub sub Menu 😃
+                        console.log('back in sub sub sub menu')
+                        $globalLinks.parent().removeClass('active');
+                        focusIndex = 0;
+                        $subSubSubMenu.removeClass('show');
+                        $subSubMenu.addClass('show');
+                        $subSubMenu.removeClass('hide');
+                        focusIndexSubSubmenu = 0;
+                        subSubmenuOpen = true;
+                        subSubmenuOpened = true;
+                        subSubSubmenuOpened = false;
+                        $('#menu').find('li.active').removeClass('active');
+                        $globalLinks.eq(focusIndex).parent().addClass('active');
                     }
                     break;
                 case 'KeyH':
@@ -402,7 +493,7 @@ $(() => {
                     $('.menu-title').empty();
                     $('.menu-header').empty();
                     $('.menu-body').empty();
-                    $('.menu-body').append('<ul id="menu" class="show"></ul>')
+
                     break;
                 case 'KeyM':
                     fetchData()
@@ -419,6 +510,9 @@ $(() => {
             }
 
             const menuList = document.querySelector(".menu-body ul.show");
+            var MenuName = menuList.getAttribute('data-MenuName');
+            $('.menuTitle').text(MenuName)
+
             if (menuList) {
                 menuItems = menuList.getElementsByTagName("li");
                 firstItem = menuItems[0];
@@ -429,6 +523,7 @@ $(() => {
                     }
                 }
                 //* moving
+
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
                     if (activeItem.nextElementSibling.offsetTop > menuList.scrollTop + menuList
@@ -448,21 +543,27 @@ $(() => {
             }
 
             $globalLinks.parent().removeClass('active');
+            const activeDescription = $('body li.active').data('description');
+            console.log('activeDescription', $('li .active'))
+            $('.menu-footer p').text(activeDescription);
             // menu
-            if (!submenuOpen && !subSubmenuOpened) {
+            if (!submenuOpen && !subSubmenuOpened && !subSubSubmenuOpened) {
                 $globalLinks.eq(focusIndex).parent().addClass('active');
-                const activeDescription = $('body li.active').data('description');
-                $('.menu-footer p').text(activeDescription);
             }
             // sub menu
-            if (submenuOpened && !subSubmenuOpened) {
+            if (submenuOpened && !subSubmenuOpened && !subSubSubmenuOpened) {
                 $subLinks.parent().removeClass('active');
                 $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
             }
             // sub sub menu
-            if (subSubmenuOpened && !submenuOpened) {
+            if (subSubmenuOpened && !submenuOpened && !subSubSubmenuOpened) {
                 $subSubLinks.parent().removeClass('active');
                 $subSubLinks.eq(focusIndexSubSubmenu).parent().addClass('active');
+            }
+            // sub sub sub menu
+            if (!subSubmenuOpened && !submenuOpened && subSubSubmenuOpened) {
+                $subSubSubLinks.parent().removeClass('active');
+                $subSubSubLinks.eq(focusIndexSubSubSubmenu).parent().addClass('active');
             }
         });
 
@@ -504,7 +605,6 @@ $(function () {
             var newPosition = ui.position;
             console.log('New position:', newPosition);
             //! Perform any further actions with the new position here
-
 
         },
         containment: "window",
