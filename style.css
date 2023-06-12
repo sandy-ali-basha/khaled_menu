@@ -620,4 +620,39 @@ small {
 .pcr-app[data-theme=nano] .pcr-selection .pcr-color-palette .pcr-palette,
 .pcr-app[data-theme=nano] .pcr-selection .pcr-color-palette .pcr-palette::before {
   border-radius: 15px 15px 0px 0px;
+}
+
+.MenuOptions {
+  position: absolute;
+  left: 30%;
+  top: 90%;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.192);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px dashed white;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: #292725;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.MenuOptions .title {
+  color: #d6e1e6;
+}
+.MenuOptions .Disc {
+  color: #292725;
+  background: #d6e1e6;
+  margin: 0px 5px;
+  border-radius: 3px;
+  padding: 0px 5px;
+  font-weight: bold;
+}
+.MenuOptions .option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
 }/*# sourceMappingURL=style.css.map */
