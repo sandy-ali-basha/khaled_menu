@@ -11,7 +11,6 @@ const renderArrowList = (ArrowListItem) => {
 const renderArrowMix = (ArrowMix, ArrowMinimum, Name) => {
     const spans = [];
     for (let i = ArrowMinimum; i <= ArrowMix; i++) {
-        console.log(i)
         spans.push(`<span class="mySlides" style="display: ${i <= 1 ? 'block' : 'none'};" id="${Name + i}">${i}</span>`);
     }
     return spans;
@@ -531,22 +530,23 @@ $(() => {
                     }
                 }
                 //* moving
-
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
-                    if (activeItem.nextElementSibling.offsetTop > menuList.scrollTop + menuList
-                        .clientHeight) {
-                        menuList.scrollTop = activeItem.nextElementSibling.offsetTop - menuList
-                            .clientHeight + activeItem.nextElementSibling.clientHeight;
+                    if (activeItem.nextElementSibling.offsetTop > menuList.scrollTop + menuList.clientHeight) {
+                        menuList.scrollTop = activeItem.nextElementSibling.offsetTop;
                         activeItem.nextElementSibling.focus();
                     }
                     activeItem.nextElementSibling.focus();
+
                 } else if (event.key === "ArrowUp" && activeItem !== firstItem) {
                     event.preventDefault();
                     if (activeItem.previousElementSibling.offsetTop < menuList.scrollTop) {
                         menuList.scrollTop = activeItem.previousElementSibling.offsetTop;
+                        activeItem.previousElementSibling.focus();
+                        console.log('menuList.scrollTop', menuList.scrollTop)
                     }
                     activeItem.previousElementSibling.focus();
+                    console.log('activeItem', activeItem.previousElementSibling)
                 }
             }
 
