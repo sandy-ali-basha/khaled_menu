@@ -529,6 +529,7 @@ $(() => {
                         activeItem = menuItems[index]
                     }
                 }
+                menuList.scrollTop = 0;
                 //* moving
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
@@ -537,16 +538,13 @@ $(() => {
                         activeItem.nextElementSibling.focus();
                     }
                     activeItem.nextElementSibling.focus();
-
                 } else if (event.key === "ArrowUp" && activeItem !== firstItem) {
                     event.preventDefault();
                     if (activeItem.previousElementSibling.offsetTop < menuList.scrollTop) {
                         menuList.scrollTop = activeItem.previousElementSibling.offsetTop;
                         activeItem.previousElementSibling.focus();
-                        console.log('menuList.scrollTop', menuList.scrollTop)
                     }
                     activeItem.previousElementSibling.focus();
-                    console.log('activeItem', activeItem.previousElementSibling)
                 }
             }
 
