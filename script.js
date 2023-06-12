@@ -586,9 +586,12 @@ $(() => {
         function showDivs(n) {
             // var x = item.childElementCount; subSubmenuOpen
             var ItemName
-            if (!submenuOpen && subSubmenuOpen) {
+            if (!submenuOpen && subSubmenuOpen && !subSubSubmenuOpened) {
                 ItemName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
-            } else if (submenuOpen && !subSubmenuOpen) ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
+            } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
+            else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
+                ItemName = $subSubSubMenu.find('li.active')[0].getAttribute('data-name')
+            }
 
             var elements = (`#${ItemName} .mySlides`)
             console.log('elements', elements)
