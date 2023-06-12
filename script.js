@@ -551,27 +551,36 @@ $(() => {
             }
 
             $globalLinks.parent().removeClass('active');
-            const activeDescription = $('body li.active').data('description');
+            let activeDescription
             console.log('activeDescription', $('li .active'))
-            $('.menu-footer p').text(activeDescription);
+
             // menu
             if (!submenuOpen && !subSubmenuOpened && !subSubSubmenuOpened) {
                 $globalLinks.eq(focusIndex).parent().addClass('active');
+
+                activeDescription = $('#menu').find('li.active')[0].getAttribute('data-description')
+                $('.menu-footer p').text(activeDescription);
             }
             // sub menu
             if (submenuOpened && !subSubmenuOpened && !subSubSubmenuOpened) {
                 $subLinks.parent().removeClass('active');
                 $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
+                activeDescription = $subMenu.find('li.active')[0].getAttribute('data-description')
+                $('.menu-footer p').text(activeDescription);
             }
             // sub sub menu
             if (subSubmenuOpened && !submenuOpened && !subSubSubmenuOpened) {
                 $subSubLinks.parent().removeClass('active');
                 $subSubLinks.eq(focusIndexSubSubmenu).parent().addClass('active');
+                activeDescription = $subSubMenu.find('li.active')[0].getAttribute('data-description')
+                $('.menu-footer p').text(activeDescription);
             }
             // sub sub sub menu
             if (!subSubmenuOpened && !submenuOpened && subSubSubmenuOpened) {
                 $subSubSubLinks.parent().removeClass('active');
                 $subSubSubLinks.eq(focusIndexSubSubSubmenu).parent().addClass('active');
+                activeDescription = $subSubSubMenu.find('li.active')[0].getAttribute('data-description')
+                $('.menu-footer p').text(activeDescription);
             }
         });
 
