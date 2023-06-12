@@ -8,10 +8,11 @@ const renderArrowList = (ArrowListItem) => {
     return innerMenu
 }
 
-const renderArrowMix = (ArrowMix, ArrowMinimum) => {
+const renderArrowMix = (ArrowMix, ArrowMinimum, Name) => {
     const spans = [];
     for (let i = ArrowMinimum; i <= ArrowMix; i++) {
-        spans.push(`<span class="mySlides" style="display: ${i < 1 ? 'block' : 'none'};" id="${i}">${i} </span>`);
+        console.log(i)
+        spans.push(`<span class="mySlides" style="display: ${i <= 1 ? 'block' : 'none'};" id="${Name + i}">${i}</span>`);
     }
     return spans;
 }
@@ -63,7 +64,7 @@ const renderSubSubMenu = (submenu) => {
         ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
         ${item.SubMenu ? '<span>⇒</span>' : ' '}
         ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
-        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum)}</div>` : ' '}
+        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum, Name)}</div>` : ' '}
         </li >`
     })
     setTimeout(() => {
@@ -87,7 +88,7 @@ const renderSubMenuTree = (submenu) => {
         ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
         ${item.SubMenu ? '<span>⇒</span>' : ' '}
         ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
-        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum)}</div>` : ' '}
+        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum, Name)}</div>` : ' '}
         </li >`
     })
     setTimeout(() => {
