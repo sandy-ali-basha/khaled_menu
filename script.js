@@ -110,7 +110,7 @@ async function fetchData() {
         ) // * header
         $('.menu-title').append()//** render menu title 
         $('.menu-title').append(`<div class="menu-title">
-        <p>Main Menu</p>
+        <p id="MenuName">Main Menu</p>
         <span class="menuTitle">${data.NameMenu}</span>
      </div>`)//** render menu title 
         $('.draggable-item').css('left', data.LocationsMenu.Menu.Left)
@@ -441,6 +441,13 @@ $(() => {
                         // ! click Enter on Sub sub sub menu item
                         let ItemName = $subSubSubMenu.find('li.active')[0].getAttribute('name')
                         console.log('ItemName:', ItemName)
+                        if (ItemName === 'Primary Color') {
+                            pickr.show()
+                        }
+                        if (ItemName === 'Secondary Color') {
+                            pickr.show()
+                        }
+
                     }
 
                     break;
@@ -512,7 +519,7 @@ $(() => {
 
             const menuList = document.querySelector(".menu-body ul.show");
             var MenuName = menuList.getAttribute('data-MenuName');
-            $('.menuTitle').text(MenuName)
+            $('.MenuName').text(MenuName)
 
             if (menuList) {
                 menuItems = menuList.getElementsByTagName("li");
