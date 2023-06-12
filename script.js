@@ -15,12 +15,12 @@ const renderArrowMix = (ArrowMix, ArrowMinimum, Name) => {
     }
     return spans;
 }
+
 const renderSubMenu = (submenu) => {
     const innermenu = submenu.map(item => {
         const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
-
-        return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" data-name=${ItemName} name="${item.Name}">
-
+        return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}"
+        data-name=${ItemName} name="${item.Name}" >
         <a href="#">
         ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
         </a>
@@ -56,7 +56,8 @@ const renderSubSubMenu = (submenu) => {
         return `<li class="${item.Show ? '' : 'hide'}" 
         data-description="${item.Description}" 
         data-name=${Name}
-        name="${item.Name}">
+        name="${item.Name}"
+        >
         <a href="#">
         ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
         </a>
@@ -78,7 +79,7 @@ const renderSubSubMenu = (submenu) => {
 const renderSubMenuTree = (submenu) => {
     const innermenu = submenu.map(item => {
         const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
-        return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}" 
+        return `<li class="${item.Show ? '' : 'hide'}"  data-description="${item.Description}" 
         data-name=${Name}
         name="${item.Name}">
         <a href="#">
@@ -264,6 +265,7 @@ $(() => {
                     break;
                 case 'Enter':
                     event.preventDefault();
+
                     if (!submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                         let ItemName = $('#menu').find('li.active')[0].getAttribute('name')
                         console.log('ItemName:', ItemName)
@@ -529,19 +531,21 @@ $(() => {
                         activeItem = menuItems[index]
                     }
                 }
-                menuList.scrollTop = 0;
+                // menuList.scrollTop = 0;
                 //* moving
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
-                    if (activeItem.nextElementSibling.offsetTop > menuList.scrollTop + menuList.clientHeight) {
-                        menuList.scrollTop = activeItem.nextElementSibling.offsetTop;
-                        activeItem.nextElementSibling.focus();
+
+                    if (activeItem.nextElementSibling.offsetTop >= menuList.clientHeight - 10) {
+                        menuList.scrollTop = activeItem.nextElementSibling.offsetTop - menuList.clientHeight + activeItem.previousElementSibling.clientHeight;
+                        activeItem.nextElementSibling.focus()
                     }
                     activeItem.nextElementSibling.focus();
                 } else if (event.key === "ArrowUp" && activeItem !== firstItem) {
                     event.preventDefault();
                     if (activeItem.previousElementSibling.offsetTop < menuList.scrollTop) {
-                        menuList.scrollTop = activeItem.previousElementSibling.offsetTop;
+                        menuList.scrollTop = menuList.scrollTop - activeItem.previousElementSibling.clientHeight;
+                        console.log(menuList.scrollTop)
                         activeItem.previousElementSibling.focus();
                     }
                     activeItem.previousElementSibling.focus();
@@ -550,7 +554,6 @@ $(() => {
 
             $globalLinks.parent().removeClass('active');
             let activeDescription
-            console.log('activeDescription', $('li .active'))
 
             // menu
             if (!submenuOpen && !subSubmenuOpened && !subSubSubmenuOpened) {
