@@ -279,7 +279,7 @@ $(() => {
                             $subMenu = $(`.submenu.${sectionName} `);
                             $subLinks = $subMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
-                            $.parent().removeClass('active');
+                            $subLinks.parent().removeClass('active');
                             focusIndexSubmenu = 0;
                             submenuOpened = true;
                             submenuOpen = true;
