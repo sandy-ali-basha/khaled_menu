@@ -254,40 +254,16 @@ $(function () {
                         }
                         // * -------- actions on enter a sub menu item ------------
                         let subMenuItem = $subMenu.find('li.active')[0].getAttribute('data-name')
-
+                        // checkbox
                         const Item = $subMenu.find('li.active')[0]
                         const hasCheckbox = Item.querySelector("input[type='checkbox']") !== null;
-
-                        let divElement = Item.querySelector("i") !== null;
-                        if (divElement) {
-                            let id = Item.querySelector("i").id;
-                            let BoxText = Item.querySelector("i").getAttribute('BoxText');
-                            let Description = Item.querySelector("i").getAttribute('Description');
-                            let Placeholder = Item.querySelector("i").getAttribute('Placeholder');
-                            let BoxText2 = Item.querySelector("i").getAttribute('BoxText2') !== null;
-                            let BoxText2Val
-                            BoxText2 ? BoxText2Val = Item.querySelector("i").getAttribute('BoxText2') : BoxText2Val = null
-
-                            const ModalData = `<h1>${id}</h1>
-                            <div>${Description} <i>${Placeholder}</i></div>
-                            <br /><div><small>${BoxText}</small></div>
-                            <textarea rows="6" id="${BoxText}"></textarea>
-                            ${BoxText2 ? ` <br /><div><small>${BoxText2Val}</small></div>
-                            <textarea rows="6" id="${BoxText2Val}"></textarea>` : ' '}
-                            <div class="btns">
-                                <button class="Save SaveTextModal">Save</button>
-                                <button class="Cancel closeTextModal" >cancel</button>
-                            </div>`
-                            $('#InputModal').empty()
-                            $('#InputModal').append(ModalData)
-                            $('.saveHideModal').addClass('show')
-                            $('.saveHideModal').removeClass('hide')
-                        }
-
                         if (hasCheckbox) checkbox(subMenuItem)
+                        // box text
+                        let divElement = Item.querySelector("i") !== null;
+                        if (divElement) getBoxTextData(Item)
 
                         let activeSearch = false
-                        console.log('let activeSearch', activeSearch)
+
                         switch (subMenuItem) {
                             case "ChangeMenuColor":
                                 pickr.show()
@@ -333,6 +309,9 @@ $(function () {
                         //  item Name 
                         const subSubMenuItem = $subSubMenu.find('li.active')[0].getAttribute('data-name');
                         const SubItem = $subSubMenu.find('li.active')[0]
+
+                        let divElement = SubItem.querySelector("i") !== null;
+                        if (divElement) getBoxTextData(SubItem)
                         // * SubHasCheckbox
                         const SubHasCheckbox = SubItem.querySelector("input[type='checkbox']") !== null;
                         if (SubHasCheckbox) checkbox(subSubMenuItem)
@@ -375,10 +354,14 @@ $(function () {
                         printItemData($subSubSubMenu)
                         // ! click Enter on Sub sub sub menu item
                         let ItemName = $subSubSubMenu.find('li.active')[0].getAttribute('name')
+                        let ItemDataName = $subSubSubMenu.find('li.active')[0].getAttribute('data-name')
                         // * checkbox
                         const Item = $subSubSubMenu.find('li.active')[0]
                         const hasCheckbox = Item.querySelector("input[type='checkbox']") !== null;
-                        if (hasCheckbox) checkbox(ItemName)
+                        if (hasCheckbox) checkbox(ItemDataName)
+                        // box text 
+                        let divElement = Item.querySelector("i") !== null;
+                        if (divElement) getBoxTextData(Item)
 
                         if (ItemName === 'Primary Color' || ItemName === 'Secondary Color') {
                             pickr.show()
@@ -451,8 +434,11 @@ $(function () {
             }
 
             const menuList = document.querySelector(".menu-body ul.show");
-            // var MenuName = menuList.getAttribute('data-MenuName');
-            // $('#MenuName').text(MenuName)
+
+            var MenuName = menuList.getAttribute('data-MenuName');
+            console.log('MenuName', MenuName)
+            $('#MenuName').text(MenuName)
+
             //* moving
             if (menuList) {
                 menuItems = menuList.getElementsByTagName("li");
@@ -705,4 +691,29 @@ function printItemData(itemName) {
     console.log('description: ', itemName.find('li.active').data('description'))
     console.log('Name: ', itemName.find('li.active')[0].getAttribute('name'))
     console.log(' ')
+}
+
+function getBoxTextData(Item) {
+    let id = Item.querySelector("i").id;
+    let BoxText = Item.querySelector("i").getAttribute('BoxText');
+    let Description = Item.querySelector("i").getAttribute('Description');
+    let Placeholder = Item.querySelector("i").getAttribute('Placeholder');
+    let BoxText2 = Item.querySelector("i").getAttribute('BoxText2') !== null;
+    let BoxText2Val
+    BoxText2 ? BoxText2Val = Item.querySelector("i").getAttribute('BoxText2') : BoxText2Val = null
+
+    const ModalData = `<h1>${id}</h1>
+    <div>${Description} <i>${Placeholder}</i></div>
+    <br /><div><small>${BoxText}</small></div>
+    <textarea rows="6" id="${BoxText}"></textarea>
+    ${BoxText2 ? ` <br /><div><small>${BoxText2Val}</small></div>
+    <textarea rows="6" id="${BoxText2Val}"></textarea>` : ' '}
+    <div class="btns">
+        <button class="Save SaveTextModal">Save</button>
+        <button class="Cancel closeTextModal" >cancel</button>
+    </div>`
+    $('#InputModal').empty()
+    $('#InputModal').append(ModalData)
+    $('.saveHideModal').addClass('show')
+    $('.saveHideModal').removeClass('hide')
 }
