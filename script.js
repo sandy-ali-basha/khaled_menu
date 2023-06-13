@@ -2,7 +2,7 @@ var data = null;
 const renderArrowList = (ArrowListItem) => {
     const innerMenu = ArrowListItem.map((item, index) => {
         return `
-         <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" id="${item.Id}">${item.Name}</span>
+         <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" resend="${item.Resend}" id="${item.Id}">${item.Name}</span>
       `
     })
     return innerMenu
@@ -111,19 +111,24 @@ async function fetchData() {
             if (item.SubMenu) {
                 item.SubMenu.map(subMenuItem => {
                     if (subMenuItem.SubMenu) {
+                        const Name = subMenuItem.Name.replace(/[\s\/]+/g, "")
                         const ulContent = `<ul
                         data-MenuName="${subMenuItem.Name}"
-                         class="submenu subSubMenu
-                         ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/[\s\/]+/g, "") : subMenuItem.Name}"
-        > ${renderSubMenu(subMenuItem.SubMenu)}
-                                            </ul>`
+                        class="submenu subSubMenu
+                        ${subMenuItem.Name?.indexOf(' ') >= 0 ? Name : subMenuItem.Name}">
+                        ${renderSubMenu(subMenuItem.SubMenu)}
+                        </ul>`
+
                         $('.menu-body').append(ulContent)
 
                         subMenuItem.SubMenu.map(item => {
                             if (item.SubMenu) {
+                                const Name = item.Name.replace(/[\s\/]+/g, "")
                                 const ulContent = `<ul
                                 data-MenuName="${item.Name}"
-                         class="submenu subSubS ${item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name}"> ${renderSubMenu(item.SubMenu)}</ul>`
+                                class="submenu subSubS ${item.Name?.indexOf(' ') >= 0 ? Name : item.Name}">
+                                ${renderSubMenu(item.SubMenu)}
+                                </ul>`
                                 $('.menu-body').append(ulContent)
                             }
                         })
@@ -132,18 +137,20 @@ async function fetchData() {
             }
         })
 
-        console.log('data: '.data)
+        console.log('data: ', data)
         return data;
     } catch (error) {
         console.error(error);
     }
 }
-$(() => {
+$(function () {
     fetchData().then(data => {
-        // * theme * //
-        const CurrentTheme = data.Theme
-        ChangeTheme(CurrentTheme)
+        //* change the theme 
+        ChangeTheme(data.Theme)
+        // * show Menu
         $('.menu').addClass('show')
+        $('.menu').removeClass('hide')
+        // * variables
         const $globalLinks = $('#menu').find('> li > a');
         let focusIndex = 0;
         let submenuOpen = false;
@@ -160,7 +167,6 @@ $(() => {
         let focusIndexSubSubmenu = 0;
         let focusIndexSubSubSubmenu = 0;
         let submenuOpened = false;
-
         let menuItems = null
         let firstItem = null
         let lastItem = null
@@ -202,19 +208,15 @@ $(() => {
                     break;
                 case 'Enter':
                     event.preventDefault();
-
+                    //*first menu
                     if (!submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
-                        let ItemName = $('#menu').find('li.active')[0].getAttribute('name')
-                        console.log('ItemName:', ItemName)
+                        printItemData($('#menu'))
                         //! show sub menu when press enter in menu
-
                         if ($('#menu').find('li.active').length) {
                             //* sectionName / subMenu */
+
                             let sectionName = $('#menu').find('li.active').data('name');
-                            //*  show selected item data 
-                            console.log('sectionName: ', $('#menu').find('li.active').data('name'))
-                            console.log('description: ', $('#menu').find('li.active').data('description'))
-                            //* subMenu
+
                             $subMenu = $(`.submenu.${sectionName} `);
                             $subLinks = $subMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
@@ -227,14 +229,14 @@ $(() => {
                             $('#menu').removeClass('show');
                             $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
                         }
-                    } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
-                        let ItemName = $subMenu.find('li.active')[0].getAttribute('name')
-                        console.log('ItemName:', ItemName)
+                    }// * second menu
+                    else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
+
+                        printItemData($subMenu)
                         //! show sub sub menu when press enter in sub menu
 
                         let sectionName = $subMenu.find('li.active').data('name');
                         $subSubMenu = $(`.subSubMenu.${sectionName} `);
-                        console.log('$subSubMenu', $subSubMenu)
                         // *check if there is a sub sub ul menu in the dom 
                         if ($subSubMenu.length > 0) {
                             $subSubLinks = $subSubMenu.find('> li > a');
@@ -245,7 +247,6 @@ $(() => {
                             submenuOpen = false;
                             subSubmenuOpen = true;
                             subSubmenuOpened = true;
-                            console.log('$subSubMenu', $subSubMenu)
                             $subSubMenu.addClass('show');
                             $subSubMenu.removeClass('hide');
                             $subMenu.removeClass('show');
@@ -274,8 +275,8 @@ $(() => {
                             ${BoxText2 ? ` <br /><div><small>${BoxText2Val}</small></div>
                             <textarea rows="6" id="${BoxText2Val}"></textarea>` : ' '}
                             <div class="btns">
-                              <button class="Save SaveTextModal">Save</button>
-                              <button class="Cancel closeTextModal" >cancel</button>
+                                <button class="Save SaveTextModal">Save</button>
+                                <button class="Cancel closeTextModal" >cancel</button>
                             </div>`
                             $('#InputModal').empty()
                             $('#InputModal').append(ModalData)
@@ -283,10 +284,7 @@ $(() => {
                             $('.saveHideModal').removeClass('hide')
                         }
 
-                        if (hasCheckbox) {
-                            const checkedItem = document.getElementById(subMenuItem).checked;
-                            checkedItem ? document.getElementById(subMenuItem).checked = false : document.getElementById(subMenuItem).checked = true
-                        }
+                        if (hasCheckbox) checkbox(subMenuItem)
 
                         let activeSearch = false
                         console.log('let activeSearch', activeSearch)
@@ -328,18 +326,16 @@ $(() => {
 
                                 break;
                         }
-                    } else if (!submenuOpen && subSubmenuOpen && !subSubSubmenuOpened) {
-                        let ItemName = $subSubMenu.find('li.active')[0].getAttribute('name')
-                        console.log('ItemName:', ItemName)
+                    } //* third menu
+                    else if (!submenuOpen && subSubmenuOpen && !subSubSubmenuOpened) {
+                        printItemData($subSubMenu)
                         // ! -------- actions on enter a sub sub menu item ------------
                         //  item Name 
                         const subSubMenuItem = $subSubMenu.find('li.active')[0].getAttribute('data-name');
                         const SubItem = $subSubMenu.find('li.active')[0]
+                        // * SubHasCheckbox
                         const SubHasCheckbox = SubItem.querySelector("input[type='checkbox']") !== null;
-                        if (SubHasCheckbox) {
-                            const checkedItem = document.getElementById(subSubMenuItem).checked;
-                            checkedItem ? document.getElementById(subSubMenuItem).checked = false : document.getElementById(subSubMenuItem).checked = true
-                        }
+                        if (SubHasCheckbox) checkbox(subSubMenuItem)
                         //! /////////////
 
                         switch (subSubMenuItem) {
@@ -359,7 +355,6 @@ $(() => {
                         // ! open sub sub sub menu
                         let SubDataName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
                         $subSubSubMenu = $(`.subSubS.${SubDataName} `);
-                        console.log('$subSubSubMenu.length', $subSubSubMenu.length)
                         if ($subSubSubMenu.length > 0) {
                             $subSubSubLinks = $subSubSubMenu.find('> li > a');
                             $globalLinks.eq(focusIndex).parent().removeClass('active');
@@ -375,19 +370,20 @@ $(() => {
                             $subSubMenu.removeClass('show');
                             $subSubSubLinks.eq(focusIndexSubSubSubmenu).parent().addClass('active');
                         }
-                    } else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
+                    } //* menu four
+                    else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
+                        printItemData($subSubSubMenu)
                         // ! click Enter on Sub sub sub menu item
                         let ItemName = $subSubSubMenu.find('li.active')[0].getAttribute('name')
-                        console.log('ItemName:', ItemName)
-                        if (ItemName === 'Primary Color') {
-                            pickr.show()
-                        }
-                        if (ItemName === 'Secondary Color') {
-                            pickr.show()
-                        }
+                        // * checkbox
+                        const Item = $subSubSubMenu.find('li.active')[0]
+                        const hasCheckbox = Item.querySelector("input[type='checkbox']") !== null;
+                        if (hasCheckbox) checkbox(ItemName)
 
+                        if (ItemName === 'Primary Color' || ItemName === 'Secondary Color') {
+                            pickr.show()
+                        }
                     }
-
                     break;
                 case 'Backspace':
                     event.preventDefault();
@@ -455,9 +451,9 @@ $(() => {
             }
 
             const menuList = document.querySelector(".menu-body ul.show");
-            var MenuName = menuList.getAttribute('data-MenuName');
-            $('#MenuName').text(MenuName)
-
+            // var MenuName = menuList.getAttribute('data-MenuName');
+            // $('#MenuName').text(MenuName)
+            //* moving
             if (menuList) {
                 menuItems = menuList.getElementsByTagName("li");
                 firstItem = menuItems[0];
@@ -467,8 +463,6 @@ $(() => {
                         activeItem = menuItems[index]
                     }
                 }
-                // menuList.scrollTop = 0;
-                //* moving
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
                     if (activeItem.nextElementSibling.offsetTop >= menuList.clientHeight - 10) {
@@ -486,35 +480,23 @@ $(() => {
                 }
             }
 
-            $globalLinks.parent().removeClass('active');
-            let activeDescription
-
+            //! change focus 
             // menu
             if (!submenuOpen && !subSubmenuOpened && !subSubSubmenuOpened) {
-                $globalLinks.eq(focusIndex).parent().addClass('active');
-                activeDescription = $('#menu').find('li.active')[0].getAttribute('data-description')
-                $('.menu-footer p').text(activeDescription);
+                const MenuName = $('#menu')
+                Focus($globalLinks, focusIndex, MenuName)
             }
             // sub menu
             if (submenuOpened && !subSubmenuOpened && !subSubSubmenuOpened) {
-                $subLinks.parent().removeClass('active');
-                $subLinks.eq(focusIndexSubmenu).parent().addClass('active');
-                activeDescription = $subMenu.find('li.active')[0].getAttribute('data-description')
-                $('.menu-footer p').text(activeDescription);
+                Focus($subLinks, focusIndexSubmenu, $subMenu)
             }
             // sub sub menu
             if (subSubmenuOpened && !submenuOpened && !subSubSubmenuOpened) {
-                $subSubLinks.parent().removeClass('active');
-                $subSubLinks.eq(focusIndexSubSubmenu).parent().addClass('active');
-                activeDescription = $subSubMenu.find('li.active')[0].getAttribute('data-description')
-                $('.menu-footer p').text(activeDescription);
+                Focus($subSubLinks, focusIndexSubSubmenu, $subSubMenu)
             }
             // sub sub sub menu
             if (!subSubmenuOpened && !submenuOpened && subSubSubmenuOpened) {
-                $subSubSubLinks.parent().removeClass('active');
-                $subSubSubLinks.eq(focusIndexSubSubSubmenu).parent().addClass('active');
-                activeDescription = $subSubSubMenu.find('li.active')[0].getAttribute('data-description')
-                $('.menu-footer p').text(activeDescription);
+                Focus($subSubSubLinks, focusIndexSubSubSubmenu, $subSubSubMenu)
             }
         });
 
@@ -529,22 +511,29 @@ $(() => {
         function showDivs(n) {
             // var x = item.childElementCount; subSubmenuOpen
             var ItemName
-
             if (!submenuOpen && subSubmenuOpen && !subSubSubmenuOpened) {
                 ItemName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
                 setTimeout(() => {
                     const li = $subSubMenu.find('li.active')[0];
                     const span = li.querySelector('span.mySlides[style="display: block;"]');
+                    let Id = span.getAttribute('id')
+                    let resendData = span.getAttribute('resend')
                     const content = span.textContent;
+                    console.log('Id:', Id)
+                    console.log('resendData:', resendData)
                     ChangeTheme(content)
                 }, 400)
-            } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
+            }
+            else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
                 ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
                 setTimeout(() => {
                     const li = $subMenu.find('li.active')[0];
                     const span = li.querySelector('span.mySlides[style="display: block;"]');
+                    let Id = span.getAttribute('id')
                     const content = span.textContent;
-                    console.log('content:', content)
+                    console.log('Id:', Id)
+                    let resendData = span.getAttribute('resend')
+                    console.log('resendData:', resendData)
                     ChangeTheme(content)
                 }, 400)
             }
@@ -553,13 +542,14 @@ $(() => {
                 setTimeout(() => {
                     const li = $subSubSubMenu.find('li.active')[0];
                     const span = li.querySelector('span.mySlides[style="display: block;"]');
+                    let Id = span.getAttribute('id')
                     const content = span.textContent;
-                    console.log('Item :', content)
+                    console.log('Id:', Id)
+                    let resendData = span.getAttribute('resend')
+                    console.log('resendData:', resendData)
                     ChangeTheme(content)
                 }, 400)
             }
-
-
 
             var elements = (`#${ItemName} .mySlides`)
             console.log('elements', elements)
@@ -577,6 +567,14 @@ $(() => {
         }
     }).catch(error => console.error('error', error));
 })
+
+// !
+function Focus(Link, focusIndex, MenuName) {
+    Link.parent().removeClass('active');
+    Link.eq(focusIndex).parent().addClass('active');
+    activeDescription = MenuName.find('li.active')[0].getAttribute('data-description')
+    $('.menu-footer p').text(activeDescription);
+}
 //! set Theme
 function ChangeTheme(Theme) {
     console.log('ChangeTheme', Theme)
@@ -599,7 +597,6 @@ $(function () {
             var newPosition = ui.position;
             console.log('New position:', newPosition);
             //! Perform any further actions with the new position here
-
         },
         containment: "window",
         handle: ".adjustment-line"
@@ -695,4 +692,17 @@ $(document).on('click', '.TechBtn', () => {
 choseFont = () => {
     document.documentElement.style.setProperty('--font', 'Tajawal')
     //* Font available Rubik  / Inter
+}
+
+function checkbox(subMenuItem) {
+    const checkedItem = document.getElementById(subMenuItem).checked;
+    checkedItem ? document.getElementById(subMenuItem).checked = false : document.getElementById(subMenuItem).checked = true
+}
+
+function printItemData(itemName) {
+    console.log(' ')
+    console.log('sectionName: ', itemName.find('li.active').data('name'))
+    console.log('description: ', itemName.find('li.active').data('description'))
+    console.log('Name: ', itemName.find('li.active')[0].getAttribute('name'))
+    console.log(' ')
 }
