@@ -311,7 +311,10 @@ $(function () {
                         const SubItem = $subSubMenu.find('li.active')[0]
 
                         let divElement = SubItem.querySelector("i") !== null;
-                        if (divElement) getBoxTextData(SubItem)
+                        if (divElement) {
+                            getBoxTextData(SubItem)
+                            getTextAreaValue(SubItem)
+                        }
                         // * SubHasCheckbox
                         const SubHasCheckbox = SubItem.querySelector("input[type='checkbox']") !== null;
                         if (SubHasCheckbox) checkbox(subSubMenuItem)
@@ -434,9 +437,8 @@ $(function () {
             }
 
             const menuList = document.querySelector(".menu-body ul.show");
-
+            // change Menu Name
             var MenuName = menuList.getAttribute('data-MenuName');
-            console.log('MenuName', MenuName)
             $('#MenuName').text(MenuName)
 
             //* moving
@@ -665,8 +667,10 @@ $(document).on('click', '.closeTextModal', () => {
     $('.saveHideModal').addClass('hide')
     $('.saveHideModal').removeClass('show')
 })
+
 $(document).on('click', '.SaveTextModal', () => {
     console.log("Button clicked SaveTextModal");
+    getTextAreaValue()
     $('.saveHideModal').addClass('hide')
     $('.saveHideModal').removeClass('show')
 })
@@ -701,11 +705,12 @@ function getBoxTextData(Item) {
     let BoxText2 = Item.querySelector("i").getAttribute('BoxText2') !== null;
     let BoxText2Val
     BoxText2 ? BoxText2Val = Item.querySelector("i").getAttribute('BoxText2') : BoxText2Val = null
+    let TestAreaId = BoxText.replace(/[\s\/]+/g, "")
 
     const ModalData = `<h1>${id}</h1>
     <div>${Description} <i>${Placeholder}</i></div>
     <br /><div><small>${BoxText}</small></div>
-    <textarea rows="6" id="${BoxText}"></textarea>
+    <textarea rows="6" id="${TestAreaId}"></textarea>
     ${BoxText2 ? ` <br /><div><small>${BoxText2Val}</small></div>
     <textarea rows="6" id="${BoxText2Val}"></textarea>` : ' '}
     <div class="btns">
@@ -716,4 +721,12 @@ function getBoxTextData(Item) {
     $('#InputModal').append(ModalData)
     $('.saveHideModal').addClass('show')
     $('.saveHideModal').removeClass('hide')
+}
+
+function getTextAreaValue() {
+
+    let inputModalId = 'InputModal';
+    let textareaValue = document.querySelector(`#${inputModalId} textarea`).value;
+    console.log('textareaValue', textareaValue);
+
 }
