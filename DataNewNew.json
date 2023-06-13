@@ -5,7 +5,7 @@
   "action": "OpenMenu",
   "NameMenu": "الادارة العليا",
   "logoonerror": "https://cdn.discordapp.com/attachments/1007039756435193926/1111707231403114526/defaultAvatar.png",
-  "Theme": "Default",
+  "Theme": "Modern",
   "LocationsMenu": {
     "BoxText": {
       "Left": "140px",
@@ -20,7 +20,7 @@
       "Top": "30px"
     },
     "Notification": {
-      "Left": "150px",
+      "Left": "400px",
       "Top": "30px"
     },
     "NoClipText": {

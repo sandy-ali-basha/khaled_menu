@@ -2,7 +2,7 @@ var data = null;
 const renderArrowList = (ArrowListItem) => {
     const innerMenu = ArrowListItem.map((item, index) => {
         return `
-         <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" id="${item.Id}">${item.Name} </span>
+         <span class="mySlides" style="display: ${index < 1 ? 'block' : 'none'};" id="${item.Id}">${item.Name}</span>
       `
     })
     return innerMenu
@@ -17,20 +17,21 @@ const renderArrowMix = (ArrowMix, ArrowMinimum, Name) => {
 }
 
 const renderSubMenu = (submenu) => {
-    const innermenu = submenu.map(item => {
-        const ItemName = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
+    const innerMenu = submenu.map(item => {
+        const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
         return `<li class="${item.Show ? '' : 'hide'}" data-description="${item.Description}"
-        data-name=${ItemName} name="${item.Name}" >
+        data-name=${Name} name="${item.Name}" >
         <a href="#">
-        ${item.Checked === undefined ? item.Name : `<label for=${ItemName}>${item.Name}</label>`}
+        ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
         </a>
-
-        ${item.Checked === undefined ? ' ' : `<input id=${ItemName} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
-
+    
+        ${item.Checked === undefined ? ' ' : `<input id=${Name} type="checkbox" ${item.Checked ? 'Checked' : ' '}>`}
+    
         ${item.SubMenu ? '<span>⇒</span>' : ' '}
-        ${item.textBox ? `<span><input type="text" id="${ItemName}" ></input></span>` : ' '}
+        ${item.textBox ? `<span><input type="text" id="${Name}" ></input></span>` : ' '}
         
-        ${item.ArrowList ? `<div class='leftRightItem' id='${ItemName}' >${renderArrowList(item.ArrowList)}</div>` : ' '}
+        ${item.ArrowList ? `<div class='leftRightItem' id='${Name}' >${renderArrowList(item.ArrowList)}</div>` : ' '}
+        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum, Name)}</div>` : ' '}
         ${item.BoxText ? `<i 
         BoxText="${item.BoxText.BoxText}"
        ${item.BoxText.BoxText2 ? `BoxText2="${item.BoxText.BoxText2}"` : ' '}
@@ -47,58 +48,9 @@ const renderSubMenu = (submenu) => {
             ul.innerHTML = ul.innerHTML.replace(/,/g, "");
         });
     }, 500)
-    return innermenu
+    return innerMenu
 }
 
-const renderSubSubMenu = (submenu) => {
-    const innermenu = submenu.map(item => {
-        const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
-        return `<li class="${item.Show ? '' : 'hide'}" 
-        data-description="${item.Description}" 
-        data-name=${Name}
-        name="${item.Name}"
-        >
-        <a href="#">
-        ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
-        </a>
-        ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
-        ${item.SubMenu ? '<span>⇒</span>' : ' '}
-        ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
-        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum, Name)}</div>` : ' '}
-        </li >`
-    })
-    setTimeout(() => {
-        const ulSubmenu = document.querySelectorAll("ul.subSubMenu");
-        ulSubmenu.forEach((ul) => {
-            ul.innerHTML = ul.innerHTML.replace(/,/g, "");
-        });
-    }, 500)
-    return innermenu
-}
-
-const renderSubMenuTree = (submenu) => {
-    const innermenu = submenu.map(item => {
-        const Name = item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name;
-        return `<li class="${item.Show ? '' : 'hide'}"  data-description="${item.Description}" 
-        data-name=${Name}
-        name="${item.Name}">
-        <a href="#">
-        ${item.Checked === undefined ? item.Name : `<label for=${Name}>${item.Name}</label>`}
-        </a>
-        ${item.Checked === undefined ? ' ' : `<input id="${Name}" ${item.Checked ? 'Checked' : ' '} type="checkbox">`}
-        ${item.SubMenu ? '<span>⇒</span>' : ' '}
-        ${item.ArrowList ? `<div class='leftRightItem' id="${Name}">${renderArrowList(item.ArrowList)}</div>` : ' '}
-        ${item.ArrowMix ? `<div class='leftRightItem' id="${Name}">${renderArrowMix(item.ArrowMix, item.ArrowMinimum, Name)}</div>` : ' '}
-        </li >`
-    })
-    setTimeout(() => {
-        const ulSubmenu = document.querySelectorAll("ul.subSubMenu");
-        ulSubmenu.forEach((ul) => {
-            ul.innerHTML = ul.innerHTML.replace(/,/g, "");
-        });
-    }, 500)
-    return innermenu
-}
 async function fetchData() {
     try {
         const response = await fetch('./DataNewNew.json');
@@ -135,7 +87,7 @@ async function fetchData() {
         document.documentElement.style.setProperty('--opacity', data.ColorMenu.a);
 
         //! append main menu items 
-        $('.menu-body').append(`<ul data-MenuName="${data.NameMenu}" id="menu" class="show"></ul>`)
+        $('.menu-body').append(`<ul data-MenuName="Main Menu" id="menu" class="show"></ul>`)
         data.Data.forEach((item, index) => {
             const ItemName = item.Name.replace(/[\s\/]+/g, "");
 
@@ -163,7 +115,7 @@ async function fetchData() {
                         data-MenuName="${subMenuItem.Name}"
                          class="submenu subSubMenu
                          ${subMenuItem.Name?.indexOf(' ') >= 0 ? subMenuItem.Name.replace(/[\s\/]+/g, "") : subMenuItem.Name}"
-        > ${renderSubSubMenu(subMenuItem.SubMenu)}
+        > ${renderSubMenu(subMenuItem.SubMenu)}
                                             </ul>`
                         $('.menu-body').append(ulContent)
 
@@ -171,7 +123,7 @@ async function fetchData() {
                             if (item.SubMenu) {
                                 const ulContent = `<ul
                                 data-MenuName="${item.Name}"
-                         class="submenu subSubS ${item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name}"> ${renderSubMenuTree(item.SubMenu)}</ul>`
+                         class="submenu subSubS ${item.Name?.indexOf(' ') >= 0 ? item.Name.replace(/[\s\/]+/g, "") : item.Name}"> ${renderSubMenu(item.SubMenu)}</ul>`
                                 $('.menu-body').append(ulContent)
                             }
                         })
@@ -188,24 +140,9 @@ async function fetchData() {
 }
 $(() => {
     fetchData().then(data => {
-
         // * theme * //
         const CurrentTheme = data.Theme
-
-        if (CurrentTheme === 'basic') {
-
-            $('.menu').addClass('redMenu')
-            $('.menu').removeClass('Green')
-        } else if (CurrentTheme === 'Default') {
-            $('.menu').removeClass('Green')
-            $('.menu').removeClass('redMenu')
-
-        } else if (CurrentTheme === 'modern') {
-            $('.menu').addClass('Green')
-            $('.menu').removeClass('redMenu')
-
-        }
-
+        ChangeTheme(CurrentTheme)
         $('.menu').addClass('show')
         const $globalLinks = $('#menu').find('> li > a');
         let focusIndex = 0;
@@ -513,14 +450,13 @@ $(() => {
                     plusDivs(1)
                     break;
                 case 'ArrowLeft':
-                    console.log('ArrowLeft')
                     plusDivs(-1)
                     break;
             }
 
             const menuList = document.querySelector(".menu-body ul.show");
             var MenuName = menuList.getAttribute('data-MenuName');
-            $('.MenuName').text(MenuName)
+            $('#MenuName').text(MenuName)
 
             if (menuList) {
                 menuItems = menuList.getElementsByTagName("li");
@@ -535,7 +471,6 @@ $(() => {
                 //* moving
                 if (event.key === "ArrowDown" && activeItem !== lastItem) {
                     event.preventDefault();
-
                     if (activeItem.nextElementSibling.offsetTop >= menuList.clientHeight - 10) {
                         menuList.scrollTop = activeItem.nextElementSibling.offsetTop - menuList.clientHeight + activeItem.previousElementSibling.clientHeight;
                         activeItem.nextElementSibling.focus()
@@ -545,7 +480,6 @@ $(() => {
                     event.preventDefault();
                     if (activeItem.previousElementSibling.offsetTop < menuList.scrollTop) {
                         menuList.scrollTop = menuList.scrollTop - activeItem.previousElementSibling.clientHeight;
-                        console.log(menuList.scrollTop)
                         activeItem.previousElementSibling.focus();
                     }
                     activeItem.previousElementSibling.focus();
@@ -558,7 +492,6 @@ $(() => {
             // menu
             if (!submenuOpen && !subSubmenuOpened && !subSubSubmenuOpened) {
                 $globalLinks.eq(focusIndex).parent().addClass('active');
-
                 activeDescription = $('#menu').find('li.active')[0].getAttribute('data-description')
                 $('.menu-footer p').text(activeDescription);
             }
@@ -596,12 +529,37 @@ $(() => {
         function showDivs(n) {
             // var x = item.childElementCount; subSubmenuOpen
             var ItemName
+
             if (!submenuOpen && subSubmenuOpen && !subSubSubmenuOpened) {
                 ItemName = $subSubMenu.find('li.active')[0].getAttribute('data-name')
-            } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
+                setTimeout(() => {
+                    const li = $subSubMenu.find('li.active')[0];
+                    const span = li.querySelector('span.mySlides[style="display: block;"]');
+                    const content = span.textContent;
+                    ChangeTheme(content)
+                }, 400)
+            } else if (submenuOpen && !subSubmenuOpen && !subSubSubmenuOpened) {
+                ItemName = $subMenu.find('li.active')[0].getAttribute('data-name')
+                setTimeout(() => {
+                    const li = $subMenu.find('li.active')[0];
+                    const span = li.querySelector('span.mySlides[style="display: block;"]');
+                    const content = span.textContent;
+                    console.log('content:', content)
+                    ChangeTheme(content)
+                }, 400)
+            }
             else if (!submenuOpen && !subSubmenuOpen && subSubSubmenuOpened) {
                 ItemName = $subSubSubMenu.find('li.active')[0].getAttribute('data-name')
+                setTimeout(() => {
+                    const li = $subSubSubMenu.find('li.active')[0];
+                    const span = li.querySelector('span.mySlides[style="display: block;"]');
+                    const content = span.textContent;
+                    console.log('Item :', content)
+                    ChangeTheme(content)
+                }, 400)
             }
+
+
 
             var elements = (`#${ItemName} .mySlides`)
             console.log('elements', elements)
@@ -619,6 +577,21 @@ $(() => {
         }
     }).catch(error => console.error('error', error));
 })
+//! set Theme
+function ChangeTheme(Theme) {
+    console.log('ChangeTheme', Theme)
+    if (Theme === 'Basic') {
+        $('.menu').addClass('redMenu')
+        $('.menu').removeClass('Green')
+    } else if (Theme === 'Default') {
+        $('.menu').removeClass('Green')
+        $('.menu').removeClass('redMenu')
+    } else if (Theme === 'Modern') {
+        $('.menu').addClass('Green')
+        $('.menu').removeClass('redMenu')
+    }
+}
+// -- -- --
 //* draggable
 $(function () {
     $('.draggable-item').draggable({
@@ -634,7 +607,6 @@ $(function () {
 
     $('.pcr-app').append('<div class="color-adjustment-line"></div>')
     $('.pcr-app').draggable({
-
         stop: function (event, ui) {
             var newPosition = ui.position;
             console.log('New position:', newPosition);
